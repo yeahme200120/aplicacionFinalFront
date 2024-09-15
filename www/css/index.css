@@ -1,0 +1,51 @@
+@import url(generales.css);
+
+/*//// index //// */
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+header {
+    width: 100%;
+    height: 30vh;
+}
+
+body {
+    margin: 0;
+    margin-bottom: 10vh;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10vh;
+}
+
+.img-index {
+    background-image: url('../vectores/curva1.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/* media querys */
+@media (min-width: 768px) {
+    header {
+        width: 100%;
+        height: 43vh;
+    }
+
+    h4 {
+        font-size: 42px !important;
+    }
+
+    p {
+        font-size: 24px !important;
+    }
+}
+
+/* @media (max-width: 1200px) {
+    
+} */

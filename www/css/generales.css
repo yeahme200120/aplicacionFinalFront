@@ -1,0 +1,130 @@
+/* fonts */
+@font-face {
+    font-family: roboto-bold;
+    src: url(../fonts/Roboto-Bold.ttf);
+    font-weight: 400;
+    font-style: bold;
+ }
+
+ @font-face {
+    font-family: roboto-light;
+    src: url(../fonts/Roboto-Light.ttf);
+    font-weight: 100;
+    font-style: normal;
+ }
+
+ .roboto-1 {
+    font-family: 'roboto-bold';
+    font-size: 32px;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--text-principal);
+    text-align: center;
+}
+
+.roboto-2 {
+    font-family: 'roboto-bold';
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    color: #000;
+}
+
+
+ /* Colors */
+ :root {
+    --bg-principal: #FF6B00;
+    --text-principal: #1A2C72;
+    --text-form: #34495e;
+}
+
+/* Colores Toastify */
+/* 
+    verder: #28b463
+    amarillo: #f4d03f
+    rojo: #c0392b
+
+*/
+
+/* Generales */
+.loadSystem {
+    z-index: 999999;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.bg-primario {
+    background-color: var(--bg-principal);
+    color: #ffff;
+}
+
+.img-curvas-1 {
+    background-image: url('../vectores/Rectangle4.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.img-curvas-2 {
+    background-image: url('../vectores/Rectangle5.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.elipse-footer {
+    background-color: var(--bg-principal);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.div-btn-app {
+    background-color: var(--bg-principal) !important;
+    font-family: 'roboto-light';
+    font-size: large;
+    font-style: normal;
+    color: #ffff !important;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.form-control {
+    height: 50px;
+    background-color: #f0f3f4;
+    color: var(--text-form);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+
+}
+
+/* test table */
+#tablaInsumos_filter {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+#dataTable-search-input {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 22px;
+    color: var(--text-form);
+}
+
+.form-control:focus {
+    border-color: var(--bg-principal);
+    box-shadow: 0 0 0 .2rem rgb(255, 99, 71, .2);
+}
+
+.form-control, .form-select {
+    border-color: var(--bg-principal);
+    background-color: #ffffff;
+}
+
+.form-select:focus {
+    border-color: var(--bg-principal);
+    box-shadow: 0 0 0 .2rem rgb(255, 99, 71, .2);
+}

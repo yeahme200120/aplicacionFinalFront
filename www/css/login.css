@@ -1,0 +1,72 @@
+@import url(generales.css);
+
+/*//// login ////*/
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+header {
+    width: 100%;
+    height: 30vh;
+}
+
+body {
+    margin: 0;
+    margin-bottom: 10vh;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10vh;
+}
+
+.contenedor-imgUser {
+    width: 100%;
+    height: 38vh;
+}
+
+.img-userLogin {
+    width: 245px;
+    height: 240px;
+    border-radius: 50%;
+    background-image: url('../img/userLogin.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+
+.h4-saludo {
+    color: var(--text-principal);
+    font-family: 'roboto-bold';
+    font-size: 64px;
+}
+
+/* media querys */
+@media (min-width: 768px) {
+    header {
+        width: 100% !important;
+        height: 43vh !important;
+    }
+
+    .contenedor-imgUser {
+        width: 100% !important;
+        height: 48vh !important;
+    }
+
+    .img-userLogin {
+        width: 380px !important;
+        height: 380px !important;
+    }
+
+    .h4-saludo {
+        font-size: 72px !important;
+    }
+}
+
+/* @media (max-width: 1200px) {
+    
+} */

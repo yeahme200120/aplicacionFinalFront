@@ -1,0 +1,92 @@
+@import url(generales.css);
+
+/*//// Principal view ////*/
+
+html {
+   min-height: 100%;
+   position: relative;
+}
+
+header {
+   width: 100%;
+}
+
+body {
+   margin: 0;
+   margin-bottom: 10vh;
+}
+
+footer {
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+   height: 10vh;
+   /*  */
+   position: fixed;
+
+}
+
+.img-menu {
+   width: 80px;
+   height: 80px;
+   min-height: 48px;
+}
+
+ #img-ventas {
+    background-image: url("../img/vender.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-self: center;
+ }
+ #img-inventario {
+    background-image: url("../img/inventario.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-self: center;
+ }
+ #img-reportes {
+    background-image: url("../img/reportesVentas.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-self: center;
+ }
+ #img-config {
+    background-image: url("../img/configuracion.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-self: center;
+ }
+
+ /* media querys */
+@media (min-width: 768px) {
+   header {
+       width: 100% !important;
+   }
+
+   section {
+      margin-top: 3rem;
+   }
+
+   .img-menu {
+      width: 130px;
+      min-height: 130px;
+   }
+}
+
+/* @media (max-width: 1200px) {
+   
+} */
+ .barra-fondo {
+   background-color: #FF6B00;
+ }
+ .colorApp{
+   background-color:  #FF6B00;
+ }

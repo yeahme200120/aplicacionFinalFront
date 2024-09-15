@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Aceso</title>
+    <!-- Styles Generales -->
+    <link rel="stylesheet" href="../Bootstrap_css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Styles Especificos -->
+    <link rel="stylesheet" href="../css/cambiarAcceso.css">
+</head>
+<body>
+    <header class="img-curvas-2"></header>
+    <section class="container-fluid mt-5 pt-3">
+        <div class="row">
+            <div class="col text-center">
+                <p class="roboto-2" style="font-size: 22px;">Por tu seguridad, por favor cambia tu contraseña</p>
+                <form class="p-3">
+                    <div class="input-group mb-3">
+                        <input id="newPasword" type="password" class="form-control" placeholder="Nueva Contraseña">
+                        <span id="muestraNewPassword" class="input-group-text">
+                            <i id="showNewPassword" class="bi bi-eye-slash"></i>
+                        </span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <p><strong>Tu contraseña debe tener:</strong></p>
+                        <ul>
+                            <li><strong>Minimo 8 dígitos</strong></li>
+                            <li><strong>Números</strong></li>
+                            <li><strong>Letras mayusculas</strong></li>
+                            <li><strong>Caracter especial</strong></li>
+                        </ul>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input id="confirmaPasword" type="password" class="form-control" placeholder="Confirmar Contraseña">
+                        <span id="muestraConfirmPassword" class="input-group-text">
+                            <i id="showConfirmPassword" class="bi bi-eye-slash"></i>
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-5">
+                        <button id="cambiarAcceso" type="button" class="btn btn-lg rounded-pill div-btn-app">Aceptar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer class="container-fluid">
+        <div class="row w-auto">
+            <div class="col-12 d-flex flex-row justify-content-around align-items-center" style="height: 9.9vh;">
+                <div class="">
+                    <img src="../img/Line.png" alt="lineS">
+                </div>
+                <div class="">
+                    <div class="elipse-footer"></div>
+                </div>
+                <div class="">
+                    <img src="../img/Line.png" alt="lineE">
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Scrips Generales -->
+     <script src="../Bootstrap_js/bootstrap.bundle.min.js"></script>
+     <script src="../js/jquery-3.7.1.min.js"></script>
+     <script src="../js/toastify-js.js"></script>
+     <!-- Scripts Especificos -->
+     <script type="module" src="../js/cambiarAcceso.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>principal</title>
+    <!-- Styles Generales -->
+    <link rel="stylesheet" href="../Bootstrap_css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Styles Especificos -->
+    <link rel="stylesheet" href="../css/home.css">
+</head>
+<body>
+    <header class="barra-fondo">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="mt-1">
+                <p class="fs-3 text-light nomreEmpresa" style="font-family: Arial, Helvetica, sans-serif;" id="nombreEmpresa">NOMBRE DEL NEGOCIO</p>
+            </div>
+        </div>
+    </header>
+    <section class="container-fluid">
+        <div id="menu-events" class="row align-items-end btn-menu">
+            <div class="col-sm-12 col-md-6 my-2">
+                <div class="card shadow bg-white rounded py-2" style="align-items: center;">
+                    <img src="../img/vender.png" alt="" width="80">
+                    <h5 class="text-center py-2">Vender</h5>
+                </div>
+            </div>
+
+            <div id="btn-catalogo" class="col-sm-12 col-md-6 my-2">
+                <div class="card shadow bg-white rounded py-2" style="align-items: center;">
+                    <img src="../img/catalogos.png" alt="" width="80">
+                    <h5 class="text-center py-2">Catálogos</h5>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 my-2">
+                <div class="card shadow bg-white rounded py-2" style="align-items: center;">
+                    <img src="../img/reportesVentas.png" alt="" width="80">
+                    <h5 class="text-center py-2">Reporte de ventas</h5>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 my-2">
+                <div class="card shadow bg-white rounded py-2" style="align-items: center;">
+                    <img src="../img/configuraciones.png" alt="" width="80">
+                    <h5 class="text-center py-2">Configuración</h5>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 my-2">
+                
+                <div id="btn-insumos" class="btn-insumos card shadow bg-white rounded py-2 btn-catalogos" style="align-items: center;">
+                    <img src="../img/insumos.png" alt="" width="80">
+                    <h5 class="text-center py-2">Insumos</h5>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 my-2">
+                <div id="btn-productos" class="btn-productos card shadow bg-white rounded py-2" style="align-items: center;">
+                    <img src="../img/productos.png" alt="" width="80">
+                    <h5 class="text-center py-2">Productos</h5>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 my-2">
+                <div id="btn-provedores" class="btn-provedores card shadow bg-white rounded py-2" style="align-items: center;">
+                    <img src="../img/provedores.png" alt="" width="80">
+                    <h5 class="text-center py-2">Proveedores</h5>
+                </div>
+            </div>            
+        </div>
+    </section>
+    <footer class="bg-primario">
+        <div class="w-auto h-100 d-flex justify-content-center align-items-center">
+            <div id="btn-userLogin">
+                <img src="../img/userLogin.png" width="65px" height="60px" alt="user">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Cerrar Sesion -->
+    <div class="modal fade" id="modal-cerrarSesion" tabindex="-1" aria-labelledby="modal-cerrarSesionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background-color: var(--bg-principal) !important;">
+                    <h5 class="modal-title">Mensaje de sistema</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="modal-msg">¿Estas seguro de cerrar sesión?</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="btn-cerrarSesion" type="button" class="btn" style="color: #FFFF; background-color: var(--bg-principal) !important;">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scrips Generales -->
+     <script src="../Bootstrap_js/bootstrap.bundle.min.js"></script>
+     <script src="../js/jquery-3.7.1.min.js"></script>
+     <!-- Scripts Especificos -->
+    <script type="module" src="../js/home.js"></script>
+    <script src="js/funcionesGlobales.js"></script>
+</body>
+</html>

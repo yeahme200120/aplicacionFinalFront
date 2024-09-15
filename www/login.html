@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Styles Generales -->
+    <link rel="stylesheet" href="Bootstrap_css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Styles Especificos -->
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <div class="container-fluid h-100 loadSystem position-absolute d-none">
+        <div class="row h-100 align-items-center justify-content-center">
+            <div class="col-12 d-flex flex-column justify-content-center">
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <div class="spinner-grow m-2" style="background-color: var(--bg-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <div class="spinner-grow m-2" style="background-color: var(--bg-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow m-2" style="background-color: var(--bg-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <body>
+        <header class="img-curvas-1">
+            <div class="container">
+                <div class="row w-auto align-items-end contenedor-imgUser">
+                    <div class="col d-flex justify-content-center">
+                        <div class="w-auto mx-auto">
+                            <div class="img-userLogin"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="container-fluid mt-5 pt-3">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="col-12">
+                        <h4 class="text-center h4-saludo">¡Hola!</h2>
+                    </div>
+                    <div class="col-12">
+                        <form action="" class="p-3">
+                            <div class="input-group mt-5 mb-3">
+                                <input id="email" type="email" class="form-control" placeholder="Email">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person"></i>
+                                </span>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input id="password" type="password" class="form-control" placeholder="Contraseña">
+                                <span id="muestra-password" class="input-group-text">
+                                    <i id="showPassword" class="bi bi-eye-slash"></i>
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-center mt-5">
+                                <button id="btnLogin" type="button" class="btn btn-lg rounded-pill div-btn-app">Iniciar Sesión</button>
+                            </div>
+                            <p class="text-center mt-3"><strong>olvidé mi contraseña</strong></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <a class="col-2 btn m-2" style="background-color: #2AC54D;" href="https://api.whatsapp.com/send/?phone=7351732058">
+                    <i class="bi bi-whatsapp text-white bi-2x"></i> &nbsp; <label for="" class="text-white">Soporte</label>
+                </a>
+            </div>
+        </section>
+        <footer class="container-fluid">
+        </footer>
+        <!-- Scrips Generales -->
+        <script src="Bootstrap_js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery-3.7.1.min.js"></script>
+        <!-- Scripts Especificos -->
+        <script type="module" src="js/login.js"></script>
+        <script src="js/funcionesGlobales.js"></script>
+    </body>
+</html>
