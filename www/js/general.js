@@ -1,4 +1,4 @@
-
+const $loadSystem = $('.loadSystem');
 export function manejadorAPI(metodo, url, datos) {
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -85,4 +85,19 @@ export async function getEmpresa(){
                 backgroundColor: "#f7dc6f"
             }).showToast();
         })
+}
+export async function mostrarPreload(){
+    $(".loadSystem").removeClass('d-none');
+    $(".loadSystem").css('display',"block");
+}
+export async function ocultarPreload(){
+    $loadSystem.fadeToggle(1000);
+    $(".loadSystem").addClass('d-none');
+}
+
+export async function setNombreEmpresa(){
+    const empresa = localStorage.getItem("Empresa");
+    let nombre = empresa.replace(/["']/g, "")
+    let mayus = nombre.toUpperCase(nombre);
+    $("#nombreEmpresa").text(mayus);
 }

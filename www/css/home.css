@@ -90,3 +90,6 @@ footer {
  .colorApp{
    background-color:  #FF6B00;
  }
+ .barra-fondo-responsivo {
+   background: linear-gradient(180deg, #FF6B00 59%, #FFFEFE 100%);
+ }

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../css/toastify.min.css">
     <!-- Styles Especificos -->
     <link rel="stylesheet" href="../css/home.css">
-    <link rel="stylesheet" href="../css/insumos.css">
+    <link rel="stylesheet" href="../css/provedores.css">
     <link rel="stylesheet" href="../css/generales.css">
 </head>
 
@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>
-    <header class="barra-fondo">
+    <header class="barra-fondo-responsivo">
         <div class="d-flex justify-content-center align-items-center">
             <div class="mt-4">
                 <p class="fs-3 text-light" style="font-family: Arial, Helvetica, sans-serif;" id="nombreEmpresa">NOMBRE DEL NEGOCIO</p>
@@ -58,7 +58,7 @@
         </div>
         <div class="row align-items-end">
             <div class="col-12 mb-3">
-                <ul id="tabs-insumos" class="nav nav-tabs" role="tablist">
+                <ul id="tabs-provedores" class="nav nav-tabs" role="tablist">
                     <li class="nav-item text-center col-6" role="presentation">
                         <a class="nav-link active" name="menuAgregar" data-bs-toggle="tab" role="tab"
                             aria-selected="true" >
@@ -76,66 +76,52 @@
         </div>
     </nav>
     <!-- Agregar -->
-    <section id="section-agregarInsumos" class="container-fluid pb-3">
+    <section id="section-agregarProvedores" class="container-fluid pb-3">
         <div class="col-12 p-3">
             <form>
                 <div class="mb-3">
                     <div class="row">
-                        <div class="col-10 col-md-9">
-                            <label for="almacen" class="form-label">Almacén</label>
-                            <select id="almacen" class="form-select form-select-lg selectInsumos"></select>
+                        <div class="col-12 col-md-6">
+                            <label for="nombre_provedor" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre_provedor" placeholder="Descripción">
                         </div>
-                        <div id="addAlmacen" class="col-2 col-md-3 d-flex align-self-end justify-content-center">
-                            <img src="../Icons/add.png" alt="add" width="45" height="45">
+                        <div class="col-12 col-md-6">
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="direccion" placeholder="Direccion">
                         </div>
-                    </div>
+                        <div class="col-12 col-md-6">
+                            <label for="correo" class="form-label">Correo</label>
+                            <input type="email" class="form-control" id="correo" placeholder="correo">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="id_categoria" class="form-label">Categoria</label>
+                            <select id="id_categoria" class="form-select form-select-lg selectProvedores"></select>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="razon_social" class="form-label">Razon social</label>
+                            <input type="text" class="form-control" id="razon_social" placeholder="correo">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="telefono" class="form-label">Telefono</label>
+                            <input type="number" class="form-control" id="telefono" placeholder="telefono">
+                        </div>
                 </div>
-                <div class="mb-3">
-                    <label for="descripcion" class="form-label">Descripción</label>
-                    <input type="text" class="form-control" id="descripcion" placeholder="Descripción">
-                </div>
-                <div class="mb-3">
-                    <label for="precioU" class="form-label">Precio Unitario</label>
-                    <input type="number" min="1" class="form-control" id="precioU" placeholder="0">
-                </div>
-                <div class="mb-3">
-                    <label for="iva" class="form-label">Iva %</label>
-                    <input id="iva" type="number" min="1" class="form-control" placeholder="Iva">
-                </div>
-                <div class="mb-3">
-                    <label for="unidad" class="form-label">Unidad</label>
-                    <select id="unidad" class="form-select form-select-lg selectInsumos"></select>
-                </div>
-                <div class="mb-3">
-                    <label for="cantidad" class="form-label">Cantidad</label>
-                    <input id="cantidad" type="number" min="1" class="form-control" placeholder="0">
-                </div>
-                <div class="mb-3">
-                    <label for="proveedor" class="form-label">Proveedor</label>
-                    <select id="proveedor" class="form-select form-select-lg selectInsumos"></select>
                 </div>
                 <div class="d-flex justify-content-center mt-5">
-                    <button id="btn-agregarInsumo" type="button"
-                        class="btn btn-lg rounded-pill div-btn-app">Agregar</button>
+                    <button id="btn-agregarProvedor" type="button"
+                        class="btn btn-lg rounded-pill btn-segunda-opcion text-white">Agregar</button>
                 </div>
             </form>
         </div>
-        <!-- <div id="alerta-agregarInsumo" class="col-12 d-none" style="min-height: 20px;">
-            <div class="row">
-                <p class="text-center roboto-2">Se agregó con éxito <small
-                        style="font-size: 24px; color: #68d641 !important;"><i
-                            class="bi bi-check-circle-fill"></i></small></p>
-            </div>
-        </div> -->
     </section>
     <!-- Consultar -->
-    <section id="section-consultarInsumos" class="container-fluid pb-3 d-none">
+    <section id="section-consultarProvedores" class="container-fluid pb-3 d-none">
         <div class="container-fluid my-3">
-            <table class="table" id="tablaInsumos" style="width: 100%;"></table>
+            <table class="table" id="tablaProvedores" style="width: 100%;"></table>
         </div>
         
     </section>
-    <footer class="bg-primario">
+    <footer class="footer2">
         <div class="w-auto h-100 d-flex justify-content-around align-items-center">
             <div id="btn-menu-principal-back">
                 <img src="../img/back-arrow-white.png" width="35px" height="35px" alt="home">
@@ -154,7 +140,7 @@
     <script src="../js/toastify-js.js"></script>
     <script src="../js/dataTables/simple-datatables.js"></script>
     <!-- Scripts Especificos -->
-    <script type="module" src="../js/insumos.js"></script>
+    <script type="module" src="../js/provedores.js"></script>
 </body>
 
 </html>

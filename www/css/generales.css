@@ -57,6 +57,9 @@
     background-color: var(--bg-principal);
     color: #ffff;
 }
+.bg-primario-degradado {
+    background: linear-gradient(180deg, #FF6B00 59%, #FFFEFE 100%);
+}
 
 .img-curvas-1 {
     background-image: url('../vectores/Rectangle4.svg');
@@ -127,4 +130,10 @@
 .form-select:focus {
     border-color: var(--bg-principal);
     box-shadow: 0 0 0 .2rem rgb(255, 99, 71, .2);
+}
+.footer2{
+    background: #343339;
+}
+.btn-segunda-opcion{
+    background: #343339;
 }
