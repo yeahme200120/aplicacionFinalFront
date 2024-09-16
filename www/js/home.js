@@ -17,19 +17,15 @@ $(document).ready(async function(){
     $("#nombreEmpresa").text(mayus);
 });
 document.getElementById('btn-catalogo').addEventListener('click', ()=>{
-    mostrarPreload();
     window.location.href = "catalogos.html"
 });
 document.getElementById('btn-insumos').addEventListener('click', ()=>{
-    mostrarPreload()
     window.location.href = "insumos.html"
 });
 document.getElementById('btn-productos').addEventListener('click', ()=>{
-    mostrarPreload()
     window.location.href = "productos.html"
 });
 document.getElementById('btn-provedores').addEventListener('click', async ()=>{
-    mostrarPreload();
     let url = 'https://abonos.sipecem.com.mx/api/getCategoriasApi'
     let datos = localStorage.getItem("DataUser") ? localStorage.getItem("DataUser") : 0;
     await $.ajax(
@@ -50,6 +46,64 @@ document.getElementById('btn-provedores').addEventListener('click', async ()=>{
                 backgroundColor: "#f7dc6f"
             }).showToast();
         })
+});
+document.getElementById('btn-usuarios').addEventListener('click', async ()=>{
+    //Get Roles de usuario
+    await $.ajax(
+        {
+        url : `https://abonos.sipecem.com.mx/api/getRolUsuarios`,
+        type: `GET`,
+        })
+        .done(async function(data) {
+            localStorage.setItem("Rol_Usuario", JSON.stringify(data))
+        })
+        .fail(function(error) {            
+            Toastify({
+                text: `Ocurrió un error! ${respuesta}`,
+                duration: 3000,
+                backgroundColor: "#f7dc6f"
+            }).showToast();
+        })
+
+    let url = 'https://abonos.sipecem.com.mx/api/getTurnoUsuario'
+    let datos = localStorage.getItem("DataUser") ? localStorage.getItem("DataUser") : 0;
+    await $.ajax(
+        {
+        url : `${url}`,
+        type: `POST`,
+        data : datos ? JSON.parse(datos)  : null,
+        })
+        .done(async function(data) {
+            localStorage.setItem("Turnos", JSON.stringify(data))
+            
+        })
+        .fail(function(error) {
+            Toastify({
+                text: `Ocurrió un error! ${respuesta}`,
+                duration: 3000,
+                backgroundColor: "#f7dc6f"
+            }).showToast();
+        })
+
+        let url2 = 'https://abonos.sipecem.com.mx/api/getEstatusUsuarios'
+        await $.ajax(
+            {
+            url : `${url2}`,
+            type: `POST`,
+            data : datos ? JSON.parse(datos)  : null,
+            })
+            .done(async function(data) {
+                localStorage.setItem("Estatus_usuarios", JSON.stringify(data))
+                
+            })
+            .fail(function(error) {
+                Toastify({
+                    text: `Ocurrió un error! ${respuesta}`,
+                    duration: 3000,
+                    backgroundColor: "#f7dc6f"
+                }).showToast();
+            })
+        window.location.href = "usuarios.html"
 });
 
 

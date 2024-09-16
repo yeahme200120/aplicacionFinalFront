@@ -1,0 +1,13 @@
+@import url(generales.css);
+
+/* /// insumos /// */
+
+#tabs-usuarios > li > a {
+    font-size: 24px;
+    color: #000;
+}
+
+.active {
+    border-bottom: 3px solid var(--bg-principal) !important;
+    background-color: rgb(255, 99, 71, .2) !important;
+}
