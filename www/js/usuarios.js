@@ -98,9 +98,8 @@ $tabsUsuarios.on('click', 'li a', async (e) => {
     if (btnEvent == "Agregar") {
         $seccionConsultar.addClass('d-none');
         $seccionAgregar.removeClass('d-none');
-    
+        ocultarPreload()
     } else if (btnEvent == "Consultar") {
-        console.log("Consultar");
             $seccionAgregar.addClass('d-none');
             $seccionConsultar.removeClass('d-none');
         await getUsuarios()
@@ -295,7 +294,6 @@ async function getUsuarios() {
             infoUsuarios.push([contenido])
         }
     }
-    console.log("Info usuarios", infoUsuarios);
     
     tablaUsuarios.clear();
     tablaUsuarios.rows.add(infoUsuarios);
