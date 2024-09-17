@@ -114,15 +114,24 @@ $btn_userLogin.click(()=>{
 });
 
 $btn_cerrarSesion.click(()=>{
+    console.log("Cerrar sesion");
+    
     const user = getUserLocal()
     if (user == false) {
+        console.log("Sin usuario");
+        window.location.href = '../index.html';
     } else {
         removeLocal('DataUser');
         removeLocal('Catalogos');
         removeLocal('Provedores');
         removeLocal('EstatusProductos');
         removeLocal('Empresa');
-
-        window.location.href = '../index.html';
+        removeLocal('Estados_usuarios');
+        removeLocal('Estatus_usuarios');
+        removeLocal('Roles_usuarios');
+        removeLocal('Areas_usuario');
+        removeLocal('Categorias');
+        removeLocal('Turnos');
+        removeLocal('Rol_Usuario');
     }
 });

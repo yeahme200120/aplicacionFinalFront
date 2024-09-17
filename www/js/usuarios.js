@@ -269,7 +269,6 @@ async function getUsuarios() {
     mostrarPreload()
     const dataUser = getUserLocal();
     const catalogos = getLocal('Catalogos');
-    const unidades = catalogos.Unidades;
     
     let infoUsuarios = [];
     const urlGetUsuarios = 'https://abonos.sipecem.com.mx/api/getUsuariosEmpresa';
