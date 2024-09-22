@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="../css/home.css">
 </head>
 <body>
-    <header class="barra-fondo">
+    <header class="barra-fondo-responsivo">
         <div class="d-flex justify-content-center align-items-center">
-            <div class="mt-1">
+            <div class="mt-4">
                 <p class="fs-3 text-light nomreEmpresa" style="font-family: Arial, Helvetica, sans-serif;" id="nombreEmpresa">NOMBRE DEL NEGOCIO</p>
             </div>
         </div>
@@ -40,11 +40,17 @@
             </div>       
         </div>
     </section>
-    <footer class="bg-primario">
-        <div class="w-auto h-100 d-flex justify-content-center align-items-center">
-            <div id="btn-userLogin">
-                <img src="../img/userLogin.png" width="65px" height="60px" alt="user">
+    <footer class="footer2">
+        <div class="w-auto h-100 d-flex justify-content-around align-items-center">
+            <a  href="javascript:history.back()" id="btn-menu-principal-back">
+                <img src="../img/back-arrow-white.png" width="35px" height="35px" alt="home">
+            </a>
+            <div id="btn-menu-principal-home">
+                <img src="../img/back-home-withe.png" width="35px" height="35px" alt="home">
             </div>
+            <a id="btn-userLogin">
+                <img src="../img/userLogin.png" width="65px" height="60px" alt="user">
+            </a>
         </div>
     </footer>
 
@@ -70,5 +76,7 @@
      <script src="../js/jquery-3.7.1.min.js"></script>
      <!-- Scripts Especificos -->
     <script type="module" src="../js/configuraciones.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
 </body>
 </html>

@@ -5,7 +5,6 @@ import { configTable } from "./dataTables/config-table.js";
 
 // Variables globales
 const $btnHome = $('#btn-menu-principal-home');
-const $btnBack = $('#btn-menu-principal-back');
 
 const $tabsProvedores = $('#tabs-provedores');
 
@@ -67,10 +66,6 @@ $(document).ready(async function () {
 
 $btnHome.on('click', function() {
     window.location.href = "home.html"
-});
-
-$btnBack.on('click', function() {
-    history.back()
 });
 
 $tabsProvedores.on('click', 'li a', async (e) => {

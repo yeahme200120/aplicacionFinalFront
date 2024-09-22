@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="../css/home.css">
 </head>
 <body>
-    <header class="barra-fondo">
+    <header class="barra-fondo-responsivo">
         <div class="d-flex justify-content-center align-items-center">
-            <div class="mt-1">
+            <div class="mt-4">
                 <p class="fs-3 text-light nomreEmpresa" style="font-family: Arial, Helvetica, sans-serif;" id="nombreEmpresa">NOMBRE DEL NEGOCIO</p>
             </div>
         </div>
@@ -49,11 +49,17 @@
             </div>        
         </div>
     </section>
-    <footer class="bg-primario">
-        <div class="w-auto h-100 d-flex justify-content-center align-items-center">
-            <div id="btn-userLogin">
-                <img src="../img/userLogin.png" width="65px" height="60px" alt="user">
+    <footer class="footer2">
+        <div class="w-auto h-100 d-flex justify-content-around align-items-center">
+            <a  href="../index.html">
+                <img src="../img/back-arrow-white.png" width="35px" height="35px" alt="home">
+            </a>
+            <div id="btn-menu-principal-home">
+                <img src="../img/back-home-withe.png" width="35px" height="35px" alt="home">
             </div>
+            <a id="btn-userLogin">
+                <img src="../img/userLogin.png" width="65px" height="60px" alt="user">
+            </a>
         </div>
     </footer>
 
@@ -74,11 +80,39 @@
             </div>
         </div>
     </div>
+    <!-- modal Preload -->
+    <div class="modal fade loadSystem" id="loadSystem" tabindex="-1" aria-labelledby="loadSystem" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " style="align-items: center; align-content: center; align-self: center;">
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-2">
+                        <div class="spinner-grow m-2" style="background-color: var(--bg-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-2">
+                        <div class="spinner-grow m-2" style="background-color: var(--bg-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="spinner-grow m-2" style="background-color: var(--bg-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
     <!-- Scrips Generales -->
      <script src="../Bootstrap_js/bootstrap.bundle.min.js"></script>
      <script src="../js/jquery-3.7.1.min.js"></script>
      <!-- Scripts Especificos -->
     <script type="module" src="../js/home.js"></script>
-    <script src="js/funcionesGlobales.js"></script>
 </body>
 </html>

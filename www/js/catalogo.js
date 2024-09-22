@@ -1,12 +1,15 @@
 //Imports
 
-
+import { getEmpresa, getUserLocal, removeLocal, mostrarPreload, ocultarPreload, setNombreEmpresa, cerrarSesion } from "./general.js";
 
 // Variables globales
 const $btnHome = $('#btn-menu-principal-home');
-const $btnBack = $('#btn-menu-principal-back');
 const $btnCatalogos = $('#btn-catalogos');
 const $btnProvedores = $('#btn-provedores');
+
+const $btn_userLogin = $('#btn-userLogin');
+const $btn_cerrarSesion = $('#btn-cerrarSesion');
+const $modal_cerrarSesion = $('#modal-cerrarSesion');
 
 $(document).ready(function(){
     //Setaemos el nombre de la empresa
@@ -17,12 +20,6 @@ $(document).ready(function(){
 });
 $btnHome.click(()=>{
     window.location.href = "home.html"
-});
-
-$btnBack.click(()=>{
-    console.log("Click on btn back");
-    
-    history.back();
 });
 
 $btnCatalogos.on('click','div', (e)=>{
@@ -48,4 +45,11 @@ $btnCatalogos.on('click','div', (e)=>{
             break;
     }
     
+});
+$btn_userLogin.click(()=>{ 
+    $modal_cerrarSesion.modal('show');
+});
+
+$btn_cerrarSesion.click(()=>{
+    cerrarSesion()
 });

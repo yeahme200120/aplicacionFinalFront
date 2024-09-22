@@ -1,11 +1,10 @@
 //Imports
-import { getUserLocal, getLocal, manejadorAPI, mostrarPreload, ocultarPreload, setNombreEmpresa } from "./general.js";
+import { getUserLocal, getLocal, manejadorAPI, mostrarPreload, ocultarPreload, setNombreEmpresa, cerrarSesion } from "./general.js";
 import { loadModal } from "./modal.js";
 import { configTable } from "./dataTables/config-table.js";
 
 // Variables globales
 const $btnHome = $('#btn-menu-principal-home');
-const $btnBack = $('#btn-menu-principal-back');
 
 const $tabsUsuarios = $('#tabs-usuarios');
 
@@ -15,6 +14,10 @@ const $seccionConsultar = $('#section-consultarUsuarios');
 const $btnAgregarUsuario = $('#btn-agregarUsuario');
 
 const $loadSystem = $('.loadSystem');
+//Flojo cerrar sesion
+const $btn_userLogin = $('#btn-userLogin');
+const $btn_cerrarSesion = $('#btn-cerrarSesion');
+const $modal_cerrarSesion = $('#modal-cerrarSesion');
 
 //Select´s
 const $id_turno = $('#id_turno');
@@ -88,21 +91,19 @@ $btnHome.on('click', function() {
     window.location.href = "home.html"
 });
 
-$btnBack.on('click', function() {
-    history.back()
-});
-
 $tabsUsuarios.on('click', 'li a', async (e) => {
-    mostrarPreload()
     const btnEvent = e.currentTarget.innerText
     if (btnEvent == "Agregar") {
+        mostrarPreload()
         $seccionConsultar.addClass('d-none');
         $seccionAgregar.removeClass('d-none');
         ocultarPreload()
     } else if (btnEvent == "Consultar") {
+        mostrarPreload()
             $seccionAgregar.addClass('d-none');
             $seccionConsultar.removeClass('d-none');
         await getUsuarios()
+        ocultarPreload()
     }
 })
 
@@ -300,3 +301,10 @@ async function getUsuarios() {
 
     ocultarPreload()
 }
+$btn_userLogin.click(()=>{ 
+    $modal_cerrarSesion.modal('show');
+});
+
+$btn_cerrarSesion.click(()=>{
+    cerrarSesion()
+});

@@ -131,17 +131,34 @@
     </section>
     <footer class="footer2">
         <div class="w-auto h-100 d-flex justify-content-around align-items-center">
-            <div id="btn-menu-principal-back">
+            <a  href="javascript:history.back()">
                 <img src="../img/back-arrow-white.png" width="35px" height="35px" alt="home">
-            </div>
+            </a>
             <div id="btn-menu-principal-home">
                 <img src="../img/back-home-withe.png" width="35px" height="35px" alt="home">
             </div>
-            <div>
+            <a id="btn-userLogin">
                 <img src="../img/userLogin.png" width="65px" height="60px" alt="user">
-            </div>
+            </a>
         </div>
     </footer>
+    <!-- Modal Cerrar Sesion -->
+    <div class="modal fade modal-cerrarSesion" id="modal-cerrarSesion" tabindex="-1" aria-labelledby="modal-cerrarSesionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background-color: var(--bg-principal) !important;">
+                    <h5 class="modal-title">Mensaje de sistema</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="modal-msg">¿Estas seguro de cerrar sesión?</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="btn-cerrarSesion" type="button" class="btn" style="color: #FFFF; background-color: var(--bg-principal) !important;">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Scrips Generales -->
     <script src="../Bootstrap_js/bootstrap.bundle.min.js"></script>
     <script src="../js/jquery-3.7.1.min.js"></script>

@@ -16,42 +16,15 @@ $(document).ready(async function(){
     let mayus = await nombre.toUpperCase(nombre);
     $("#nombreEmpresa").text(mayus);
 });
-document.getElementById('btn-catalogo').addEventListener('click', ()=>{
-    window.location.href = "catalogos.html"
-});
-document.getElementById('btn-configuraciones').addEventListener('click', ()=>{
-    window.location.href = "configuraciones.html"
-});
-document.getElementById('btn-insumos').addEventListener('click', ()=>{
-    window.location.href = "insumos.html"
-});
-document.getElementById('btn-productos').addEventListener('click', ()=>{
-    window.location.href = "productos.html"
-});
-document.getElementById('btn-provedores').addEventListener('click', async ()=>{
-    let url = 'https://abonos.sipecem.com.mx/api/getCategoriasApi'
-    let datos = localStorage.getItem("DataUser") ? localStorage.getItem("DataUser") : 0;
-    await $.ajax(
-        {
-        url : `${url}`,
-        type: `POST`,
-        data : datos ? JSON.parse(datos)  : null,
-        })
-        .done(async function(data) {
-            localStorage.setItem("Categorias", JSON.stringify(data.Categorias))
-            window.location.href = "provedores.html"
-        })
-        .fail(function(error) {
-            console.log("Respuesta fail: ",error);
-            Toastify({
-                text: `Ocurrió un error! ${respuesta}`,
-                duration: 3000,
-                backgroundColor: "#f7dc6f"
-            }).showToast();
-        })
-});
+
 document.getElementById('btn-usuarios').addEventListener('click', async ()=>{
-    //Get Roles de usuario
+    //Get Roles de }
+    try {
+        $(".loadSystem").modal('show');
+    } catch (error) {
+        console.log("Error: ", error);
+        
+    }
     await $.ajax(
         {
         url : `https://abonos.sipecem.com.mx/api/getRolUsuarios`,
@@ -110,11 +83,7 @@ document.getElementById('btn-usuarios').addEventListener('click', async ()=>{
 });
 
 
-
-
-$btn_userLogin.click(()=>{
-    console.log("Se va a cerrar la sesion");
-    
+$btn_userLogin.click(()=>{ 
     $modal_cerrarSesion.modal('show');
 });
 

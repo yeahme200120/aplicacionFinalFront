@@ -94,6 +94,12 @@ export async function ocultarPreload(){
     $loadSystem.fadeToggle(1000);
     $(".loadSystem").addClass('d-none');
 }
+export async function mostrarModalPreload(){
+    $(".loadSystem").modal('show');
+}
+export async function ocultarModalPreload(){
+    $(".loadSystem").modal('hide');
+}
 
 export async function setNombreEmpresa(){
     const empresa = localStorage.getItem("Empresa");
@@ -102,7 +108,6 @@ export async function setNombreEmpresa(){
     $("#nombreEmpresa").text(mayus);
 }
 export function cerrarSesion(){
-    console.log("Cerrar sesion");
     removeLocal('DataUser');
     removeLocal('Catalogos');
     removeLocal('Provedores');
@@ -117,3 +122,7 @@ export function cerrarSesion(){
     removeLocal('Rol_Usuario');
     window.location.href = '../index.html';
 }
+
+//***********************   Funciones Bluethooth    ***********************
+
+//********************   Fin Funciones Bluethooth    ***********************

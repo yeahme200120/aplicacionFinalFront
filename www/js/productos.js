@@ -5,7 +5,7 @@ import { configTable } from "./dataTables/config-table.js";
 
 // Variables globales
 const $btnHome = $('#btn-menu-principal-home');
-const $btnBack = $('#btn-menu-principal-back');
+
 
 const $tabsProductos = $('#tabs-productos');
 
@@ -39,6 +39,10 @@ const $unidad = $("#unidad");
 
 //Tables
 const $tablaProductos = $("#tablaProductos").DataTable(configTable);
+
+const $btn_userLogin = $('#btn-userLogin');
+const $btn_cerrarSesion = $('#btn-cerrarSesion');
+const $modal_cerrarSesion = $('#modal-cerrarSesion');
 
 $(document).ready(async function () {
 
@@ -144,10 +148,6 @@ $(document).ready(async function () {
 
 $btnHome.on('click', function() {
     window.location.href = "home.html"
-});
-
-$btnBack.on('click', function() {
-    history.back()
 });
 
 $tabsProductos.on('click', 'li a', async (e) => {
@@ -358,3 +358,10 @@ async function getAreaAlmacen(){
         );
     });
 }
+$btn_userLogin.click(()=>{ 
+    $modal_cerrarSesion.modal('show');
+});
+
+$btn_cerrarSesion.click(()=>{
+    cerrarSesion()
+});
