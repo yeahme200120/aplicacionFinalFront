@@ -21,32 +21,23 @@
     <section class="container-fluid">
         <div id="menu-events" class="row align-items-end btn-menu">
             <div class="col-sm-12 col-md-6 my-2">
-                <div class="card shadow bg-white rounded py-2" style="align-items: center;">
-                    <img src="../img/vender.png" alt="" width="80">
-                    <h5 class="text-center py-2">Vender</h5>
+                <div id="btn-usuarios" class="btn-provedores card shadow bg-white rounded py-2" style="align-items: center;">
+                    <img src="../img/usuarios.png" alt="" width="80">
+                    <h5 class="text-center py-2">Usuarios</h5>
                 </div>
-            </div>
-
-            <div id="btn-catalogo" class="col-sm-12 col-md-6 my-2">
-                <div class="card shadow bg-white rounded py-2" style="align-items: center;">
-                    <img src="../img/catalogos.png" alt="" width="80">
-                    <h5 class="text-center py-2">Catálogos</h5>
-                </div>
-            </div>
-
+            </div>          
             <div class="col-sm-12 col-md-6 my-2">
-                <div class="card shadow bg-white rounded py-2" style="align-items: center;">
-                    <img src="../img/reportesVentas.png" alt="" width="80">
-                    <h5 class="text-center py-2">Reporte de ventas</h5>
+                <div id="btn-impresoras" class="btn-provedores card shadow bg-white rounded py-2" style="align-items: center;">
+                    <img src="../img/impresoras.png" alt="" width="80">
+                    <h5 class="text-center py-2">Impresoras</h5>
                 </div>
-            </div>
-
+            </div> 
             <div class="col-sm-12 col-md-6 my-2">
-                <div id="btn-configuraciones" class="card shadow bg-white rounded py-2" style="align-items: center;">
-                    <img src="../img/configuraciones.png" alt="" width="80">
-                    <h5 class="text-center py-2">Configuración</h5>
+                <div id="btn-mi-perfil" class="btn-provedores card shadow bg-white rounded py-2" style="align-items: center;">
+                    <img src="../img/perfil.png" alt="" width="80">
+                    <h5 class="text-center py-2">Mi perfil</h5>
                 </div>
-            </div>        
+            </div>       
         </div>
     </section>
     <footer class="bg-primario">
@@ -58,7 +49,7 @@
     </footer>
 
     <!-- Modal Cerrar Sesion -->
-    <div class="modal fade" id="modal-cerrarSesion" tabindex="-1" aria-labelledby="modal-cerrarSesionLabel" aria-hidden="true">
+    <div class="modal fade modal-cerrarSesion" id="modal-cerrarSesion" tabindex="-1" aria-labelledby="modal-cerrarSesionLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-white" style="background-color: var(--bg-principal) !important;">
@@ -78,7 +69,6 @@
      <script src="../Bootstrap_js/bootstrap.bundle.min.js"></script>
      <script src="../js/jquery-3.7.1.min.js"></script>
      <!-- Scripts Especificos -->
-    <script type="module" src="../js/home.js"></script>
-    <script src="js/funcionesGlobales.js"></script>
+    <script type="module" src="../js/configuraciones.js"></script>
 </body>
 </html>

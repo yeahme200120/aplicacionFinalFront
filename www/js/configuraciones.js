@@ -113,6 +113,8 @@ document.getElementById('btn-usuarios').addEventListener('click', async ()=>{
 
 
 $btn_userLogin.click(()=>{
+    console.log("Se va a cerrar la sesion");
+    
     $modal_cerrarSesion.modal('show');
 });
 

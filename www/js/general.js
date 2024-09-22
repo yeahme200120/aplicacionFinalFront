@@ -101,3 +101,19 @@ export async function setNombreEmpresa(){
     let mayus = nombre.toUpperCase(nombre);
     $("#nombreEmpresa").text(mayus);
 }
+export function cerrarSesion(){
+    console.log("Cerrar sesion");
+    removeLocal('DataUser');
+    removeLocal('Catalogos');
+    removeLocal('Provedores');
+    removeLocal('EstatusProductos');
+    removeLocal('Empresa');
+    removeLocal('Estados_usuarios');
+    removeLocal('Estatus_usuarios');
+    removeLocal('Roles_usuarios');
+    removeLocal('Areas_usuario');
+    removeLocal('Categorias');
+    removeLocal('Turnos');
+    removeLocal('Rol_Usuario');
+    window.location.href = '../index.html';
+}
