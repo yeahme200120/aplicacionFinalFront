@@ -11,9 +11,10 @@ const $loadSystem = $('.loadSystem');
 
 $(document).ready(async function(){
     //Setaemos el nombre de la empresa
-    const empresa =await  localStorage.getItem("Empresa");
-    let nombre =await empresa.replace(/["']/g, "")
-    let mayus = await nombre.toUpperCase(nombre);
+    const empresa =await localStorage.getItem("Empresa");
+    
+    let nombre =empresa.replace(/["']/g, "")
+    let mayus = nombre.toUpperCase(nombre);
     $("#nombreEmpresa").text(mayus);
 });
 document.getElementById('btn-catalogo').addEventListener('click', ()=>{
@@ -22,7 +23,6 @@ document.getElementById('btn-catalogo').addEventListener('click', ()=>{
 document.getElementById('btn-configuraciones').addEventListener('click', ()=>{
     window.location.href = "configuraciones.html"
 });
-
 $btn_userLogin.click(()=>{
     console.log("Cerrar");
     

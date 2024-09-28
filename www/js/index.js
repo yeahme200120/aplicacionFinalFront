@@ -1,6 +1,9 @@
 //Imports
-import { getUserLocal } from "./general.js";
+import { getUserLocal, removeLocal } from "./general.js";
 
+$(document).ready(function(){
+    cerrarSesion();
+});
 document.getElementById('btnComenzar').addEventListener('click', () => {
     console.log("existe user local -> ",);
     if (getUserLocal() === false) {
@@ -9,3 +12,23 @@ document.getElementById('btnComenzar').addEventListener('click', () => {
         setTimeout(function () { $(window).attr('location', 'views/home.html') }, 500);
     }
 });
+
+function cerrarSesion(){
+    try {
+        removeLocal('DataUser');
+        removeLocal('Catalogos');
+        removeLocal('Provedores');
+        removeLocal('EstatusProductos');
+        removeLocal('Empresa');
+        removeLocal('Estados_usuarios');
+        removeLocal('Estatus_usuarios');
+        removeLocal('Roles_usuarios');
+        removeLocal('Areas_usuario');
+        removeLocal('Categorias');
+        removeLocal('Turnos');
+        removeLocal('Rol_Usuario');
+    } catch (error) {
+        console.log("ERROR: ", error);
+        
+    }
+}

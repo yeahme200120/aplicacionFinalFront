@@ -1,5 +1,5 @@
 //Imports
-import { manejadorAPI } from '../js/general.js'
+import { manejadorAPI, getEmpresa } from '../js/general.js'
 import { loadModal } from "../js/modal.js";
 
 //Variables
@@ -50,7 +50,7 @@ document.getElementById('btnLogin').addEventListener('click', async () => {
             const dataUser = JSON.stringify(respLogin)
             localStorage.setItem("DataUser", dataUser)
             respLogin.contra_update++
-
+            getEmpresa();
             if (respLogin.contra_update == 0) {
                 setTimeout(function () { $(window).attr('location', 'views/cambiarAcceso.html') }, 500);
             } else {
