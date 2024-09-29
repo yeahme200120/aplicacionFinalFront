@@ -30,6 +30,7 @@ const $precioU = $('#precioU');
 const $iva = $('#iva');
 const $unidad = $('#unidad');
 const $cantidad = $('#cantidad');
+const $stock = $('#stock');
 const $proveedor = $('#proveedor');
 
 //Tables
@@ -132,6 +133,7 @@ $btnAgregarInsumo.on('click', async function () {
     let iva = $iva.val();
     let unidad = $unidad.val();
     let cantidad = $cantidad.val();
+    let stock = $stock.val();
     let proveedor = $proveedor.val();
     const empresa = dataUsuario.id_empresa;
 
@@ -141,6 +143,7 @@ $btnAgregarInsumo.on('click', async function () {
         precioU == "" ||
         iva == "" ||
         cantidad == "" ||
+        stock == "" ||
         proveedor == ""
     ) {
         Toastify({
@@ -158,6 +161,7 @@ $btnAgregarInsumo.on('click', async function () {
     iva = parseInt(iva);
     unidad = parseInt(unidad);
     cantidad = parseInt(cantidad);
+    stock = parseInt(stock);
     proveedor = parseInt(proveedor);
 
     //SET API
@@ -170,10 +174,12 @@ $btnAgregarInsumo.on('click', async function () {
         "iva": iva,
         "id_unidad": unidad,
         "cantidad": cantidad,
+        "stock": stock,
         "id_empresa": empresa,
         "id_provedor": proveedor
     }
-
+    console.log("data del insumo: ", datosSetInsumo);
+    
     await $.ajax(
     {
     url : `${url}`,
@@ -252,6 +258,8 @@ async function getInsumos() {
     
     if (respInsumos.Insumos) {
         for (const insumo of respInsumos.Insumos) {
+            console.log("Data Insumos: ", insumo);
+            
             let colorStatus = ''
             if (insumo.cantidad <= 5) {
                 colorStatus = '#c0392b';
@@ -264,27 +272,27 @@ async function getInsumos() {
             }
 
             let nombreUnidad = unidades.filter(item => item.id == insumo.id_unidad)[0]['nombre_unidad']
-            let mapUnidadesShort = {
-                'Pieza': 'pz',
-                'Kilo': 'kg',
-                'Litros': 'lt',
-                'Gramo': 'gr',
-                'Mililitro': 'ml',
-                'Caja': 'cajas'
+            let estilo = '';
+            if(insumo.cantidad <= insumo.stock){
+                estilo = 'text-danger'
+            }else{
+                estilo = 'text-success'
             }
-
-            nombreUnidad = mapUnidadesShort[nombreUnidad];
-
             let contenido = `
                 <div class="card bg-light mb-3">
                     <div class="card-header fw-bold colorApp text-white">${insumo.descripcion}</div>
                     <div class="card-body">
+                        <div class="row justify-content-end">
+                            <div class="col-2">
+                                <i class="bi bi-circle-fill ${estilo}" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
                         <ul>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Cantidad</label></div><div class="col-6"><h6>${insumo.cantidad}</h6></div></li>
-                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Unidad</label></div><div class="col-6"><h6>${nombreUnidad}</h6></div></li>
-                            <li class=""><div class="row"><div class="col-6"><label class="fw-bold">Empresa</label></div><div class="col-6"><h6>${insumo.id_empresa}</h6></div></></li>
-                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Provedor</label></div><div class="col-6"><h6>${insumo.id_provedor}</h6></div></></li></li>
-                            <li class=""><div class="row"><div class="col-6"><label class="fw-bold">Estatus</label></div><div class="col-6"><h6>${insumo.estatus}</h6></div></></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Unidad</label></div><div class="col-6"><h6>${insumo.nombre_unidad}</h6></div></li>
+                            <li class=""><div class="row"><div class="col-6"><label class="fw-bold">Empresa</label></div><div class="col-6"><h6>${insumo.nombre_Empresa}</h6></div></></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Provedor</label></div><div class="col-6"><h6>${insumo.nombre_provedor}</h6></div></></li></li>
+                            <li class=""><div class="row"><div class="col-6"><label class="fw-bold">Área</label></div><div class="col-6"><h6>${insumo.nombre_area}</h6></div></></li>
                         </ul>
                     </div>
                 </div>

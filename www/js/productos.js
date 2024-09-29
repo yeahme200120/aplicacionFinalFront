@@ -32,6 +32,7 @@ const $precio_compra = $("#precio_compra");
 const $precio_venta = $("#precio_venta");
 const $id_provedor = $("#id_provedor");
 const $stock = $("#stock");
+const $cantidad = $("#cantidad");
 const $iva = $("#iva");
 const $id_estatus_producto = $("#id_estatus_producto");
 const $id_categoria = $("#id_categoria");
@@ -172,6 +173,7 @@ $btnAgregarProducto.on('click', async function () {
     let precio_venta =$precio_venta.val();
     let id_provedor =$id_provedor.val();
     let stock =$stock.val();
+    let cantidad =$cantidad.val();
     let iva =$iva.val();
     let id_estatus_producto =$id_estatus_producto.val();
     let id_categoria =$id_categoria.val();
@@ -185,6 +187,7 @@ $btnAgregarProducto.on('click', async function () {
         precio_venta == '' ||
         id_provedor == '' ||
         stock == '' ||
+        cantidad == '' ||
         iva == '' ||
         id_estatus_producto == '' ||
         id_categoria == '' ||
@@ -204,6 +207,7 @@ $btnAgregarProducto.on('click', async function () {
     precio_venta = parseFloat(precio_venta);
     id_provedor = parseInt(id_provedor);
     stock = parseInt(stock);
+    cantidad = parseInt(cantidad);
     iva = parseInt(iva);
     id_estatus_producto = parseInt(id_estatus_producto);
     id_categoria = parseInt(id_categoria);
@@ -218,6 +222,7 @@ $btnAgregarProducto.on('click', async function () {
         "precio_venta":precio_venta,
         "id_provedor":id_provedor,
         "stock":stock,
+        "cantidad":cantidad,
         "iva":iva,
         "id_estatus_producto":id_estatus_producto,
         "id_categoria":id_categoria,
@@ -296,21 +301,22 @@ async function getProductos() {
     
     if (respProductos.Productos) {
         for (const producto of respProductos.Productos) {
-            let colorStatus = ''
-            if (producto.stock <= 5) {
-                colorStatus = '#c0392b';
-            }
-            else if(producto.stock <= 10) {
-                colorStatus = '#f4d03f';
-            }
-            else {
-                colorStatus = "#28b463"
+            let estilo = '';
+            if(producto.cantidad <= producto.stock){
+                estilo = 'text-danger'
+            }else{
+                estilo = 'text-success'
             }
 
             let contenido = `
                 <div class="card bg-light mb-3">
                     <div class="card-header fw-bold colorApp text-white">${producto.nombre_producto}</div>
                     <div class="card-body">
+                        <div class="row justify-content-end">
+                            <div class="col-2">
+                                <i class="bi bi-circle-fill ${estilo}" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
                         <ul>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Cantidad</label></div><div class="col-6"><h6>${producto.stock}</h6></div></li>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Compra</label></div><div class="col-6"><h6>${producto.precio_compra}</h6></div></li>
