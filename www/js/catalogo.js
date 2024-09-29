@@ -38,8 +38,7 @@ $btnCatalogos.on('click','div', (e)=>{
             
             break;
         case 'REPORTES':
-            
-            break;
+        break;
     
         default:
             break;

@@ -81,6 +81,17 @@ document.getElementById('btn-usuarios').addEventListener('click', async ()=>{
             })
         window.location.href = "usuarios.html"
 });
+document.getElementById('btn-mi-perfil').addEventListener('click', async ()=>{
+    //Get Roles de }
+    try {
+        $(".loadSystem").modal('show');
+    } catch (error) {
+        console.log("Error: ", error);
+        
+    }
+    
+        window.location.href = "miPerfil.html"
+});
 
 
 $btn_userLogin.click(()=>{ 
