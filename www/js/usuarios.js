@@ -35,6 +35,13 @@ $(document).ready(async function () {
     const userData = getUserLocal();
     const metodo = 'POST';
     
+    //Setear el nombre del usuario logeado
+    const user =JSON.parse(localStorage.getItem("DataUser"));
+    let nombre = user.name;
+    let mayus = nombre.toUpperCase(nombre);
+    $("#nombreUser").text(mayus);
+
+
     //Categorias
     const urlTurno = 'https://abonos.sipecem.com.mx/api/getTurnoUsuario';
     const datosTurno = userData;
