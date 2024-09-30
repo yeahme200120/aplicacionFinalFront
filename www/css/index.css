@@ -22,7 +22,9 @@ footer {
     width: 100%;
     height: 10vh;
 }
-
+.bodyIndex{
+    background: #FF6B00;
+}
 .img-index {
     background-image: url('../vectores/curva1.svg');
     background-repeat: no-repeat;

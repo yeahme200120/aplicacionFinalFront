@@ -91,6 +91,15 @@
     padding-left: 70px;
     padding-right: 70px;
 }
+.div-btn-app-index {
+    background-color: #343339 !important;
+    font-family: 'roboto-light';
+    font-size: large;
+    font-style: normal;
+    color: #ffff !important;
+    padding-left: 70px;
+    padding-right: 70px;
+}
 
 .form-control {
     height: 50px;
