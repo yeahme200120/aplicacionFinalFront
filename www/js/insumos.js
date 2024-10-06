@@ -133,7 +133,7 @@ $btnAgregarInsumo.on('click', async function () {
     let iva = $iva.val();
     let unidad = $unidad.val();
     let cantidad = $cantidad.val();
-    let stock = $stock.val();
+    let stock = parseInt(0);
     let proveedor = $proveedor.val();
     const empresa = dataUsuario.id_empresa;
 
@@ -143,7 +143,6 @@ $btnAgregarInsumo.on('click', async function () {
         precioU == "" ||
         iva == "" ||
         cantidad == "" ||
-        stock == "" ||
         proveedor == ""
     ) {
         Toastify({
@@ -161,7 +160,7 @@ $btnAgregarInsumo.on('click', async function () {
     iva = parseInt(iva);
     unidad = parseInt(unidad);
     cantidad = parseInt(cantidad);
-    stock = parseInt(stock);
+    stock = parseInt(0);
     proveedor = parseInt(proveedor);
 
     //SET API
@@ -174,7 +173,7 @@ $btnAgregarInsumo.on('click', async function () {
         "iva": iva,
         "id_unidad": unidad,
         "cantidad": cantidad,
-        "stock": stock,
+        "stock": parseInt(0),
         "id_empresa": empresa,
         "id_provedor": proveedor
     }
@@ -259,34 +258,11 @@ async function getInsumos() {
     if (respInsumos.Insumos) {
         for (const insumo of respInsumos.Insumos) {
             console.log("Data Insumos: ", insumo);
-            
-            let colorStatus = ''
-            if (insumo.cantidad <= 5) {
-                colorStatus = '#c0392b';
-            }
-            else if(insumo.cantidad <= 10) {
-                colorStatus = '#f4d03f';
-            }
-            else {
-                colorStatus = "#28b463"
-            }
-
             let nombreUnidad = unidades.filter(item => item.id == insumo.id_unidad)[0]['nombre_unidad']
-            let estilo = '';
-            if(insumo.cantidad <= insumo.stock){
-                estilo = 'text-danger'
-            }else{
-                estilo = 'text-success'
-            }
             let contenido = `
                 <div class="card bg-light mb-3">
                     <div class="card-header fw-bold colorApp text-white">${insumo.descripcion}</div>
                     <div class="card-body">
-                        <div class="row justify-content-end">
-                            <div class="col-2">
-                                <i class="bi bi-circle-fill ${estilo}" style="font-size: 2rem;"></i>
-                            </div>
-                        </div>
                         <ul>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Cantidad</label></div><div class="col-6"><h6>${insumo.cantidad}</h6></div></li>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Unidad</label></div><div class="col-6"><h6>${insumo.nombre_unidad}</h6></div></li>

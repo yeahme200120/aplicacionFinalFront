@@ -1,6 +1,7 @@
 //imports
 
-import { getEmpresa, getUserLocal, removeLocal, mostrarPreload, ocultarPreload, setNombreEmpresa, cerrarSesion } from "./general.js";
+import { getEmpresa, getUserLocal, removeLocal, mostrarPreload, ocultarPreload, setNombreEmpresa, cerrarSesion ,mostrarDispositivos,comprobarStatusBluethooth,conectarImpresora,impresoraConectada,desconectarImpresora,codificacionTexto,imprimirSimple,formatTexto,imprimirImgen64,tituloFormat,impresioPV,imprimirQR,imprimirBarras, imprimirSeparador} from "./general.js";
+import { conectDevice, conectDeviceMoment, imprimir } from "./impresiones.js";
 //variables
 const $btn_userLogin = $('#btn-userLogin');
 const $btn_cerrarSesion = $('#btn-cerrarSesion');
@@ -11,9 +12,9 @@ const $loadSystem = $('.loadSystem');
 
 $(document).ready(async function(){
     //Setaemos el nombre de la empresa
-    const empresa =await  localStorage.getItem("Empresa");
-    let nombre =await empresa.replace(/["']/g, "")
-    let mayus = await nombre.toUpperCase(nombre);
+    const empresa =localStorage.getItem("Empresa");
+    let nombre =empresa.replace(/["']/g, "")
+    let mayus = nombre.toUpperCase(nombre);
     $("#nombreEmpresa").text(mayus);
 });
 
@@ -89,8 +90,30 @@ document.getElementById('btn-mi-perfil').addEventListener('click', async ()=>{
         console.log("Error: ", error);
         
     }
-    
         window.location.href = "miPerfil.html"
+});
+document.getElementById('btn-impresoras').addEventListener('click', async ()=>{
+    try {
+        /* mostrarDispositivos()
+        comprobarStatusBluethooth()
+        conectarImpresora()
+        impresoraConectada()
+        desconectarImpresora()
+        codificacionTexto()
+        imprimirSimple()
+        formatTexto()
+        imprimirImgen64()
+        tituloFormat()
+        impresioPV()
+        imprimirQR()
+        imprimirBarras() 
+        imprimirSeparador()  */  
+        conectDevice()
+        conectDeviceMoment()
+        imprimir()
+    } catch (error) {
+        alert(error)
+    }
 });
 
 
