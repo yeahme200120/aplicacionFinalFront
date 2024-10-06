@@ -111,8 +111,7 @@
                     <input id="cantidad" type="number" min="1" class="form-control" placeholder="0">
                 </div>
                 <div class="mb-3">
-                    <label for="stock" class="form-label">Stock</label>
-                    <input id="stock" type="number" min="1" class="form-control" placeholder="0">
+                    <input id="stock" name="stock" type="hidden" min="1" class="form-control" value="0">
                 </div>
                 <div class="mb-3">
                     <label for="proveedor" class="form-label">Proveedor</label>
@@ -124,13 +123,6 @@
                 </div>
             </form>
         </div>
-        <!-- <div id="alerta-agregarInsumo" class="col-12 d-none" style="min-height: 20px;">
-            <div class="row">
-                <p class="text-center roboto-2">Se agregó con éxito <small
-                        style="font-size: 24px; color: #68d641 !important;"><i
-                            class="bi bi-check-circle-fill"></i></small></p>
-            </div>
-        </div> -->
     </section>
     <!-- Consultar -->
     <section id="section-consultarInsumos" class="container-fluid pb-3 d-none">

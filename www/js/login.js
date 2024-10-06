@@ -47,6 +47,20 @@ document.getElementById('btnLogin').addEventListener('click', async () => {
             // console.log("Estas fuera de tu horario");
             loadModal('modalDinamico', './components/modal.html','Lo sentimos 🥺, Estás fuera del turno laboral.');
         }else {
+            //Obtenemos los catalogos            
+            try {
+                let data = { usuario: respLogin.id }
+                const urlCatalogos = 'https://abonos.sipecem.com.mx/api/getCatalogos';
+                const respCatalogos = await manejadorAPI("POST",urlCatalogos,data)
+                
+                localStorage.removeItem("Catalogos")
+                localStorage.setItem('Catalogos', JSON.stringify(respCatalogos));
+            } catch (error) {
+                console.log("Error al traer los catalogos: ", error);
+                return 
+                
+            }
+
             const dataUser = JSON.stringify(respLogin)
             localStorage.setItem("DataUser", dataUser)
             respLogin.contra_update++

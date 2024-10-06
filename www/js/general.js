@@ -126,3 +126,203 @@ export function cerrarSesion(){
 //***********************   Funciones Bluethooth    ***********************
 
 //********************   Fin Funciones Bluethooth    ***********************
+//***********************   Funciones de la impresora   ********************
+export function mostrarDispositivos(){
+    //Muestra el listado de los dispositivos bluethooth vunculados
+    try {
+        window.BluetoothPrinter.list(function (data) {
+           alert("Success");
+           alert(data);
+          },function (err) {
+           alert("Error");
+           alert(err);
+          })
+    } catch (error) {
+        alert(error)
+    }
+}
+export function comprobarStatusBluethooth(){
+    //Comprueba el estatus del bluethooth
+    try {
+        window.BluetoothPrinter.status(function(data){
+           alert("Success");
+           alert(data)
+          },function(err){
+           alert("Error");
+           alert(err)
+          })        
+    } catch (error) {
+        alert(error)
+    }
+}
+export function conectarImpresora(){
+    //Conecta la impresora
+    try {
+        window.BluetoothPrinter.connect("PrinterName", function(data){
+           alert("Success");
+           alert(data)
+          },function(err){
+           alert("Error");
+           alert(err)
+          })
+    } catch (error) {
+        alert(error)
+    }
+}
+export function impresoraConectada(){
+    //Comprueba si la impresora esta conectada
+    try {
+        window.BluetoothPrinter.isConnected(function(data){
+           alert("Success");
+           alert(data)
+          },function(err){
+           alert("Error");
+           alert(err);
+          })
+    } catch (error) {
+        alert(error)
+    }
+} 
+export function desconectarImpresora(){
+    //Desconecta la improra despues de 1.5 segundos
+    try {
+        setTimeout(function(){
+            window.BluetoothPrinter.disconnect("PrinterName", function(data){
+             alert("Success");
+             alert(data)
+            },function(err){
+             alert("Error");
+             alert(err)
+            });
+          }, 1500);
+    } catch (error) {
+        alert(error)
+    }
+}
+export function codificacionTexto(){
+    try {
+        window.BluetoothPrinter.setEncoding("ISO-8859-1", function(data){
+           alert("Success");
+           alert(data)
+          },function(err){
+           alert("Error");
+           alert(err)
+          })
+    } catch (error) {
+        alert(error)
+    }
+}
+export function imprimirSimple(){
+    try {
+        window.BluetoothPrinter.printText("String to Print", function(data){
+           alert("Success");
+           alert(texto)
+          },function(err){
+           alert("Error");
+           alert(err)
+          })
+    } catch (error) {
+        alert()
+    }
+}
+export function imprimirSeparador(){
+    try {
+        window.BluetoothPrinter.printText("--------------------------------", function(data){
+            alert("Success");
+            alert(texto)
+           },function(err){
+            alert("Error");
+            alert(err)
+           })
+    } catch (error) {
+        alert(error)
+    }
+}
+export function formatTexto(){
+    window.BluetoothPrinter.printTextSizeAlign("String to Print", 0, 0, function(textoFormat){
+       alert("Success");
+       alert(textoFormat)
+      },function(err){
+       alert("Error");
+       alert(err)
+      })
+}
+export function imprimirImgen64(){
+    try {
+        window.BluetoothPrinter.printBase64("Image Base64 String", '0', function(imagen){
+           alert("Success");
+           alert(imagen);
+          },function(err){
+           alert("Error");
+           alert(err);
+          })
+    } catch (error) {
+        alert(error)
+    }
+}
+export function tituloFormat(){
+    try {
+        window.BluetoothPrinter.printTitle("String text", 0, 0, function(titulo){
+           alert("Success");
+           alert(titulo);
+          },function(err){
+           alert("Error");
+           alert(err);
+          })
+    } catch (error) {
+        alert(error)
+    }
+}
+export function impresioPV(){
+    try {
+        window.BluetoothPrinter.printPOSCommand("0C", function(data){
+           alert("Success");
+           alert(data)
+          },function(err){
+           alert("Error");
+           alert(err)
+          })
+    } catch (error) {
+        alert(error)
+    }
+}
+export function imprimirQR(){
+    try {
+        var data = "https://github.com/CesarBalzer/Cordova-Plugin-window.BluetoothPrinter";
+        var align = 1; /* 0, 1, 2 */
+        var model = 49; /* https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=140 */
+        var size = 32; /* https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=141 */
+        var eclevel = 50; /* https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=142 */
+    
+        window.BluetoothPrinter.printQRCode(data, align, model, size, eclevel, function(data){
+       alert("Success");
+       alert(data);
+        },function(err){
+       alert("Error");
+       alert(err);
+        })
+    } catch (error) {
+        alert(error)
+    }
+}
+export function imprimirBarras(){
+    try {
+        var system = 0; /* Barcode system, defined as "m" at https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=128 */
+        var data = "012345678901"; /* Barcode data, according to barcode system */
+        var align = 1; /* 0, 1, 2 */
+        var position = 2; /* Text position: https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=125 */;
+        var font = 0; /* Font for HRI characters: https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=126 */
+        var height = 64; /* Set barcode height: https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=127*/
+    
+        window.BluetoothPrinter.printBarcode(system, data, align, position, font, height, function(data) {
+       alert("Success");
+       alert(data);
+        }, function(err){
+       alert("Error");
+       alert(err);
+        })
+    } catch (error) {
+        alert(error)
+    }
+}
+//***********************   Fin Funciones de la impresora   ****************
