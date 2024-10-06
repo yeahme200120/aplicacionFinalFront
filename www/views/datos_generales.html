@@ -53,7 +53,7 @@
             </div>
         </div>
     </header>
-    <nav class="container-fluid">
+    <nav class="container-fluid pb-1">
         <div class="row mb-3 pt-3">
             <h5 class="card-title text-center fs-3" id="nombreUser"><strong>Mi perfil</strong></h5>
         </div>
@@ -68,9 +68,40 @@
                 </defs>
             </svg>    
         </div>        
-        <div class="row align-items-end p-2">
-            <div class="col-12 fondo-boton-secondary">
-                <h5 class="p-3">Datos Generales</h5>
+        <div class="row align-items-end p-2 fondo-boton-secondary">
+            <div class="col-12 ">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" value="">
+            </div>
+            <div class="col-12 ">
+                <label for="id_area">Area</label>
+                <select name="id_area" id="id_area" class="form-control">
+                </select>
+            </div>
+            <div class="col-12 ">
+                <label for="id_estado_usuario">Estado usuario</label>
+                <select name="id_estado_usuario" id="id_estado_usuario" class="form-control">
+                </select>
+            </div>
+            <div class="col-12 ">
+                <label for="id_rol">Rol</label>
+                <select name="id_rol" id="id_rol" class="form-control">
+                </select>
+            </div>
+            <div class="col-12 ">
+                <label for="telefono">Teléfono</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" value="">
+            </div>
+            <div class="col-12 ">
+                <label for="Turno">Turno</label>    
+                <select name="id_turno" id="id_turno" class="form-control"></select>
+                </select>
+            </div>
+        </div>
+        <div class="row justify-content-center pt-3">
+            <div class="col-4">
+                <button id="btn-actualizarUsuario" type="button"
+                    class="btn btn-lg rounded-pill btn-segunda-opcion text-white">Actualizar</button>
             </div>
         </div>
     </nav>
@@ -82,9 +113,6 @@
             <a href="./home.html" id="btn-menu-principal-home">
                 <img src="../img/back-home-withe.png" width="35px" height="35px" alt="home">
             </a>
-            <!-- <a id="btn-userLogin">
-                <img src="../img/userLogin.png" width="65px" height="60px" alt="user">
-            </a> -->
         </div>
     </footer>
     <!-- Modal Cerrar Sesion -->
@@ -110,7 +138,7 @@
     <script src="../js/toastify-js.js"></script>
     <script src="../js/dataTables/simple-datatables.js"></script>
     <!-- Scripts Especificos -->
-    <script type="module" src="../js/usuarios.js"></script>
+    <script type="module" src="../js/datosGenerales.js"></script>
 </body>
 
 </html>

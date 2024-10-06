@@ -172,7 +172,6 @@ $btnAgregarProducto.on('click', async function () {
     let precio_compra =$precio_compra.val();
     let precio_venta =$precio_venta.val();
     let id_provedor =$id_provedor.val();
-    let stock =$stock.val();
     let cantidad =$cantidad.val();
     let iva =$iva.val();
     let id_estatus_producto =$id_estatus_producto.val();
@@ -186,7 +185,6 @@ $btnAgregarProducto.on('click', async function () {
         precio_compra == '' ||
         precio_venta == '' ||
         id_provedor == '' ||
-        stock == '' ||
         cantidad == '' ||
         iva == '' ||
         id_estatus_producto == '' ||
@@ -206,7 +204,6 @@ $btnAgregarProducto.on('click', async function () {
     precio_compra = parseFloat(precio_compra);
     precio_venta = parseFloat(precio_venta);
     id_provedor = parseInt(id_provedor);
-    stock = parseInt(stock);
     cantidad = parseInt(cantidad);
     iva = parseInt(iva);
     id_estatus_producto = parseInt(id_estatus_producto);
@@ -221,7 +218,6 @@ $btnAgregarProducto.on('click', async function () {
         "precio_compra":precio_compra,
         "precio_venta":precio_venta,
         "id_provedor":id_provedor,
-        "stock":stock,
         "cantidad":cantidad,
         "iva":iva,
         "id_estatus_producto":id_estatus_producto,
@@ -301,28 +297,15 @@ async function getProductos() {
     
     if (respProductos.Productos) {
         for (const producto of respProductos.Productos) {
-            let estilo = '';
-            if(producto.cantidad <= producto.stock){
-                estilo = 'text-danger'
-            }else{
-                estilo = 'text-success'
-            }
-
             let contenido = `
                 <div class="card bg-light mb-3">
                     <div class="card-header fw-bold colorApp text-white">${producto.nombre_producto}</div>
                     <div class="card-body">
-                        <div class="row justify-content-end">
-                            <div class="col-2">
-                                <i class="bi bi-circle-fill ${estilo}" style="font-size: 2rem;"></i>
-                            </div>
-                        </div>
                         <ul>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Cantidad</label></div><div class="col-6"><h6>${producto.stock}</h6></div></li>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Compra</label></div><div class="col-6"><h6>${producto.precio_compra}</h6></div></li>
                             <li class=""><div class="row"><div class="col-6"><label class="fw-bold">Precio venta</label></div><div class="col-6"><h6>${producto.precio_venta}</h6></div></></li>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Id Provedor</label></div><div class="col-6"><h6>${producto.id_provedor}</h6></div></></li></li>
-                            <li class=""><div class="row"><div class="col-6"><label class="fw-bold">Stock</label></div><div class="col-6"><h6>${producto.stock}</h6></div></></li>
                         </ul>
                     </div>
                 </div>
