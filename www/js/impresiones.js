@@ -367,7 +367,7 @@ export function numberContrato(op) {
     }, bodyText, '0', '1')
 }
 
-/* //Imprime Folio y Fecha
+//Imprime Folio y Fecha
 function bodyUno(op){
     const actual = localStorage.getItem("ticketSeleccionado")?JSON.parse(localStorage.getItem("ticketSeleccionado")):"/";
     let sizeText = '0'
@@ -375,7 +375,6 @@ function bodyUno(op){
     let texto = ''
     const FECHA = moment(new Date())
     let fechaFormat = 'd'
-    }
     switch (op) {
         case 'pago':
             //folio = $('#FolioTicket').text()
@@ -401,7 +400,7 @@ FECHA: ${fechaFormat}\n`
     BTPrinter.printTextSizeAlign(function (data) {
         textNegrita(op)
     }, function (err) {
-    }, texto, sizeText, '1')
+    }, texto, sizeText, '1');
 }
 
 function bodyTicket(op) {
@@ -518,34 +517,6 @@ PLAN: ${NombrePlan}\n
     }, bodyText, sizeText, '1')
 }
 
-// Imprimir el ticket Estado De Cuenta
-function imprimirEstadoC(Info, inversionista, numeroc, restante) {
-    switch (logo){
-        case 'RegionDesarrrolloSistemas':
-            BTPrinter.printBase64(function (data) {
-                titleTicketEstadoC(Info, inversionista, numeroc, restante)
-            }, function (err) {
-                console.log(err)
-            }, SIPREFJaliscoB64, '1')
-            break;
-
-        case 'RegionCentroMorelos':
-            BTPrinter.printBase64(function (data) {
-                titleTicketEstadoC(Info, inversionista, numeroc, restante)
-            }, function (err) {
-                console.log(err)
-            }, SIPREFMorelosB64, '1')
-            break;
-        
-        case 'RegionJalisco':
-            BTPrinter.printBase64(function (data) {
-                titleTicketEstadoC(Info, inversionista, numeroc, restante)
-            }, function (err) {
-                console.log(err)
-            }, SIPREFJaliscoB64, '1')
-            break;
-    }
-}
 
 function titleTicketEstadoC(Info, inversionista, numeroc, restante) {
     BTPrinter.printTextSizeAlign(function (data) {
@@ -621,4 +592,4 @@ function footerTicket(op) {
         }, function (err) {
         }, "\n", '0', '1');
     }
-} */
+}

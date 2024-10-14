@@ -134,7 +134,7 @@ $btnAgregarInsumo.on('click', async function () {
     let unidad = $unidad.val();
     let cantidad = $cantidad.val();
     let stock = parseInt(0);
-    let proveedor = $proveedor.val();
+    //let proveedor = $proveedor.val();
     const empresa = dataUsuario.id_empresa;
 
     //VALIDACION: INFORMACIÓN COMPLETA
@@ -142,8 +142,8 @@ $btnAgregarInsumo.on('click', async function () {
         descripcion == "" ||
         precioU == "" ||
         iva == "" ||
-        cantidad == "" ||
-        proveedor == ""
+        cantidad == "" 
+        /* proveedor == "" */
     ) {
         Toastify({
             text: "Completa la información!",
@@ -161,7 +161,7 @@ $btnAgregarInsumo.on('click', async function () {
     unidad = parseInt(unidad);
     cantidad = parseInt(cantidad);
     stock = parseInt(0);
-    proveedor = parseInt(proveedor);
+    proveedor = parseInt(0);
 
     //SET API
     const metodo = "POST";
@@ -261,18 +261,19 @@ async function getInsumos() {
             let nombreUnidad = unidades.filter(item => item.id == insumo.id_unidad)[0]['nombre_unidad']
             let contenido = `
                 <div class="card bg-light mb-3">
-                    <div class="card-header fw-bold colorApp text-white">${insumo.descripcion}</div>
+                    <div class="card-header fw-bold cardInsumo">${insumo.descripcion}</div>
                     <div class="card-body">
                         <ul>
-                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Cantidad</label></div><div class="col-6"><h6>${insumo.cantidad}</h6></div></li>
-                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Unidad</label></div><div class="col-6"><h6>${insumo.nombre_unidad}</h6></div></li>
-                            <li class=""><div class="row"><div class="col-6"><label class="fw-bold">Empresa</label></div><div class="col-6"><h6>${insumo.nombre_Empresa}</h6></div></></li>
-                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Provedor</label></div><div class="col-6"><h6>${insumo.nombre_provedor}</h6></div></></li></li>
-                            <li class=""><div class="row"><div class="col-6"><label class="fw-bold">Área</label></div><div class="col-6"><h6>${insumo.nombre_area}</h6></div></></li>
+                            <li class="fw-bold"><div class="row"><div class="col-8"><label class="fw-bold">Cantidad Minima</label></div><div class="col-4"><h6>${insumo.cantidad}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-8"><label class="fw-bold">Unidad</label></div><div class="col-4"><h6>${insumo.nombre_unidad}</h6></div></li>
+                            <li class=""><div class="row"><div class="col-8"><label class="fw-bold">Área</label></div><div class="col-4"><h6>${insumo.nombre_area}</h6></div></></li>
                         </ul>
                     </div>
                 </div>
             `;
+            /* <li class=""><div class="row"><div class="col-6"><label class="fw-bold">Empresa</label></div><div class="col-6"><h6>${insumo.nombre_Empresa}</h6></div></></li> */
+                                        /* <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Provedor</label></div><div class="col-6"><h6>${insumo.nombre_provedor}</h6></div></></li></li> */
+            
             infoInsumos.push([contenido])
         }
     }
@@ -283,7 +284,7 @@ async function getInsumos() {
     tablaInsumos.clear();
     tablaInsumos.rows.add(infoInsumos);
     tablaInsumos.draw();
-
+    $(".cardInsumo").addClass("bg-btn-primario");
     ocultarPreload()
 }
 async function mostrarPreload(){
@@ -295,6 +296,8 @@ async function ocultarPreload(){
     $(".loadSystem").addClass('d-none');
 }
 async function getAreaAlmacen(){
+    let arrayInsumos = []
+    let arrayAreas=[]
     let almacen = $('#almacen');
     const $allSelect = $('.selectInsumos');
     const urlAreas = 'https://abonos.sipecem.com.mx/api/getAreaAlmacenApi';
@@ -305,10 +308,21 @@ async function getAreaAlmacen(){
     almacen.empty();
      // Opciones -> areas
     $.each(areas, function (index, item) {
+        arrayInsumos.push(item)
         almacen.append(
             $('<option></option>').val(item.id).text(item.nombre_area)
         );
     });
+    console.log("Insumos: ", arrayInsumos);
+    const busqueda = arrayInsumos.reduce((acc, insumo) => {
+        const clave = JSON.stringify(insumo)
+        console.log("Clave: ", clave);
+        
+        acc[descripcion] = acc[descripcion] || 0
+        return acc;
+    })
+    console.log(busqueda);
+    
 }
 $btn_userLogin.click(()=>{ 
     $modal_cerrarSesion.modal('show');

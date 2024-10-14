@@ -34,8 +34,9 @@
 
  /* Colors */
  :root {
-    --bg-principal: #FF6B00;
-    --text-principal: #1A2C72;
+    /* --bg-principal: #FF6B00; */
+    --bg-principal: #F9F0EB;
+    --text-principal: #685E5E;
     --text-form: #34495e;
 }
 
@@ -52,13 +53,16 @@
     z-index: 999999;
     background-color: rgba(255, 255, 255, 0.9);
 }
-
+.bg-btn-primario{
+    background-color: #685E5E;
+    color: dark;
+}   
 .bg-primario {
     background-color: var(--bg-principal);
-    color: #ffff;
+    color: var(--text-principal);
 }
 .bg-primario-degradado {
-    background: linear-gradient(180deg, #FF6B00 59%, #FFFEFE 100%);
+    background: linear-gradient(180deg, var(--text-principal), 59%, #FFFEFE 100%);
 }
 
 .img-curvas-1 {
@@ -83,13 +87,17 @@
 }
 
 .div-btn-app {
-    background-color: var(--bg-principal) !important;
+    background-color: var(--bg-principal) ;
     font-family: 'roboto-light';
     font-size: large;
     font-style: normal;
-    color: #ffff !important;
-    padding-left: 70px;
-    padding-right: 70px;
+    color: black;
+    border-style: solid black;
+}
+input{
+    background-color: var(--bg-principal) ;
+    color: black;
+    border-style: solid black;
 }
 .div-btn-app-index {
     background-color: #343339 !important;
@@ -103,7 +111,7 @@
 
 .form-control {
     height: 50px;
-    background-color: #f0f3f4;
+    background-color: var(--bg-principal);
     color: var(--text-form);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
@@ -128,21 +136,22 @@
 
 .form-control:focus {
     border-color: var(--bg-principal);
-    box-shadow: 0 0 0 .2rem rgb(255, 99, 71, .2);
+    box-shadow: 0 0 0 .2rem var(--text-principal),;
 }
 
 .form-control, .form-select {
-    border-color: var(--bg-principal);
-    background-color: #ffffff;
+    border-color: var(--text-principal);
+    background-color: var(--bg-principal);
 }
 
 .form-select:focus {
     border-color: var(--bg-principal);
-    box-shadow: 0 0 0 .2rem rgb(255, 99, 71, .2);
+    box-shadow: 0 0 0 .2rem var(--text-principal),;
 }
 .footer2{
-    background: #343339;
+    /* background: #343339; */
+    background: var(--text-principal);
 }
 .btn-segunda-opcion{
-    background: #343339;
+    background: var(--text-principal);
 }

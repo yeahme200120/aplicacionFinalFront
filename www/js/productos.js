@@ -299,7 +299,7 @@ async function getProductos() {
         for (const producto of respProductos.Productos) {
             let contenido = `
                 <div class="card bg-light mb-3">
-                    <div class="card-header fw-bold colorApp text-white">${producto.nombre_producto}</div>
+                    <div class="card-header fw-bold cardProductos">${producto.nombre_producto}</div>
                     <div class="card-body">
                         <ul>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Cantidad</label></div><div class="col-6"><h6>${producto.stock}</h6></div></li>
@@ -320,7 +320,7 @@ async function getProductos() {
     $tablaProductos.clear();
     $tablaProductos.rows.add(infoProductos);
     $tablaProductos.draw();
-
+    $(".cardProductos").addClass("bg-btn-primario");
     ocultarPreload()
 }
 async function mostrarPreload(){
@@ -354,3 +354,6 @@ $btn_userLogin.click(()=>{
 $btn_cerrarSesion.click(()=>{
     cerrarSesion()
 });
+async function habilitarPrecio(numProd) {
+    console.log(numProd);
+}
