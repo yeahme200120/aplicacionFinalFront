@@ -84,15 +84,10 @@ footer {
 /* @media (max-width: 1200px) {
    
 } */
- .barra-fondo {
-   background-color: #FF6B00;
- }
- .colorApp{
-   background-color:  #FF6B00;
- }
+
  .barra-fondo-responsivo {
-   background: linear-gradient(180deg, #FF6B00 59%, #FFFEFE 100%);
+   background: linear-gradient(180deg, #685E5E, 60%, #F9F0EB 100%);
  }
  .fondo-boton-secondary{
-   background-color: #E6E6E6;
+   background-color: var(--bg-principal);
  }
