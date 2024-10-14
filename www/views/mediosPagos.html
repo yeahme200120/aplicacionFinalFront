@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi perfil</title>
+    <!-- test -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Styles Generales -->
+    <link rel="stylesheet" href="../Bootstrap_css/bootstrap.min.css">
+    <link href="../img/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/toastify.min.css">
+    <!-- Styles Especificos -->
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/usuarios.css">
+    <link rel="stylesheet" href="../css/generales.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container-fluid h-100 loadSystem position-absolute d-none">
+        <div class="row h-100 align-items-center justify-content-center">
+            <div class="col-12 d-flex flex-column justify-content-center">
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <div class="spinner-grow m-2" style="background-color: var(--bg-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <div class="spinner-grow m-2" style="background-color: var(--bg-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow m-2" style="background-color: var(--bg-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="barra-fondo-responsivo">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="mt-4">
+                <p class="fs-3 text-light" style="font-family: Arial, Helvetica, sans-serif;" id="nombreEmpresa">NOMBRE DEL NEGOCIO</p>
+            </div>
+        </div>
+    </header>
+    <nav class="container-fluid">
+        <nav class="container-fluid pt-4">
+            <div class="row mb-3">
+                <h5 class="card-title text-center fs-3"><strong>Medios de pago</strong></h5>
+            </div>
+            <div class="row align-items-end pt-1">
+                <div class="col-12 mb-3">
+                    <ul id="tabs-turnos" class="nav nav-tabs" role="tablist">
+                        <li class="nav-item text-center col-6" role="presentation">
+                            <a class="nav-link active" name="menuAgregar" data-bs-toggle="tab" role="tab"
+                                aria-selected="true" >
+                                <span class="fs-4">Agregar</span>
+                            </a>
+                        </li>
+                        <li class="nav-item text-center col-6" role="presentation">
+                            <a class="nav-link" name="menuConsultar" data-bs-toggle="tab" role="tab"
+                                aria-selected="false">
+                                <span class="fs-4">Consultar</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>    
+        <!-- Agregar turnos -->    
+        <section id="section-agregarTurnos" class="container-fluid pb-3">
+            <div class="col-12 p-3">
+                <form>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-12 col-md-6 pt-1">
+                                <label for="turno" class="form-label">Nombre del medio de pago</label>
+                                <input type="text" class="form-control" id="turno" placeholder="Nombre">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="justify-content-center mt-5 text-center">
+                        <button id="btn-agregarTurno" type="button"
+                            class="btn btn-lg rounded-pill btn-segunda-opcion text-white">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- Consultar -->
+        <section id="section-consultarTurnos" class="container-fluid pb-3 d-none">
+            <div class="container my-3">
+                <table class="table" id="tablaTurnos" style="width: 100%;"></table>
+            </div>
+        </section>
+    </nav>
+    <footer class="footer2">
+        <div class="w-auto h-100 d-flex justify-content-around align-items-center">
+            <a  href="javascript:history.back()">
+                <img src="../img/back-arrow-white.png" width="35px" height="35px" alt="home">
+            </a>
+            <a href="./home.html" id="btn-menu-principal-home">
+                <img src="../img/back-home-withe.png" width="35px" height="35px" alt="home">
+            </a>
+        </div>
+    </footer>
+    <!-- Scrips Generales -->
+    <script src="../Bootstrap_js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/toastify-js.js"></script>
+    <script src="../js/dataTables/simple-datatables.js"></script>
+    <!-- Scripts Especificos -->
+    <script type="module" src="../js/mediosPagos.js"></script>
+</body>
+
+</html>

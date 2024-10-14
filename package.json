@@ -14,14 +14,17 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-android": "^13.0.0",
-    "cordova-plugin-bluetoothprinter": "^0.1.0"
+    "cordova-plugin-bluetoothprinter": "^0.1.0",
+    "cordova-plugin-bluetoothprinter": "^0.1.0",
+    "cordova-plugin-btprinter": "github:CesarBalzer/Cordova-Plugin-BTPrinter"
   },
   "cordova": {
     "platforms": [
       "android"
     ],
     "plugins": {
-      "com.qinsilk.bluetoothprinter": {}
+      "com.qinsilk.bluetoothprinter": {},
+      "cordova-plugin-btprinter": {}
     }
   },
   "dependencies": {

@@ -288,7 +288,7 @@ async function getUsuarios() {
         for (const usuario of respUsuarios) {
             let contenido = `
                 <div class="card bg-light mb-1">
-                    <div class="card-header fw-bold colorApp text-white">${usuario.name}</div>
+                    <div class="card-header fw-bold cardUsuarios">${usuario.name}</div>
                     <div class="card-body">
                         <ul>
                             <li class="fw-bold p-0 m-0"><div class="row"><div class="col-6"><label class="fw-bold">Correo</label></div><div class="col-6"><h6>${usuario.email}</h6></div></li>
@@ -305,7 +305,7 @@ async function getUsuarios() {
     tablaUsuarios.clear();
     tablaUsuarios.rows.add(infoUsuarios);
     tablaUsuarios.draw();
-
+    $(".cardUsuarios").addClass("bg-btn-primario");
     ocultarPreload()
 }
 $btn_userLogin.click(()=>{ 

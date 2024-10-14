@@ -41,11 +41,14 @@ document.getElementById('btnLogin').addEventListener('click', async () => {
             ocultarPreload()
             // console.log("Licencia inactiva");
             loadModal('modalDinamico', './components/modal.html', 'Lo sentimos 🥺, Tú licencia ha vencido...');
+            $(".modalDinamico").addClass("bg-btn-primario");
         }
         else if(respLogin.msg == "Estas fuera de tu horario") {
             ocultarPreload()
             // console.log("Estas fuera de tu horario");
             loadModal('modalDinamico', './components/modal.html','Lo sentimos 🥺, Estás fuera del turno laboral.');
+            $(".modalDinamico").addClass("bg-btn-primario");
+
         }else {
             //Obtenemos los catalogos            
             try {
