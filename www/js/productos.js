@@ -5,19 +5,12 @@ import { configTable } from "./dataTables/config-table.js";
 
 // Variables globales
 const $btnHome = $('#btn-menu-principal-home');
-
-
 const $tabsProductos = $('#tabs-productos');
-
 const $seccionAgregar = $('#section-agregarProductos');
 const $seccionConsultar = $('#section-consultarProductos');
-
 const $btnAgregarProducto = $('#btn-agregarProducto');
-const $alertaAgregarProducto = $('#alerta-agregarProducto');
-
 const $loadSystem = $('.loadSystem');
-
-const $btnAddAlmacen = $('#addAlmacen');
+const $btnAddAlmacen = $('#addCatProducto');
 
 //Select´s
 const $allSelect = $('.selectProductos');
@@ -44,6 +37,7 @@ const $tablaProductos = $("#tablaProductos").DataTable(configTable);
 const $btn_userLogin = $('#btn-userLogin');
 const $btn_cerrarSesion = $('#btn-cerrarSesion');
 const $modal_cerrarSesion = $('#modal-cerrarSesion');
+const $btn_addCatProducto = $("#id_categoria_producto")
 
 $(document).ready(async function () {
 
@@ -71,27 +65,15 @@ $(document).ready(async function () {
     //EstatusProductos
     const urlEstatusProductos = 'https://abonos.sipecem.com.mx/api/getEstatusProducto';
     const datosEstatusProductos = userData;
-    
+
     const respCatalogos = await manejadorAPI(metodo,urlCatalogos,datos)
     localStorage.setItem('Catalogos', JSON.stringify(respCatalogos));
 
-    const respProvedores = await manejadorAPI(metodo,urlProvedores,datosProvedores)
-    localStorage.setItem('Provedores', JSON.stringify(respProvedores));
 
-    const respEstatusProductos = await manejadorAPI(metodo,urlEstatusProductos,datosEstatusProductos)
-    localStorage.setItem('EstatusProductos', JSON.stringify(respEstatusProductos));
+    /* const respEstatusProductos = await manejadorAPI(metodo,urlEstatusProductos,datosEstatusProductos)
+    localStorage.setItem('EstatusProductos', JSON.stringify(respEstatusProductos)); */
 
-    if(respProvedores == false){}
-    else{
-        const provedores = getLocal('Provedores');
-        // Opciones -> proveedores
-        $.each(provedores, function (index, item) {
-            $selectProvedor.append(
-                $('<option></option>').val(item.id).text(item.nombre_provedor)
-            );
-        });        
-    }
-    if(respEstatusProductos.EstatusProductos == false){
+   /*  if(respEstatusProductos.EstatusProductos == false){
     }else{
         
         const estatusProductos = getLocal('EstatusProductos');
@@ -101,7 +83,7 @@ $(document).ready(async function () {
                 $('<option></option>').val(item.id).text(item.estatus_producto)
             );
         });        
-    }
+    } */
 
     const respAreas = await manejadorAPI(metodo,urlAreas, datosAreas)
 
@@ -251,34 +233,37 @@ $btnAgregarProducto.on('click', async function () {
 });
 
 $btnAddAlmacen.on('click', async function() {
-    loadModal('agregarAlmacen', '../components/addAlmacen.html','');    
+    $("#agregarCategoriaProducto").modal("show")   
+});
+
+$btn_addCatProducto.on('click', async function() {
 });
 
 //Evento de Modal Add Almacen
-$(document).on('click', '#btnSetAlmacen', async function() {
+$(document).on('click', '#btnSetCategoriaProducto', async function() {
     mostrarPreload();
-    const $newAlmacen = $('#nombreAlmacen');
-    const newAlmacen = $newAlmacen.val().trim().toUpperCase();
+    const $newCatProd = $('#nombreCategoriaProducto');
+    const newCatProd = $newCatProd.val().trim().toUpperCase();
     const dataUser = getUserLocal()
-    const urlSetAlmacen = 'https://abonos.sipecem.com.mx/api/setAreaAlmacenApi';
+    const urlSetAlmacen = 'https://abonos.sipecem.com.mx/api/setCategoriaProducto';
     const datosSetAlmacen = {
-        usuario: JSON.stringify(dataUser),
-        nombre_area: newAlmacen
+        usuario: dataUser,
+        categoria: newCatProd
     }
 
     const respSetAlmacen = await manejadorAPI('POST', urlSetAlmacen, datosSetAlmacen);
     console.log("Respuesta de la insercion:", respSetAlmacen);
     
-    $('#agregarAlmacen').modal('hide');
-    if (respSetAlmacen === 1) {
+    $('#agregarCategoriaProducto').modal('hide');
+    if (respSetAlmacen == 1) {
         await getAreaAlmacen()
         loadModal('modalDinamico', '../components/modal.html', 'Agregado con éxito')
     }
-    else if(respSetAlmacen === 0) {
+    else if(respSetAlmacen == 0) {
         loadModal('modalDinamico', '../components/modal.html', 'Ups! Ocurrió un error 🙉')
     }
     else {
-        loadModal('modalDinamico', '../components/modal.html', respSetAlmacen.msg)
+        loadModal('modalDinamico', '../components/modal.html', respSetAlmacen.msg ? respSetAlmacen.msg : respSetAlmacen)
     }
     ocultarPreload()
 });
@@ -290,7 +275,7 @@ async function getProductos() {
     const unidades = catalogos.Unidades;
     
     
-    let infoProductos = [];
+   /*  let infoProductos = [];
     const urlGetProductos = 'https://abonos.sipecem.com.mx/api/getProductosApi';
     const datos = dataUser;
     const respProductos = await manejadorAPI('POST',urlGetProductos, datos);
@@ -315,7 +300,7 @@ async function getProductos() {
     }
     else {
         
-    }
+    } */
 
     $tablaProductos.clear();
     $tablaProductos.rows.add(infoProductos);
@@ -353,7 +338,4 @@ $btn_userLogin.click(()=>{
 
 $btn_cerrarSesion.click(()=>{
     cerrarSesion()
-});
-async function habilitarPrecio(numProd) {
-    console.log(numProd);
-}
+})

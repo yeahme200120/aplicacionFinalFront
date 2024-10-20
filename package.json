@@ -15,7 +15,8 @@
   "devDependencies": {
     "cordova-android": "^13.0.0",
     "cordova-plugin-bluetoothprinter": "^0.1.0",
-    "cordova-plugin-btprinter": "github:CesarBalzer/Cordova-Plugin-BTPrinter"
+    "cordova-plugin-btprinter": "github:CesarBalzer/Cordova-Plugin-BTPrinter",
+    "sweetalert2": "^11.14.4"
   },
   "cordova": {
     "platforms": [

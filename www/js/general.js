@@ -11,6 +11,7 @@ export function manejadorAPI(metodo, url, datos) {
         },
         error: function(jqXHR, textStatus, errorThrown) {
             let error = {"Error jqXHR" : jqXHR, "Error textStatus" : textStatus, "Error errorThrown" : errorThrown }; 
+            console.log(error);
             reject(new Error(`Error en la solicitud: ${textStatus}`));
         }
         });

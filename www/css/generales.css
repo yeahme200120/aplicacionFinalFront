@@ -155,3 +155,7 @@ input{
 .btn-segunda-opcion{
     background: var(--text-principal);
 }
+.modal-new{
+    background: var(--text-principal);
+    color: white;
+}
