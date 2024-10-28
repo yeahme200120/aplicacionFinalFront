@@ -20,33 +20,87 @@
     </header>
     <section class="container-fluid">
         <div id="menu-events" class="row align-items-end btn-menu">
-            <div class="col-sm-12 col-md-6 my-2">
+            <div class="col-12 col-md-6 my-2" >
                 <div class="card shadow bg-white rounded py-2" style="align-items: center;">
-                    <img src="../img/vender.png" alt="" width="80">
-                    <h5 class="text-center py-2">Vender</h5>
+                    <div class="row justify-content-center">
+                        <div class="col-4">
+                            <img src="../img/vender.png" alt="" width="80" class="p-1">
+                        </div>
+                        <div class="col-6">
+                            <h5 class="text-center py-2">Vender</h5>
+                            <h6 class="text-center">Comieza a capturar tu venta rápido y fácil</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="btn-productos" class="col-12 col-md-6 my-2">
+                <div class="card shadow bg-white rounded py-2" style="align-items: center;">
+                    <div class="row justify-content-center">
+                        <div class="col-5">
+                            <img src="../img/catalogos.png" alt="" width="80">
+                        </div>
+                        <div class="col-6">
+                            <h5 class="text-center py-2">Productos</h5>
+                            <h6 class="text-center">Administra todos tus productos</h6>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div id="btn-catalogo" class="col-sm-12 col-md-6 my-2">
+            <div class="col-12 col-md-6 my-2" >
                 <div class="card shadow bg-white rounded py-2" style="align-items: center;">
-                    <img src="../img/catalogos.png" alt="" width="80">
-                    <h5 class="text-center py-2">Almacen</h5>
+                    <div class="row justify-content-center">
+                        <div class="col-4">
+                            <img src="../img/reportesVentas.png" alt="" width="80">
+                        </div>
+                        <div class="col-6">
+                            <h5 class="text-center py-2">Reporte de ventas</h5>
+                            <h6 class="text-center">Consulta tus ingresos y egresos del día</h6>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-sm-12 col-md-6 my-2">
-                <div class="card shadow bg-white rounded py-2" style="align-items: center;">
-                    <img src="../img/reportesVentas.png" alt="" width="80">
-                    <h5 class="text-center py-2">Reporte de ventas</h5>
+            </div>    
+            
+            <div class="col-12 col-md-6 my-2" >
+                <div id="btn-usuarios" class="card shadow bg-white rounded py-2">
+                    <div class="row justify-content-center">
+                        <div class="col-4">
+                            <img src="../img/usuarios.png" alt="" width="72">
+                        </div>
+                        <div class="col-6">
+                            <h5 class="text-center py-2">Usuarios</h5>
+                            <h6 class="text-center">Administra a tus colaboradores</h6>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-sm-12 col-md-6 my-2">
-                <div id="btn-configuraciones" class="card shadow bg-white rounded py-2" style="align-items: center;">
-                    <img src="../img/configuraciones.png" alt="" width="80">
-                    <h5 class="text-center py-2">Configuración</h5>
+            </div>          
+            <div class="col-12 col-md-6 my-2" >
+                <div id="btn-impresoras" class="card shadow bg-white rounded py-2" >
+                    <div class="row justify-content-center">
+                        <div class="col-4">
+                            <img src="../img/impresoras.png" alt="" width="70">
+                        </div>
+                        <div class="col-6">
+                            <h5 class="text-center py-2">Impresoras</h5>
+                            <h6 class="text-center">Configura tu impresora</h6>
+                        </div>
+                    </div>
                 </div>
-            </div>        
+            </div> 
+            <div class="col-12 col-md-6 my-2" >
+                <div id="btn-mi-perfil" class="card shadow bg-white rounded py-2">
+                    <div class="row justify-content-center">
+                        <div class="col-3">
+                            <img src="../img/perfil.png" alt="" width="50">
+                        </div>
+                        <div class="col-7">
+                            <h5 class="text-center py-2">Mi perfil</h5>
+                            <h6 class="text-center">Administra tus datos y configuraciones esenciales</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            
         </div>
     </section>
     <footer class="footer2">
@@ -71,7 +125,7 @@
                     <h5 class="modal-title">Mensaje de sistema</h5>
                 </div>
                 <div class="modal-body">
-                    <p id="modal-msg">¿Estas seguro de cerrar sesión?</p>
+                    <p id="modal-msg" class="modal-msg">¿Estas seguro de cerrar sesión?</p>
                 </div>
                 <div class="modal-footer d-flex justify-content-end">
                     <button type="button" class="bg-btn-primario rounded" data-bs-dismiss="modal">No</button>

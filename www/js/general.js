@@ -326,4 +326,20 @@ export function imprimirBarras(){
         alert(error)
     }
 }
+export async function getCatalogosGlobal(id_usuario){
+    try {
+        let data = { usuario: id_usuario}
+        console.log("Data user: ", data);
+        
+        const urlCatalogos = 'https://abonos.sipecem.com.mx/api/getCatalogos';
+        const respCatalogos = await manejadorAPI("POST",urlCatalogos,data)
+        
+        localStorage.removeItem("Catalogos")
+        localStorage.setItem('Catalogos', JSON.stringify(respCatalogos));
+    } catch (error) {
+        console.log("Error al traer los catalogos: ", error);
+        return 
+        
+    }
+}
 //***********************   Fin Funciones de la impresora   ****************

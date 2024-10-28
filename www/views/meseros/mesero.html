@@ -7,8 +7,6 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <meta name="color-scheme" content="light dark">
-        <link rel="stylesheet" href="./Bootstrap_css/bootstrap.min.css">
-        <script src="./js/jquery-3.7.1.min.js"></script>
         <title>Restaurante</title>
         
 
@@ -20,15 +18,33 @@
     </head>
     <body class="bodyIndex container-fluid">
         <section class="text-center mt-5 mt-md-0 pt-5 pt-md-0">
-            <div class="container mt-5 mt-md-0 pt-5 pt-md-0" id="inicio">
-                <img class="mt-5 pt-5" src="./img/LogoOficial.gif" alt="" width="150">
-                <img src="./img/texto.png" alt="">
-            </div>
+            <h1>Vistas de meseros</h1>
         </section>
+        <footer class="text-center p-0 m-0">
+            <button class="btn btn-info" onclick="cerrarSesion()"> Cerrar Sesion</button>
+       </footer>
+       
         <!-- Scripts Especificos -->
         <script src="Bootstrap_js/bootstrap.bundle.min.js"></script>
         <script src="js/jquery-3.7.1.min.js"></script>
         <script type="module" src="js/index.js"></script>
         <script type="module" src="js/general.js"></script>
+        <script>
+            function cerrarSesion(){
+                localStorage.removeItem('DataUser');
+                localStorage.removeItem('Catalogos');
+                localStorage.removeItem('Provedores');
+                localStorage.removeItem('EstatusProductos');
+                localStorage.removeItem('Empresa');
+                localStorage.removeItem('Estados_usuarios');
+                localStorage.removeItem('Estatus_usuarios');
+                localStorage.removeItem('Roles_usuarios');
+                localStorage.removeItem('Areas_usuario');
+                localStorage.removeItem('Categorias');
+                localStorage.removeItem('Turnos');
+                localStorage.removeItem('Rol_Usuario');
+                window.location.href = '../../index.html';
+            }
+        </script>
     </body>
 </html>

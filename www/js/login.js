@@ -9,76 +9,99 @@ const $loadSystem = $('.loadSystem');
 // const $modalSystem = $('#exampleModal');
 
 document.getElementById('btnLogin').addEventListener('click', async () => {
-
-    if ($("#email").hasClass('is-invalid') || $("#password").hasClass('is-invalid')) {
-        return
-    }
-    else if (!$email.value || !$password.value ) {
-        $email.classList.add('is-invalid');
-        $password.classList.add('is-invalid');
-        return
-    }
-    
-    mostrarPreload()
-
-    try {
-        const metodo = "POST";
-        const url = "https://abonos.sipecem.com.mx/api/logIn";
-        const datos = { email: $email.value, password: $password.value }
-
-        const respLogin = await manejadorAPI(metodo, url, datos);
-        
-        $loadSystem.fadeToggle(1000);
-
-        setTimeout(function () { $loadSystem.addClass('d-none'); }, 500);
-
-        if (respLogin.msg == "Usuario no registrado" || respLogin.msg == "Credenciales incorrectas") {
-            ocultarPreload()
+        if ($("#email").hasClass('is-invalid') || $("#password").hasClass('is-invalid')) {
+            return
+        }
+        else if (!$email.value || !$password.value ) {
             $email.classList.add('is-invalid');
             $password.classList.add('is-invalid');
-        }
-        else if(respLogin.msg == "Licencia inactiva") {
-            ocultarPreload()
-            // console.log("Licencia inactiva");
-            loadModal('modalDinamico', './components/modal.html', 'Lo sentimos 🥺, Tú licencia ha vencido...');
-            $(".modalDinamico").addClass("bg-btn-primario");
-        }
-        else if(respLogin.msg == "Estas fuera de tu horario") {
-            ocultarPreload()
-            // console.log("Estas fuera de tu horario");
-            loadModal('modalDinamico', './components/modal.html','Lo sentimos 🥺, Estás fuera del turno laboral.');
-            $(".modalDinamico").addClass("bg-btn-primario");
-
-        }else {
-            //Obtenemos los catalogos            
-            try {
-                let data = { usuario: respLogin.id }
-                const urlCatalogos = 'https://abonos.sipecem.com.mx/api/getCatalogos';
-                const respCatalogos = await manejadorAPI("POST",urlCatalogos,data)
-                
-                localStorage.removeItem("Catalogos")
-                localStorage.setItem('Catalogos', JSON.stringify(respCatalogos));
-            } catch (error) {
-                console.log("Error al traer los catalogos: ", error);
-                return 
-                
-            }
-
-            const dataUser = JSON.stringify(respLogin)
-            localStorage.setItem("DataUser", dataUser)
-            respLogin.contra_update++
-            getEmpresa();
-            if (respLogin.contra_update == 0) {
-                setTimeout(function () { $(window).attr('location', 'views/cambiarAcceso.html') }, 500);
-            } else {
-                setTimeout(function () { $(window).attr('location', 'views/home.html') }, 500);
-            }
+            return
         }
         
-    } catch (error) {
-        console.log("Ocurrió un error -> ", error);
-        ocultarPreload()
-    }
+        mostrarPreload()
+    
+        try {
+            const metodo = "POST";
+            const url = "https://abonos.sipecem.com.mx/api/logIn";
+            const datos = { email: $email.value, password: $password.value }
+    
+            const respLogin = await manejadorAPI(metodo, url, datos);
+            
+            $loadSystem.fadeToggle(1000);
+    
+            setTimeout(function () { $loadSystem.addClass('d-none'); }, 500);
+    
+            if (respLogin.msg == "Usuario no registrado" || respLogin.msg == "Credenciales incorrectas") {
+                ocultarPreload()
+                $email.classList.add('is-invalid');
+                $password.classList.add('is-invalid');
+            }
+            else if(respLogin.msg == "Licencia inactiva") {
+                ocultarPreload()
+                // console.log("Licencia inactiva");
+                loadModal('modalDinamico', './components/modal.html', 'Lo sentimos 🥺, Tú licencia ha vencido...');
+                $(".modalDinamico").addClass("bg-btn-primario");
+            }
+            else if(respLogin.msg == "Estas fuera de tu horario") {
+                ocultarPreload()
+                // console.log("Estas fuera de tu horario");
+                loadModal('modalDinamico', './components/modal.html','Lo sentimos 🥺, Estás fuera del turno laboral.');
+                $(".modalDinamico").addClass("bg-btn-primario");
+    
+            }else {
+                //Obtenemos los catalogos            
+                try {
+                    let data = { usuario: respLogin.id }
+                    const urlCatalogos = 'https://abonos.sipecem.com.mx/api/getCatalogos';
+                    const respCatalogos = await manejadorAPI("POST",urlCatalogos,data)
+                    
+                    localStorage.removeItem("Catalogos")
+                    localStorage.setItem('Catalogos', JSON.stringify(respCatalogos));
+                } catch (error) {
+                    console.log("Error al traer los catalogos: ", error);
+                    return 
+                    
+                }
+    
+                const dataUser = JSON.stringify(respLogin)
+                localStorage.setItem("DataUser", dataUser)
+                respLogin.contra_update++
+                getEmpresa();
+                //console.log(respLogin);
+                //Validacion de rol de usuario
+                switch (respLogin.id_rol) {
+                    case 0:
+                        //Master
+                        setTimeout(function () { $(window).attr('location', 'views/home.html') }, 500);
+                    break;
+                    case 2:
+                        //Administrador
+                        setTimeout(function () { $(window).attr('location', 'views/home.html') }, 500);
+                    break;
+                    case 3:
+                        //Mesero
+                        setTimeout(function () { $(window).attr('location', 'views/meseros/mesero.html') }, 500);
+                    break;
+                    case 4:
+                        //Cajero
+                        setTimeout(function () { $(window).attr('location', 'views/cajeros/cajero.html') }, 500);
+                    break;
+                    default:
+                        break;
+                }
+
+                /* if (respLogin.contra_update == 0) {
+                    setTimeout(function () { $(window).attr('location', 'views/cambiarAcceso.html') }, 500);
+                } else {
+                    setTimeout(function () { $(window).attr('location', 'views/home.html') }, 500);
+                } */
+            }
+            
+        } catch (error) {
+            console.log("Ocurrió un error -> ", error);
+            ocultarPreload()
+        }
+    
 });
 
 $('#email, #password').click(() => {

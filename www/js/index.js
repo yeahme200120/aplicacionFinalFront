@@ -3,6 +3,9 @@ import { getUserLocal, removeLocal } from "./general.js";
 
 $(document).ready(function(){
     cerrarSesion();
+    setTimeout(() => {
+        location.href = "login.html";
+    }, 2500);
 });
 document.getElementById('btnComenzar').addEventListener('click', () => {
     console.log("existe user local -> ",);
