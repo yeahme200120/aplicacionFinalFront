@@ -82,40 +82,47 @@
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-10 col-md-9">
-                            <label for="almacen" class="form-label">Almacén</label>
-                            <select id="almacen" class="form-select form-select-lg selectInsumos"></select>
+                            <label for="almacen" class="form-label">Categoria</label>
+                            <select id="categoria_insumo" class="form-select form-select-lg selectCategorias"></select>
                         </div>
-                        <div id="addAlmacen" class="col-2 col-md-3 d-flex align-self-end justify-content-center">
+                        <div id="addCatInsumo" class="col-2 col-md-3 d-flex align-self-end justify-content-center">
                             <img src="../Icons/add.png" alt="add" width="45" height="45">
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Nombre del Producto</label>
-                    <input type="text" class="form-control" id="descripcion" placeholder="Nombre del producto">
-                </div>
-                <div class="mb-3 d-none">
-                    <label for="precioU" class="form-label">Precio Unitario</label>
-                    <input type="number" min="1" class="form-control" id="precioU" value="0">
-                </div>
-                <div class="mb-3 d-none">
-                    <label for="iva" class="form-label">Iva %</label>
-                    <input id="iva" type="number" min="1" class="form-control" value="0">
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre del producto">
                 </div>
                 <div class="mb-3">
-                    <label for="unidad" class="form-label">Unidad de medida</label>
-                    <select id="unidad" class="form-select form-select-lg selectInsumos"></select>
+                    <label for="clave" class="form-label">Clave</label>
+                    <input type="text" class="form-control" id="clave" placeholder="001">
                 </div>
                 <div class="mb-3">
-                    <label for="cantidad" class="form-label">Cantidad minima</label>
+                    <div class="row">
+                        <div class="col-10 col-md-9">
+                            <label for="unidad" class="form-label">Unidad de medida</label>
+                            <select id="unidad" class="form-select form-select-lg selectInsumos"></select>
+                        </div>
+                        <div id="addUnidadInsumo" class="col-2 col-md-3 d-flex align-self-end justify-content-center">
+                            <img src="../Icons/add.png" alt="add" width="45" height="45">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="stock" class="form-label">Stock minimo</label>
+                    <input id="stock" type="number" min="1" class="form-control" placeholder="0">
+                </div>
+                <div class="mb-3">
+                    <label for="cantidad" class="form-label">Cantidad</label>
                     <input id="cantidad" type="number" min="1" class="form-control" placeholder="0">
                 </div>
                 <div class="mb-3">
-                    <input id="stock" name="stock" type="hidden" min="1" class="form-control" value="0">
-                </div>
-                <div class="mb-3 d-none">
-                    <label for="proveedor" class="form-label">Proveedor</label>
-                    <select id="proveedor" class="form-select form-select-lg selectInsumos"></select>
+                    <label for="tipo" class="form-label">Tipo</label>
+                    <select name="tipo" id="tipo" class="form-control">
+                        <option value="1">Base</option>
+                        <option value="2">Compuesto</option>
+                    </select>
                 </div>
                 <div class="d-flex justify-content-center mt-5">
                     <button id="btn-agregarInsumo" type="button"
@@ -128,8 +135,7 @@
     <section id="section-consultarInsumos" class="container-fluid pb-3 d-none">
         <div class="container-fluid my-3">
             <table class="table" id="tablaInsumos" style="width: 100%;"></table>
-        </div>
-        
+        </div>    
     </section>
     <footer class="footer2">
         <div class="w-auto h-100 d-flex justify-content-around align-items-center">
@@ -144,21 +150,48 @@
             </a> -->
         </div>
     </footer>
-    <!-- Modal Cerrar Sesion -->
-    <div class="modal fade modal-cerrarSesion" id="modal-cerrarSesion" tabindex="-1" aria-labelledby="modal-cerrarSesionLabel" aria-hidden="true">
+    <!-- Modal Agregar Categoria -->
+    <div class="modal fade" id="agregarCategoriaInsumo" tabindex="-1" aria-labelledby="agregarAlmacenModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-white" style="background-color: var(--bg-principal) !important;">
-                    <h5 class="modal-title">Mensaje de sistema</h5>
-                </div>
-                <div class="modal-body">
-                    <p id="modal-msg">¿Estas seguro de cerrar sesión?</p>
-                </div>
-                <div class="modal-footer d-flex justify-content-end">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button id="btn-cerrarSesion" type="button" class="btn" style="color: #FFFF; background-color: var(--bg-principal) !important;">Aceptar</button>
-                </div>
+        <div class="modal-content">
+            <div class="modal-header modal-new">
+            <h1 class="modal-title">Nueva Categoria</h1>
             </div>
+            <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Nombre almacén:</label>
+                <input type="text" class="form-control" id="nombreCategoriaInsumo" placeholder="Nombre del almacén" >
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn modal-new" data-bs-dismiss="modal">Cancelar</button>
+            <button id="btnSetCategoriaInsumo" type="button" class="btn modal-new" >Agregar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- Modal Agregar Unidad Almacen -->
+    <div class="modal fade" id="agregarUnidadInsumo" tabindex="-1" aria-labelledby="agregarAlmacenModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header modal-new">
+            <h1 class="modal-title">Nueva Unidad</h1>
+            </div>
+            <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Nombre unidad:</label>
+                <input type="text" class="form-control" id="nombreUnidadInsumo" placeholder="Nombre de la unidad" >
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn modal-new" data-bs-dismiss="modal">Cancelar</button>
+            <button id="btnSetUnidadInsumo" type="button" class="btn modal-new" >Agregar</button>
+            </div>
+        </div>
         </div>
     </div>
     <!-- Scrips Generales -->

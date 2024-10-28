@@ -1,42 +1,33 @@
 //Imports
-import { getUserLocal, getLocal, manejadorAPI } from "./general.js";
+import { getUserLocal, getLocal, manejadorAPI, getCatalogosGlobal } from "./general.js";
 import { loadModal } from "./modal.js";
 import { configTable } from "./dataTables/config-table.js";
 
 // Variables globales
 const $btnHome = $('#btn-menu-principal-home');
-
-
 const $tabsProductos = $('#tabs-productos');
-
 const $seccionAgregar = $('#section-agregarProductos');
 const $seccionConsultar = $('#section-consultarProductos');
-
 const $btnAgregarProducto = $('#btn-agregarProducto');
-const $alertaAgregarProducto = $('#alerta-agregarProducto');
-
 const $loadSystem = $('.loadSystem');
-
-const $btnAddAlmacen = $('#addAlmacen');
+const $btnAddAlmacen = $('#addCatProducto');
+const $btnAddUnidad = $('#addUnidadProducto');
 
 //Select´s
 const $allSelect = $('.selectProductos');
-const $selectUnidad = $('#unidad');
-const $selectProvedor = $('#id_provedor');
-const $selectCategorias = $('#id_categoria');
+const $selectUnidad = $('#id_unidad_producto');
+const $selectCategorias = $('#id_categoria_producto');
 const $selectEstatusProducto = $('#id_estatus_producto');
 
 //formulario
-const $nombre_producto = $("#nombre_producto");
-const $precio_compra = $("#precio_compra");
-const $precio_venta = $("#precio_venta");
-const $id_provedor = $("#id_provedor");
-const $stock = $("#stock");
-const $cantidad = $("#cantidad");
-const $iva = $("#iva");
-const $id_estatus_producto = $("#id_estatus_producto");
-const $id_categoria = $("#id_categoria");
-const $unidad = $("#unidad");
+const $id_categoria_producto = $("#id_categoria_producto");
+const $nombre = $("#nombre");
+const $clave = $("#clave");
+const $precio_venta1 = $("#precio_venta1");
+const $precio_venta2 = $("#precio_venta2");
+const $precio_venta3 = $("#precio_venta3");
+const $tipo = $("#tipo");
+const $id_unidad_producto = $("#id_unidad_producto");
 
 //Tables
 const $tablaProductos = $("#tablaProductos").DataTable(configTable);
@@ -44,14 +35,15 @@ const $tablaProductos = $("#tablaProductos").DataTable(configTable);
 const $btn_userLogin = $('#btn-userLogin');
 const $btn_cerrarSesion = $('#btn-cerrarSesion');
 const $modal_cerrarSesion = $('#modal-cerrarSesion');
+const $btn_addCatProducto = $("#id_categoria_producto")
 
 $(document).ready(async function () {
 
-        //Setaemos el nombre de la empresa
-        const empresa = localStorage.getItem("Empresa");
-        let nombre = empresa.replace(/["']/g, "")
-        let mayus = nombre.toUpperCase(nombre);
-        $("#nombreEmpresa").text(mayus);
+    //Setaemos el nombre de la empresa
+    const empresa = localStorage.getItem("Empresa");
+    let nombre = empresa.replace(/["']/g, "")
+    let mayus = nombre.toUpperCase(nombre);
+    $("#nombreEmpresa").text(mayus);
 
     $loadSystem.removeClass('d-none');
     const userData = getUserLocal();
@@ -64,44 +56,12 @@ $(document).ready(async function () {
     const urlAreas = 'https://abonos.sipecem.com.mx/api/getAreaAlmacenApi';
     const datosAreas = userData;
 
-    //Provedores
-    const urlProvedores = 'https://abonos.sipecem.com.mx/api/getProvedoresApi';
-    const datosProvedores = userData;
-
     //EstatusProductos
     const urlEstatusProductos = 'https://abonos.sipecem.com.mx/api/getEstatusProducto';
     const datosEstatusProductos = userData;
-    
+
     const respCatalogos = await manejadorAPI(metodo,urlCatalogos,datos)
     localStorage.setItem('Catalogos', JSON.stringify(respCatalogos));
-
-    const respProvedores = await manejadorAPI(metodo,urlProvedores,datosProvedores)
-    localStorage.setItem('Provedores', JSON.stringify(respProvedores));
-
-    const respEstatusProductos = await manejadorAPI(metodo,urlEstatusProductos,datosEstatusProductos)
-    localStorage.setItem('EstatusProductos', JSON.stringify(respEstatusProductos));
-
-    if(respProvedores == false){}
-    else{
-        const provedores = getLocal('Provedores');
-        // Opciones -> proveedores
-        $.each(provedores, function (index, item) {
-            $selectProvedor.append(
-                $('<option></option>').val(item.id).text(item.nombre_provedor)
-            );
-        });        
-    }
-    if(respEstatusProductos.EstatusProductos == false){
-    }else{
-        
-        const estatusProductos = getLocal('EstatusProductos');
-        // Opciones -> proveedores
-        $.each(estatusProductos.EstatusProducto, function (index, item) {
-            $selectEstatusProducto.append(
-                $('<option></option>').val(item.id).text(item.estatus_producto)
-            );
-        });        
-    }
 
     const respAreas = await manejadorAPI(metodo,urlAreas, datosAreas)
 
@@ -109,9 +69,8 @@ $(document).ready(async function () {
     } else {
         //CATALOGOS
         const catalogo = getLocal('Catalogos');
-        const unidades = catalogo.Unidades;
-        const provedores = catalogo.Provedores;
-        const categorias = catalogo.Categorias;
+        const unidades = catalogo.UnidadesProductos;
+        const categorias = catalogo.CategoriasProductos;
 
         //AREAS        
         //const areas = respAreas.Areas_Almacen;
@@ -125,20 +84,14 @@ $(document).ready(async function () {
         // Opciones -> unidades
         $.each(unidades, function (index, item) {
             $selectUnidad.append(
-                $('<option></option>').val(item.id).text(item.nombre_unidad)
+                $('<option></option>').val(item.id).text(item.unidad)
             );
         });
 
-        // Opciones -> proveedores
-        $.each(provedores, function (index, item) {
-            $selectProvedor.append(
-                $('<option></option>').val(item.id).text(item.nombre_provedor)
-            );
-        });
         // Opciones -> categorias
         $.each(categorias, function (index, item) {
             $selectCategorias.append(
-                $('<option></option>').val(item.id).text(item.categoria_producto)
+                $('<option></option>').val(item.id).text(item.categoria)
             );
         });
     }
@@ -167,29 +120,25 @@ $btnAgregarProducto.on('click', async function () {
     const dataUsuario = getUserLocal();
     
     //OBTENER FORMULARIO
+    let id_categoria_producto = $id_categoria_producto.val()
+    let nombre = $nombre.val()
+    let clave = $clave.val()
+    let precio_venta1 = $precio_venta1.val()
+    let precio_venta2 = $precio_venta2.val()
+    let precio_venta3 = $precio_venta3.val()
+    let tipo = $tipo.val()
+    let id_unidad_producto = $id_unidad_producto.val()
 
-    let nombre_producto =$nombre_producto.val();
-    let precio_compra =$precio_compra.val();
-    let precio_venta =$precio_venta.val();
-    let id_provedor =$id_provedor.val();
-    let cantidad =$cantidad.val();
-    let iva =$iva.val();
-    let id_estatus_producto =$id_estatus_producto.val();
-    let id_categoria =$id_categoria.val();
-    let unidad =$unidad.val();
     const empresa = dataUsuario.id_empresa;
 
     //VALIDACION: INFORMACIÓN COMPLETA
     if (
-        nombre_producto == '' ||
-        precio_compra == '' ||
-        precio_venta == '' ||
-        id_provedor == '' ||
-        cantidad == '' ||
-        iva == '' ||
-        id_estatus_producto == '' ||
-        id_categoria == '' ||
-        unidad == '' 
+        id_categoria_producto == '' || id_categoria_producto == undefined,
+        nombre == '' || nombre == undefined,
+        clave == '' || clave == undefined,
+        precio_venta1 == '' || precio_venta1 == undefined,
+        tipo == '' || tipo == undefined,
+        id_unidad_producto == '' || id_unidad_producto == undefined
     ) {
         Toastify({
             text: "Completa la información!",
@@ -200,30 +149,30 @@ $btnAgregarProducto.on('click', async function () {
     }
 
     //FORMATO DE DATOS
-    nombre_producto = nombre_producto.trim().toUpperCase();
-    precio_compra = parseFloat(precio_compra);
-    precio_venta = parseFloat(precio_venta);
-    id_provedor = parseInt(id_provedor);
-    cantidad = parseInt(cantidad);
-    iva = parseInt(iva);
-    id_estatus_producto = parseInt(id_estatus_producto);
-    id_categoria = parseInt(id_categoria);
-    unidad = parseInt(unidad);
+    id_categoria_producto = parseInt(id_categoria_producto)
+    nombre = nombre.trim().toUpperCase();
+    clave = clave.trim().toUpperCase();
+    precio_venta1 = parseInt(precio_venta1);
+    precio_venta2 = parseInt(precio_venta2 ? precio_venta2 : 0);
+    precio_venta3 = parseInt(precio_venta3 ? precio_venta3 : 0);
+    tipo = parseInt(tipo);
+    id_unidad_producto = parseInt(id_unidad_producto);
 
     //SET API
     const metodo = "POST";
     const url = "https://abonos.sipecem.com.mx/api/setProducto";
     const datosSetProducto = {
-        "nombre_producto":nombre_producto,
-        "precio_compra":precio_compra,
-        "precio_venta":precio_venta,
-        "id_provedor":id_provedor,
-        "cantidad":cantidad,
-        "iva":iva,
-        "id_estatus_producto":id_estatus_producto,
-        "id_categoria":id_categoria,
-        "unidad":unidad,
-        "id_empresa": empresa,
+        "id_categoria_producto" : id_categoria_producto,
+        "nombre" : nombre,
+        "clave" : clave,
+        "precio_venta1" : precio_venta1,
+        "precio_venta2" : precio_venta2,
+        "precio_venta3" : precio_venta3,
+        "tipo" : tipo,
+        "id_unidad_producto" : id_unidad_producto,
+        "id_empresa" : parseInt(empresa),
+        "iva" : parseInt(0),
+        "estatus" : parseInt(1)
     }
 
     await $.ajax(
@@ -251,34 +200,68 @@ $btnAgregarProducto.on('click', async function () {
 });
 
 $btnAddAlmacen.on('click', async function() {
-    loadModal('agregarAlmacen', '../components/addAlmacen.html','');    
+    $("#agregarCategoriaProducto").modal("show")   
+});
+$btnAddUnidad.on('click', async function() {
+    $("#agregarUnidadProducto").modal("show")   
+});
+
+$btn_addCatProducto.on('click', async function() {
 });
 
 //Evento de Modal Add Almacen
-$(document).on('click', '#btnSetAlmacen', async function() {
+$(document).on('click', '#btnSetCategoriaProducto', async function() {
     mostrarPreload();
-    const $newAlmacen = $('#nombreAlmacen');
-    const newAlmacen = $newAlmacen.val().trim().toUpperCase();
+    const $newCatProd = $('#nombreCategoriaProducto');
+    const newCatProd = $newCatProd.val().trim().toUpperCase();
     const dataUser = getUserLocal()
-    const urlSetAlmacen = 'https://abonos.sipecem.com.mx/api/setAreaAlmacenApi';
+    const urlSetAlmacen = 'https://abonos.sipecem.com.mx/api/setCategoriaProducto';
     const datosSetAlmacen = {
-        usuario: JSON.stringify(dataUser),
-        nombre_area: newAlmacen
+        usuario: dataUser,
+        categoria: newCatProd
+    }
+
+    const respSetAlmacen = await manejadorAPI('POST', urlSetAlmacen, datosSetAlmacen);
+    console.log("Respuesta de la insercion:", respSetAlmacen);
+    await getCatalogosGlobal(dataUser.id)
+    $('#agregarCategoriaProducto').modal('hide');
+    if (respSetAlmacen == 1) {
+        await getAreaAlmacen()
+        loadModal('modalDinamico', '../components/modal.html', 'Agregado con éxito')
+    }
+    else if(respSetAlmacen == 0) {
+        loadModal('modalDinamico', '../components/modal.html', 'Ups! Ocurrió un error 🙉')
+    }
+    else {
+        loadModal('modalDinamico', '../components/modal.html', respSetAlmacen.msg ? respSetAlmacen.msg : respSetAlmacen)
+    }
+    ocultarPreload()
+});
+//Evento de Modal Add Unidad
+$(document).on('click', '#btnSetUnidadProducto', async function() {
+    mostrarPreload();
+    const $newUnidadProd = $('#unidad');
+    const newUnidadProd = $newUnidadProd.val().trim().toUpperCase();
+    const dataUser = getUserLocal()
+    const urlSetAlmacen = 'https://abonos.sipecem.com.mx/api/setUnidadProducto';
+    const datosSetAlmacen = {
+        usuario: dataUser,
+        unidad: newUnidadProd
     }
 
     const respSetAlmacen = await manejadorAPI('POST', urlSetAlmacen, datosSetAlmacen);
     console.log("Respuesta de la insercion:", respSetAlmacen);
     
-    $('#agregarAlmacen').modal('hide');
-    if (respSetAlmacen === 1) {
+    $('#agregarUnidadProducto').modal('hide');
+    if (respSetAlmacen == 1) {
         await getAreaAlmacen()
         loadModal('modalDinamico', '../components/modal.html', 'Agregado con éxito')
     }
-    else if(respSetAlmacen === 0) {
+    else if(respSetAlmacen == 0) {
         loadModal('modalDinamico', '../components/modal.html', 'Ups! Ocurrió un error 🙉')
     }
     else {
-        loadModal('modalDinamico', '../components/modal.html', respSetAlmacen.msg)
+        loadModal('modalDinamico', '../components/modal.html', respSetAlmacen.msg ? respSetAlmacen.msg : respSetAlmacen)
     }
     ocultarPreload()
 });
@@ -287,25 +270,25 @@ async function getProductos() {
     mostrarPreload()
     const dataUser = getUserLocal();
     const catalogos = getLocal('Catalogos');
-    const unidades = catalogos.Unidades;
+    await getCatalogosGlobal(dataUser.id)
+    
+    const respProductos = catalogos.Productos;
+    console.log("Resp productos: ",respProductos);
     
     
     let infoProductos = [];
-    const urlGetProductos = 'https://abonos.sipecem.com.mx/api/getProductosApi';
-    const datos = dataUser;
-    const respProductos = await manejadorAPI('POST',urlGetProductos, datos);
-    
-    if (respProductos.Productos) {
-        for (const producto of respProductos.Productos) {
+    if (respProductos) {
+        for (const producto of respProductos) {
+            console.log("Producto: ", producto);
             let contenido = `
                 <div class="card bg-light mb-3">
-                    <div class="card-header fw-bold cardProductos">${producto.nombre_producto}</div>
+                    <div class="card-header fw-bold cardProductos">${producto.nombre}</div>
                     <div class="card-body">
                         <ul>
-                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Cantidad</label></div><div class="col-6"><h6>${producto.stock}</h6></div></li>
-                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Compra</label></div><div class="col-6"><h6>${producto.precio_compra}</h6></div></li>
-                            <li class=""><div class="row"><div class="col-6"><label class="fw-bold">Precio venta</label></div><div class="col-6"><h6>${producto.precio_venta}</h6></div></></li>
-                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Id Provedor</label></div><div class="col-6"><h6>${producto.id_provedor}</h6></div></></li></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Clave</label></div><div class="col-6"><h6>${producto.clave}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Precio 1</label></div><div class="col-6"><h6>${producto.precio_venta1}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Precio 2</label></div><div class="col-6"><h6>${producto.precio_venta2}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Precio 3</label></div><div class="col-6"><h6>${producto.precio_venta3}</h6></div></li>
                         </ul>
                     </div>
                 </div>
@@ -316,7 +299,8 @@ async function getProductos() {
     else {
         
     }
-
+    console.log(infoProductos);
+    
     $tablaProductos.clear();
     $tablaProductos.rows.add(infoProductos);
     $tablaProductos.draw();
@@ -331,7 +315,7 @@ async function ocultarPreload(){
     $loadSystem.fadeToggle(1000);
     $(".loadSystem").addClass('d-none');
 }
-async function getAreaAlmacen(){
+/* async function getAreaAlmacen(){
     let almacen = $('#almacen');
     const $allSelect = $('.selectInsumos');
     const urlAreas = 'https://abonos.sipecem.com.mx/api/getAreaAlmacenApi';
@@ -346,14 +330,11 @@ async function getAreaAlmacen(){
             $('<option></option>').val(item.id).text(item.nombre_area)
         );
     });
-}
+} */
 $btn_userLogin.click(()=>{ 
     $modal_cerrarSesion.modal('show');
 });
 
 $btn_cerrarSesion.click(()=>{
     cerrarSesion()
-});
-async function habilitarPrecio(numProd) {
-    console.log(numProd);
-}
+})

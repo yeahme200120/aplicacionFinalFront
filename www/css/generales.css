@@ -51,18 +51,18 @@
 /* Generales */
 .loadSystem {
     z-index: 999999;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--bg-principal);
 }
 .bg-btn-primario{
-    background-color: #685E5E;
-    color: dark;
+    background-color: var(--text-principal);
+    color: var(--bg-principal);
 }   
 .bg-primario {
     background-color: var(--bg-principal);
     color: var(--text-principal);
 }
 .bg-primario-degradado {
-    background: linear-gradient(180deg, var(--text-principal), 59%, #FFFEFE 100%);
+    background: linear-gradient(180deg, var(--text-principal), 59%, var(--bg-principal) 100%);
 }
 
 .img-curvas-1 {
@@ -100,11 +100,11 @@ input{
     border-style: solid black;
 }
 .div-btn-app-index {
-    background-color: #343339 !important;
+    background-color: var(--text-form);
     font-family: 'roboto-light';
     font-size: large;
     font-style: normal;
-    color: #ffff !important;
+    color: var(--bg-principal);
     padding-left: 70px;
     padding-right: 70px;
 }
@@ -154,4 +154,20 @@ input{
 }
 .btn-segunda-opcion{
     background: var(--text-principal);
+}
+.boton-general{
+    background: var(--text-principal);
+    color: var(--bg-principal);
+}
+.modal-new{
+    background: var(--text-principal);
+    color: var(--bg-principal);
+}
+#modal-msg{
+    color: var(--text-form);
+    font-weight: bold;
+}
+.modal-msg{
+    color: var(--text-form);
+    font-weight: bold;
 }

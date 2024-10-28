@@ -16,22 +16,24 @@ const $alertaAgregarInsumo = $('#alerta-agregarInsumo');
 
 const $loadSystem = $('.loadSystem');
 
-const $btnAddAlmacen = $('#addAlmacen');
+const $btnAddCatInsumo = $('#addCatInsumo');
+const $btnAddUnidadInsumo = $('#addUnidadInsumo');
 
 //Select´s
 const $allSelect = $('.selectInsumos');
+const $allSelectCat = $('.selectCategorias');
+const $catInsumos = $('#categoria_insumo');
 const $selectUnidad = $('#unidad');
 const $selectProvedor = $('#proveedor');
 
 //formulario
-const $almacen = $('#almacen');
-const $descripcion = $('#descripcion');
-const $precioU = $('#precioU');
-const $iva = $('#iva');
+const $categoria_insumo = $('#categoria_insumo');
+const $nombre = $('#nombre');
+const $clave = $('#clave');
 const $unidad = $('#unidad');
-const $cantidad = $('#cantidad');
 const $stock = $('#stock');
-const $proveedor = $('#proveedor');
+const $cantidad = $('#cantidad');
+const $tipo = $('#tipo');
 
 //Tables
 const tablaInsumos = $("#tablaInsumos").DataTable(configTable);
@@ -68,8 +70,9 @@ $(document).ready(async function () {
     } else {
         //CATALOGOS
         const catalogo = getLocal('Catalogos');
-        const unidades = catalogo.Unidades;
+        const unidades = catalogo.UnidadesInsumos;
         const provedores = catalogo.Provedores;
+        const categorias = catalogo.CategoriasInsumos
 
         //AREAS        
         const areas = respAreas.Areas_Almacen;
@@ -78,26 +81,18 @@ $(document).ready(async function () {
 
         // Agregar la opción inicial
         $allSelect.append('<option value="">Seleccione una opción</option>');
-        
-
-        // Opciones -> areas
-        $.each(areas, function (index, item) {
-            $almacen.append(
-                $('<option></option>').val(item.id).text(item.nombre_area)
-            );
-        });
-
-        // Opciones -> unidades
+        $allSelectCat.append('<option value="">Seleccione una opción</option>');
+        // Opciones -> unidades insumos
         $.each(unidades, function (index, item) {
             $selectUnidad.append(
-                $('<option></option>').val(item.id).text(item.nombre_unidad)
+                $('<option></option>').val(item.id).text(item.unidad)
             );
         });
 
-        // Opciones -> proveedores
-        $.each(provedores, function (index, item) {
-            $selectProvedor.append(
-                $('<option></option>').val(item.id).text(item.nombre_provedor)
+        // Opciones -> categorias insumos
+        $.each(categorias, function (index, item) {
+            $catInsumos.append(
+                $('<option></option>').val(item.id).text(item.categoria)
             );
         });
     }
@@ -127,23 +122,22 @@ $btnAgregarInsumo.on('click', async function () {
     const dataUsuario = getUserLocal();
     
     //OBTENER FORMULARIO
-    let almacen = $almacen.val();
-    let descripcion = $descripcion.val();
-    let precioU = $precioU.val();
-    let iva = $iva.val();
-    let unidad = $unidad.val();
-    let cantidad = $cantidad.val();
-    let stock = parseInt(0);
-    //let proveedor = $proveedor.val();
-    const empresa = dataUsuario.id_empresa;
+    let categoria_insumo = $categoria_insumo.val()
+    let nombre = $nombre.val()
+    let clave = $clave.val()
+    let unidad = parseInt($unidad.val())
+    let stock = parseInt($stock.val())
+    let cantidad = parseInt($cantidad.val())
+    let tipo = $tipo.val()
 
     //VALIDACION: INFORMACIÓN COMPLETA
-    if (almacen == "" ||
-        descripcion == "" ||
-        precioU == "" ||
-        iva == "" ||
+    if (categoria_insumo == "" ||
+        nombre == "" ||
+        clave == "" ||
+        unidad == "" ||
+        stock == "" ||
         cantidad == "" ||
-        proveedor == ""
+        tipo == "" 
     ) {
         Toastify({
             text: "Completa la información!",
@@ -154,28 +148,26 @@ $btnAgregarInsumo.on('click', async function () {
     }
 
     //FORMATO DE DATOS
-    descripcion = descripcion.trim().toUpperCase();
-    precioU = parseFloat(precioU);
-    almacen = parseInt(almacen);
-    iva = parseInt(iva);
-    unidad = parseInt(unidad);
-    cantidad = parseInt(cantidad);
-    stock = parseInt(0);
-    proveedor = parseInt(0);
+    categoria_insumo = parseInt(categoria_insumo)
+    nombre = nombre.trim().toUpperCase()
+    clave = clave.trim().toUpperCase()
+    unidad = parseInt(unidad)
+    stock = parseInt(stock)
+    cantidad = parseInt(cantidad)
+    tipo = parseInt(tipo)
 
     //SET API
     const metodo = "POST";
     const url = "https://abonos.sipecem.com.mx/api/setInsumo";
     const datosSetInsumo = {
-        "descripcion": descripcion,
-        "id_area_almacen": almacen,
-        "precio_unitario": precioU,
-        "iva": iva,
+        "id_categoria_insumo": categoria_insumo,
+        "nombre": nombre,
+        "clave": clave,
         "id_unidad": unidad,
+        "stock": stock,
         "cantidad": cantidad,
-        "stock": parseInt(0),
-        "id_empresa": empresa,
-        "id_provedor": proveedor
+        "tipo": tipo,
+        "id_empresa":dataUsuario.id_empresa
     }
     console.log("data del insumo: ", datosSetInsumo);
     
@@ -211,26 +203,59 @@ $btnAgregarInsumo.on('click', async function () {
     })
 });
 
-$btnAddAlmacen.on('click', async function() {
-    loadModal('agregarAlmacen', '../components/addAlmacen.html','');    
+$btnAddCatInsumo.on('click', async function() {
+    //Mostrar modal de agregar categoria Insumo
+    $("#agregarCategoriaInsumo").modal("show");  
+});
+$btnAddUnidadInsumo.on('click', async function() {
+    //Mostrar modal de agregar categoria Insumo
+    $("#agregarUnidadInsumo").modal("show");  
 });
 
 //Evento de Modal Add Almacen
-$(document).on('click', '#btnSetAlmacen', async function() {
+$(document).on('click', '#btnSetCategoriaInsumo', async function() {
     mostrarPreload();
-    const $newAlmacen = $('#nombreAlmacen');
-    const newAlmacen = $newAlmacen.val().trim().toUpperCase();
+    const $newCategoriaInsumo = $('#nombreCategoriaInsumo');
+    const newCategoriaInsumo = $newCategoriaInsumo.val().trim().toUpperCase();
     const dataUser = getUserLocal()
-    const urlSetAlmacen = 'https://abonos.sipecem.com.mx/api/setAreaAlmacenApi';
+    const urlSetAlmacen = 'https://abonos.sipecem.com.mx/api/setCategoriaInsumo';
     const datosSetAlmacen = {
-        usuario: JSON.stringify(dataUser),
-        nombre_area: newAlmacen
+        usuario: dataUser,
+        categoria: newCategoriaInsumo
+    }
+    console.log("datos a enviar:", datosSetAlmacen);
+    
+    const respSetAlmacen = await manejadorAPI('POST', urlSetAlmacen, datosSetAlmacen);
+    console.log("Respuesta de la insercion:", respSetAlmacen);
+    //Ocultar modal de agregar categoria insumo
+    $('#agregarCategoriaInsumo').modal('hide');
+    if (respSetAlmacen === 1) {
+        await getAreaAlmacen()
+        loadModal('modalDinamico', '../components/modal.html', 'Agregado con éxito')
+    }
+    else if(respSetAlmacen === 0) {
+        loadModal('modalDinamico', '../components/modal.html', 'Ups! Ocurrió un error 🙉')
+    }
+    else {
+        loadModal('modalDinamico', '../components/modal.html', respSetAlmacen.msg)
+    }
+    ocultarPreload()
+});
+$(document).on('click', '#btnSetUnidadInsumo', async function() {
+    mostrarPreload();
+    const $newCategoriaInsumo = $('#nombreUnidadInsumo');
+    const newCategoriaInsumo = $newCategoriaInsumo.val().trim().toUpperCase();
+    const dataUser = getUserLocal()
+    const urlSetAlmacen = 'https://abonos.sipecem.com.mx/api/setUnidadInsumo';
+    const datosSetAlmacen = {
+        usuario: dataUser,
+        categoria: newCategoriaInsumo
     }
 
     const respSetAlmacen = await manejadorAPI('POST', urlSetAlmacen, datosSetAlmacen);
     console.log("Respuesta de la insercion:", respSetAlmacen);
-    
-    $('#agregarAlmacen').modal('hide');
+    //Ocultar modal de agregar categoria insumo
+    $('#agregarUnidadInsumo').modal('hide');
     if (respSetAlmacen === 1) {
         await getAreaAlmacen()
         loadModal('modalDinamico', '../components/modal.html', 'Agregado con éxito')
@@ -254,26 +279,31 @@ async function getInsumos() {
     const urlGetInsumos = 'https://abonos.sipecem.com.mx/api/getInsumosApi';
     const datos = dataUser;
     const respInsumos = await manejadorAPI('POST',urlGetInsumos, datos);
-    
+    let semaforo = ''
     if (respInsumos.Insumos) {
         for (const insumo of respInsumos.Insumos) {
             console.log("Data Insumos: ", insumo);
             let nombreUnidad = unidades.filter(item => item.id == insumo.id_unidad)[0]['nombre_unidad']
+            if(insumo.stock >= (insumo.cantidad + ( (insumo.cantidad*0.50) + 1 ) )){
+                semaforo = 'text-success';
+            } else if(insumo.stock > insumo.cantidad && insumo.stock <= (insumo.cantidad + ( (insumo.cantidad*0.50) ) )){
+                semaforo = 'text-warning';
+            } else {
+                semaforo = 'text-danger';
+            }
             let contenido = `
                 <div class="card bg-light mb-3">
-                    <div class="card-header fw-bold cardInsumo">${insumo.descripcion}</div>
+                    <div class="card-header fw-bold cardInsumo">${insumo.nombre}</div>
                     <div class="card-body">
+                        <div class="row justify-content-end"> <div class="col-2"> <i class="bi bi-circle-fill ${semaforo}" style="font-size:2rem"></i> </div> </div>
                         <ul>
-                            <li class="fw-bold"><div class="row"><div class="col-8"><label class="fw-bold">Cantidad Minima</label></div><div class="col-4"><h6>${insumo.cantidad}</h6></div></li>
-                            <li class="fw-bold"><div class="row"><div class="col-8"><label class="fw-bold">Unidad</label></div><div class="col-4"><h6>${insumo.nombre_unidad}</h6></div></li>
-                            <li class=""><div class="row"><div class="col-8"><label class="fw-bold">Área</label></div><div class="col-4"><h6>${insumo.nombre_area}</h6></div></></li>
+                            <li class="fw-bold"><div class="row"><div class="col-8"><label class="fw-bold">Clave</label></div><div class="col-4"><h6>${insumo.clave}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-8"><label class="fw-bold">Stock Minimo</label></div><div class="col-4"><h6>${insumo.stock}</h6></div></li>
+                            <li class=""><div class="row"><div class="col-8"><label class="fw-bold">Cantidad</label></div><div class="col-4"><h6>${insumo.cantidad}</h6></div></></li>
                         </ul>
                     </div>
                 </div>
             `;
-            /* <li class=""><div class="row"><div class="col-6"><label class="fw-bold">Empresa</label></div><div class="col-6"><h6>${insumo.nombre_Empresa}</h6></div></></li> */
-                                        /* <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Provedor</label></div><div class="col-6"><h6>${insumo.nombre_provedor}</h6></div></></li></li> */
-            
             infoInsumos.push([contenido])
         }
     }
