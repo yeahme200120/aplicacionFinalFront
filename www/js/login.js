@@ -27,9 +27,7 @@ document.getElementById('btnLogin').addEventListener('click', async () => {
     
             const respLogin = await manejadorAPI(metodo, url, datos);
             
-            $loadSystem.fadeToggle(1000);
-    
-            setTimeout(function () { $loadSystem.addClass('d-none'); }, 500);
+           
     
             if (respLogin.msg == "Usuario no registrado" || respLogin.msg == "Credenciales incorrectas") {
                 ocultarPreload()
@@ -119,11 +117,11 @@ $('#muestra-password').click(() => {
     }
 });
 
-$('#password').keypress(function (e) {
+/* $('#password').keypress(function (e) {
     if (e.keyCode == 13) {        
         $('#btnLogin').click();
     }
-});
+}); */
 async function mostrarPreload(){
     $(".loadSystem").removeClass('d-none');
     $(".loadSystem").css('display',"block");
