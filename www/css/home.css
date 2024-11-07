@@ -86,7 +86,7 @@ footer {
 } */
 
  .barra-fondo-responsivo {
-   background: linear-gradient(180deg, #685E5E, 60%, #F9F0EB 100%);
+   background: var(--text-principal);
  }
  .fondo-boton-secondary{
    background-color: var(--bg-principal);
