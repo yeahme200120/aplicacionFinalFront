@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi perfil</title>
+    <!-- test -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Styles Generales -->
+    <link rel="stylesheet" href="../Bootstrap_css/bootstrap.min.css">
+    <link href="../img/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/toastify.min.css">
+    <!-- Styles Especificos -->
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/usuarios.css">
+    <link rel="stylesheet" href="../css/generales.css">
+    <script src="../js/jquery-3.7.1.min.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container-fluid h-100 loadSystem position-absolute d-none">
+        <div class="row h-100 align-items-center justify-content-center">
+            <div class="col-12 d-flex flex-column justify-content-center">
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <div class="spinner-grow m-2" style="background-color: var(--text-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <div class="spinner-grow m-2" style="background-color: var(--text-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow m-2" style="background-color: var(--text-principal) !important;"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="barra-fondo-responsivo">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="mt-4">
+                <p class="fs-3 text-light" style="font-family: Arial, Helvetica, sans-serif;" id="nombreEmpresa">NOMBRE
+                    DEL NEGOCIO</p>
+            </div>
+        </div>
+    </header>
+    <nav class="container-fluid">
+        <section id="section-agregarTurnos" class="container-fluid pb-3 mt-5">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Efectivo
+                        </label>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Debito
+                        </label>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Credito
+                        </label>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Dolares
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-5">
+                <div class="col-12 p-2"><b>Clave</b></div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-2"><b>Descripción</b></div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-2"><b>Tipo de cambio</b></div>
+            </div>
+            <div class="row">
+                <div class="col-12 row">
+                    <div class="col-6 p-2">
+                        <b>Acepta Propina</b>
+                    </div>
+                    <div class="col-6">
+                        <select class="form-control" name="" id="">
+                            <option value="">Si</option>
+                            <option value="">No</option>
+                        </select>
+                    </div>
+                </div> 
+            </div>
+            <div class="row m-5 p-5"></div>
+            <div class="row m-3 p-3"></div>
+            <div class="row justify-content-center">
+                    <button class="btn estilo-header p-2 m-2">Aceptar</button>
+            </div>
+        </section>
+        <!-- Consultar -->
+        <section id="section-consultarTurnos" class="container-fluid pb-3 d-none">
+            <div class="container my-3">
+                <table class="table" id="tablaTurnos" style="width: 100%;"></table>
+            </div>
+        </section>
+    </nav>
+    <footer class="footer2">
+        <div class="w-auto h-100 d-flex justify-content-around align-items-center">
+            <a href="javascript:history.back()">
+                <img src="../img/back-arrow-white.png" width="35px" height="35px" alt="home">
+            </a>
+            <a href="./home.html" id="btn-menu-principal-home">
+                <img src="../img/back-home-withe.png" width="35px" height="35px" alt="home">
+            </a>
+        </div>
+    </footer>
+    <!-- Scrips Generales -->
+    <script src="../Bootstrap_js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/toastify-js.js"></script>
+    <script src="../js/dataTables/simple-datatables.js"></script>
+    <!-- Scripts Especificos -->
+    <script type="module" src="../js/mediosPagos.js"></script>
+</body>
+
+</html>
