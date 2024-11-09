@@ -35,9 +35,12 @@
  /* Colors */
  :root {
     /* --bg-principal: #FF6B00; */
-    --bg-principal: #F9F0EB;
+    --bg-principal: #fff;
     --text-principal: #547dcd;
-    --text-form: #34495e;
+    --text-form: #024770;
+    --color-fondo: #024770;
+    --color-mano: #547dcd;
+    --color-purple: #9d5bb5;
 }
 
 /* Colores Toastify */
@@ -170,4 +173,28 @@ input{
 .modal-msg{
     color: var(--text-form);
     font-weight: bold;
+}
+.calendario{
+    background-image: url('../img/calendar.svg');
+    background-repeat: no-repeat;
+    background-size: 2rem, 2rem;
+    background-position: center;
+    color: var(--color-mano);
+}
+.text-color-fondo{
+    color: var(--color-fondo);
+}
+.text-color-mano{
+    color: var(--color-mano);
+}
+.text-color-extra{
+    color: var(--color-purple);
+}
+.estilo-header{
+    background-color: var(--color-mano);
+    color: var(--bg-principal);
+}
+.estilo-purple{
+    background-color: var(--color-purple);
+    color: var(--bg-principal);
 }

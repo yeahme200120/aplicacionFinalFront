@@ -124,6 +124,16 @@ $(document).ready(async function(){
             alert(error)
         }
     });
+    $('#btn-reporte').click(async function(){
+        //Get Roles de }
+        try {
+            $(".loadSystem").modal('show');
+        } catch (error) {
+            console.log("Error: ", error);
+            
+        }
+            window.location.href = "reporte.html"
+    });
 
     $btn_userLogin.click(()=>{
         console.log("Cerrar");
