@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../css/generales.css" />
     <!-- dataTables -->
     <link rel="stylesheet" href="../css/datatables.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="../js/jquery-3.7.1.min.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
 </head>
@@ -131,7 +131,7 @@
         </div>
         <div class="row mt-3">
             <div class="col-12 table-responsive mt-5">
-                <table id="example" class="table-movimientos" class="display" style="width:100%">
+                <table id="example" class="table-movimientos" class="display" style="width: 100%">
                     <thead>
                         <tr>
                             <th>Movimiento</th>
@@ -151,53 +151,61 @@
                             <td>Pago de agua</td>
                             <td>$30,800</td>
                         </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
     </nav>
     <!-- Modal -->
-    <div class="modal fade" id="registrarMovimiento" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="registrarMovimiento" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header estilo-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Registro de movimiento</h5>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <form>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Nombre del movimiento</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Movimiento" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Descripción</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Descripción del movimiento">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Descripción</label>
-                        <select class="form-control" name="" id="" required>
-                            <option value="1">Ingreso</option>
-                            <option value="2">Egreso</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPassword1">Cantidad</label>
-                        <input type="number" class="form-control" id="exampleInputPassword1" placeholder="0,0">
-                      </div>
-                      <div class="row justify-content-center pt-3">
-                        <div class="col-3">
-                            <button onclick="cerrarModal()" class="btn estilo-purple">Cancelar</button>
+            <div class="modal-content">
+                <div class="modal-header estilo-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                        Registro de movimiento
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="movimiento">Nombre del movimiento</label>
+                            <input type="text" id="movimiento" class="form-control" aria-describedby="emailHelp"
+                                placeholder="Movimiento" required />
                         </div>
-                        <div class="col-3">
-                            <button type="submit" class="btn estilo-header">Registrar</button>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" id="descripcion" class="form-control"
+                                placeholder="Descripción del movimiento" />
                         </div>
-                      </div>
-                  </form>
-              </div>
+                        <div class="form-group">
+                            <label for="tipo_movimiento">Tipo de Movimiento</label>
+                            <select class="form-control" name="tipo_movimiento" id="tipo_movimiento" required>
+                                <option value="1">Ingreso</option>
+                                <option value="2">Egreso</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" id="cantidad" class="form-control" placeholder="0,0" />
+                        </div>
+                        <div class="row justify-content-center pt-3">
+                            <div class="col-3">
+                                <button onclick="cerrarModal()" class="btn estilo-purple">
+                                    Cancelar
+                                </button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn estilo-header" id="btn-confirm-mov">
+                                    Registrar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
     <footer class="footer2">
         <div class="w-auto h-100 d-flex justify-content-around align-items-center">
             <a href="javascript:history.back()">
@@ -243,8 +251,8 @@
     <!-- Scripts Especificos -->
     <script type="module" src="../js/reporte.js"></script>
     <script src="../js/datatables.min.js"></script>
-    <script>    
-        function registrarMovimiento(){
+    <script>
+        function registrarMovimiento() {
             $("#registrarMovimiento").modal("show");
         }
         function cerrarModal() {

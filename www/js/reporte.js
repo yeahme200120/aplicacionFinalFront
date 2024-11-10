@@ -5,6 +5,7 @@ import { configTable } from "./dataTables/config-table.js";
 
 // Variables globales
 const $btnHome = $('#btn-menu-principal-home');
+const btnConfirm = $("#btn-confirm-mov");
 
 const $tabsUsuarios = $('#tabs-usuarios');
 
@@ -41,22 +42,22 @@ $(document).ready(async function () {
                     footer: true,
                     title: 'Archivo',
                     filename: 'Export_File',
-            
+
                     //Aquí es donde generas el botón personalizado
                     text: '<button class="btn btn-success"><i class="fas fa-file-excel"></i></button>'
-                  },
+                },
                 {
                     extend: 'pdf',
                     footer: true,
                     title: 'Archivo PDF',
                     filename: 'Export_File_pdf',
                     text: '<a class="btn btn-danger bg-none" ><i class="far fa-file-pdf"></i></a>'
-                  }
+                }
             ],
             layout: {
                 topStart: 'a'
             }
-            
+
         },
     );
     //Setaemos el nombre de la empresa
@@ -313,3 +314,73 @@ $btn_userLogin.click(() => {
 $btn_cerrarSesion.click(() => {
     cerrarSesion()
 });
+btnConfirm.on('click', async function () {
+    //Obtenemos el usuario logueado
+    const dataUsuario = getUserLocal();
+    //Recoleccion de datos del formulario
+    let movimiento = $("#movimiento").val()
+    let descripcion = $("#descripcion").val()
+    let tipo_movimiento = $("#tipo_movimiento").val()
+    let cantidad = $("#cantidad").val()
+    //Validamos que no vengan vacios los campos
+    if (!movimiento || movimiento == '' || movimiento == null) { }
+    if (!descripcion || descripcion == '' || descripcion == null) { }
+    if (!tipo_movimiento || tipo_movimiento == '' || tipo_movimiento == null) { }
+    if (!cantidad || cantidad == '' || cantidad == null) { }
+
+    movimiento = movimiento.trim().toUpperCase()
+    descripcion = descripcion.trim().toUpperCase()
+    tipo_movimiento = parseInt(tipo_movimiento)
+    cantidad = parseFloat(cantidad)
+    //Definimos la configuracion de la peticion
+    const metodo = "POST";
+    const url = "https://abonos.sipecem.com.mx/api/setMovimiento";
+    const datosSetUsuario = {
+        "usuario": dataUsuario,
+        "movimiento": {
+            "movimiento": movimiento,
+            "descripcion": descripcion,
+            "tipo_movimiento": tipo_movimiento,
+            "cantidad": cantidad,
+        }
+    }
+    //Ejecucion de la petion api
+    await $.ajax(
+        {
+            url: `${url}`,
+            type: `${metodo}`,
+            data: datosSetUsuario ? datosSetUsuario : null,
+        })
+        .done(function (data) {
+            console.log(data);
+
+            if (data == 1) {
+                Toastify({
+                    text: "El Movimiento se registró con éxito",
+                    duration: 3000,
+                    backgroundColor: "#28b463"
+                }).showToast(); 
+                limpiarModal();
+            } else {
+                Toastify({
+                    text: `Ocurrió un error! ${data}`,
+                    duration: 3000,
+                    backgroundColor: "#f7dc6f"
+                }).showToast();
+            }
+        })
+        .fail(function (error) {
+            console.log("ERROR AJAX", error);
+
+            Toastify({
+                text: `Ocurrió un error! ${error}`,
+                duration: 3000,
+                backgroundColor: "#f7dc6f"
+            }).showToast();
+        })
+});
+async function limpiarModal() {
+    $("#movimiento").val('')
+    $("#descripcion").val('')
+    $("#cantidad").val('')
+}
