@@ -95,7 +95,7 @@
                     <h1>TOTAL</h1>
                 </b>
             </div>
-            <div class="col-12 text-center">
+            <div class="col-12 text-center" id="cardTotal">
                 <b>
                     <h1>$ 15,000.00</h1>
                 </b>
@@ -109,8 +109,8 @@
                             <h5 class="card-title text-success text-center">
                                 <b>INGRESOS</b>
                             </h5>
-                            <h6 class="card-subtitle mb-2 text-muted text-center">
-                                Card subtitle
+                            <h6 class="card-subtitle mb-2 text-muted text-center" id="cardIngreso">
+                                0
                             </h6>
                         </div>
                     </div>
@@ -121,8 +121,8 @@
                             <h5 class="card-title text-danger text-center">
                                 <b>EGRESOS</b>
                             </h5>
-                            <h6 class="card-subtitle mb-2 text-muted text-center">
-                                Card subtitle
+                            <h6 class="card-subtitle mb-2 text-muted text-center" id="cardEgreso">
+                                0
                             </h6>
                         </div>
                     </div>
@@ -135,22 +135,11 @@
                     <thead>
                         <tr>
                             <th>Movimiento</th>
-                            <th>Total</th>
+                            <th class="text-center">Total</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Pago de agua</td>
-                            <td>$31,800</td>
-                        </tr>
-                        <tr>
-                            <td>Venta 1</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr>
-                            <td>Pago de agua</td>
-                            <td>$30,800</td>
-                        </tr>
+                    <tbody id="cuerpoTablaMovimiento">
+
                     </tbody>
                 </table>
             </div>

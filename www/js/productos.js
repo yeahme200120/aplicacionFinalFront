@@ -70,7 +70,6 @@ $(document).ready(async function () {
         //CATALOGOS
         const catalogo = getLocal('Catalogos');
         const unidades = catalogo.UnidadesProductos;
-        const categorias = catalogo.CategoriasProductos;
 
         //AREAS        
         //const areas = respAreas.Areas_Almacen;
@@ -81,19 +80,9 @@ $(document).ready(async function () {
         $allSelect.append('<option value="">Seleccione una opción</option>');
     
 
-        // Opciones -> unidades
-        $.each(unidades, function (index, item) {
-            $selectUnidad.append(
-                $('<option></option>').val(item.id).text(item.unidad)
-            );
-        });
+        await getUnidades()
 
-        // Opciones -> categorias
-        $.each(categorias, function (index, item) {
-            $selectCategorias.append(
-                $('<option></option>').val(item.id).text(item.categoria)
-            );
-        });
+        await getCategorias()
     }
 
     $loadSystem.fadeToggle(1000);
@@ -225,6 +214,7 @@ $(document).on('click', '#btnSetCategoriaProducto', async function() {
     console.log("Respuesta de la insercion:", respSetAlmacen);
     await getCatalogosGlobal(dataUser.id)
     $('#agregarCategoriaProducto').modal('hide');
+    await getCategorias()
     if (respSetAlmacen == 1) {
         await getAreaAlmacen()
         loadModal('modalDinamico', '../components/modal.html', 'Agregado con éxito')
@@ -251,8 +241,8 @@ $(document).on('click', '#btnSetUnidadProducto', async function() {
 
     const respSetAlmacen = await manejadorAPI('POST', urlSetAlmacen, datosSetAlmacen);
     console.log("Respuesta de la insercion:", respSetAlmacen);
-    
     $('#agregarUnidadProducto').modal('hide');
+    await getUnidades()
     if (respSetAlmacen == 1) {
         await getAreaAlmacen()
         loadModal('modalDinamico', '../components/modal.html', 'Agregado con éxito')
@@ -270,25 +260,25 @@ async function getProductos() {
     mostrarPreload()
     const dataUser = getUserLocal();
     const catalogos = getLocal('Catalogos');
-    await getCatalogosGlobal(dataUser.id)
-    
-    const respProductos = catalogos.Productos;
-    console.log("Resp productos: ",respProductos);
-    
     
     let infoProductos = [];
+    const urlGetProductos = 'https://abonos.sipecem.com.mx/api/getProductos';
+    const datos = {"usuario":dataUser};
+    const respProductos = await manejadorAPI('POST',urlGetProductos, datos);
+    let semaforo = ''
     if (respProductos) {
         for (const producto of respProductos) {
-            console.log("Producto: ", producto);
             let contenido = `
                 <div class="card bg-light mb-3">
-                    <div class="card-header fw-bold cardProductos">${producto.nombre}</div>
+                    <div class="card-header fw-bold cardInsumo">${producto.nombre}</div>
                     <div class="card-body">
                         <ul>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Clave</label></div><div class="col-6"><h6>${producto.clave}</h6></div></li>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Precio 1</label></div><div class="col-6"><h6>${producto.precio_venta1}</h6></div></li>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Precio 2</label></div><div class="col-6"><h6>${producto.precio_venta2}</h6></div></li>
                             <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Precio 3</label></div><div class="col-6"><h6>${producto.precio_venta3}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Categoria</label></div><div class="col-6"><h6>${producto.categoria}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Unidad</label></div><div class="col-6"><h6>${producto.unidad}</h6></div></li>
                         </ul>
                     </div>
                 </div>
@@ -315,22 +305,59 @@ async function ocultarPreload(){
     $loadSystem.fadeToggle(1000);
     $(".loadSystem").addClass('d-none');
 }
-/* async function getAreaAlmacen(){
-    let almacen = $('#almacen');
-    const $allSelect = $('.selectInsumos');
-    const urlAreas = 'https://abonos.sipecem.com.mx/api/getAreaAlmacenApi';
-    const respAreas = await manejadorAPI(metodo,urlAreas, datosAreas)
-    console.log("Respuesta de las areas", respAreas);
-    
-    const areas = respAreas.Areas_Almacen;
-    almacen.empty();
-     // Opciones -> areas
-    $.each(areas, function (index, item) {
-        almacen.append(
-            $('<option></option>').val(item.id).text(item.nombre_area)
+async function getCategorias() {
+    try {
+        const dataUser = getUserLocal();
+        const datos = { "usuario": dataUser };
+
+        $selectCategorias.empty(); // Limpia las opciones actuales del select
+
+        const urlCategoria = 'https://abonos.sipecem.com.mx/api/getCategoriaProductos';
+        const respCategoria = await manejadorAPI("POST", urlCategoria, datos);
+
+        if (!Array.isArray(respCategoria) || respCategoria.length === 0) {
+            console.warn("No se encontraron categorías.");
+            return; // Salir si no hay categorías
+        }
+
+        // Crear opciones en memoria
+        const opciones = respCategoria.map(item => 
+            $('<option></option>').val(item.id).text(item.categoria)
         );
-    });
-} */
+
+        // Agregar opciones al select
+        $selectCategorias.append(opciones);
+    } catch (error) {
+        console.error("Error al obtener las categorías:", error);
+    }
+}
+async function getUnidades() {
+    try {
+        const dataUser = getUserLocal();
+        const datos = { "usuario": dataUser };
+
+        $selectUnidad.empty(); // Limpia las opciones actuales del select
+
+        const urlUnidad = 'https://abonos.sipecem.com.mx/api/getUnidadProductos';
+        const respUnidad = await manejadorAPI("POST", urlUnidad, datos);
+        console.log(respUnidad);
+        
+        if (!Array.isArray(respUnidad) || respUnidad.length === 0) {
+            console.warn("No se encontraron unidades.");
+            return; // Salir si no hay categorías
+        }
+
+        // Crear opciones en memoria
+        const opciones = respUnidad.map(item => 
+            $('<option></option>').val(item.id).text(item.unidad)
+        );
+
+        // Agregar opciones al select
+        $selectUnidad.append(opciones);
+    } catch (error) {
+        console.error("Error al obtener las categorías:", error);
+    }
+}
 $btn_userLogin.click(()=>{ 
     $modal_cerrarSesion.modal('show');
 });

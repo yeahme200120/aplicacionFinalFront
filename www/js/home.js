@@ -124,6 +124,9 @@ $(document).ready(async function(){
             alert(error)
         }
     });
+    $('#btn-ventas').click(async function(){
+        window.location.href = "ventas.html"
+    });
     $('#btn-reporte').click(async function(){
         //Get Roles de }
         try {
