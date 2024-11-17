@@ -116,7 +116,7 @@
             <div class="row m-5 p-5"></div>
             <div class="row m-3 p-3"></div>
             <div class="row justify-content-center">
-                    <button class="btn estilo-header p-2 m-2">Aceptar</button>
+                    <button class="btn estilo-header p-2 m-2" onclick="enDesarrollo()">Aceptar</button>
             </div>
         </section>
         <!-- Consultar -->
@@ -143,6 +143,15 @@
     <script src="../js/dataTables/simple-datatables.js"></script>
     <!-- Scripts Especificos -->
     <script type="module" src="../js/mediosPagos.js"></script>
+    <script>
+        function enDesarrollo(){
+            Toastify({
+                text: "Sorry.... Opción en desarrollo 😓",
+                duration: 3000,
+                backgroundColor: "#ec851f"
+            }).showToast();
+        }
+    </script>
 </body>
 
 </html>

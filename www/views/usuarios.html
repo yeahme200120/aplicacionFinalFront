@@ -160,6 +160,23 @@
     <script src="../js/dataTables/simple-datatables.js"></script>
     <!-- Scripts Especificos -->
     <script type="module" src="../js/usuarios.js"></script>
+    <script>
+        document.getElementById('telefono').addEventListener('input', function (e) {
+            const input = e.target;
+            const maxLength = 10;
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (input.value.length > maxLength) {
+                input.value = input.value.slice(0, maxLength); // Truncar el valor
+                Toastify({
+                    text: "El numero de telefono no puede tener mas de 10 digitos",
+                    duration: 3000,
+                    backgroundColor: "#ec851f"
+                }).showToast();
+            } else {
+            }
+        });
+    </script>
 </body>
 
 </html>

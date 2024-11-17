@@ -256,15 +256,13 @@ $btnAgregarUsuario.on('click', async function () {
             }).showToast();
         }else{
             Toastify({
-                text: `Ocurrió un error! ${data}`,
-                duration: 3000,
+                text: `Ocurrió un error! ${data.msg ? data.msg : data}`,
+                duration: 4000,
                 backgroundColor: "#f7dc6f"
             }).showToast();
         }
     })
     .fail(function(error) {
-        console.log("ERROR AJAX", error);
-        
         Toastify({
             text: `Ocurrió un error! ${error}`,
             duration: 3000,
