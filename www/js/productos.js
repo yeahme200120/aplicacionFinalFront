@@ -257,16 +257,17 @@ $(document).on('click', '#btnSetCategoriaProducto', async function() {
     }
 
     const respSetAlmacen = await manejadorAPI('POST', urlSetAlmacen, datosSetAlmacen);
-    console.log("Respuesta de la insercion:", respSetAlmacen);
     await getCatalogosGlobal(dataUser.id)
     $('#agregarCategoriaProducto').modal('hide');
     await getCategorias()
+    console.log("Respuesta", respSetAlmacen, "Respuesta: ", respSetAlmacen.msg);
+    
     if (respSetAlmacen == 1) {
         await getAreaAlmacen()
-        loadModal('modalDinamico', '../components/modal.html', 'Agregado con éxito')
+        loadModal('modalDinamico', '../components/modal.html', respSetAlmacen.msg)
     }
     else if(respSetAlmacen == 0) {
-        loadModal('modalDinamico', '../components/modal.html', 'Ups! Ocurrió un error 🙉')
+        loadModal('modalDinamico', '../components/modal.html', respSetAlmacen.msg)
     }
     else {
         loadModal('modalDinamico', '../components/modal.html', respSetAlmacen.msg ? respSetAlmacen.msg : respSetAlmacen)

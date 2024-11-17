@@ -10,7 +10,7 @@ export function loadModal(modalId, contentUrl, contenido_msg) {
             }
 
             //Agregar mensaje dinamico modal
-            $('#modal-msg').text(contenido_msg);
+            $('.modal-msg').text(contenido_msg);
 
             // Mostrar la modal usando Bootstrap
             $(`#${modalId}`).modal('show');
