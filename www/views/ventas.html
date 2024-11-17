@@ -56,9 +56,9 @@
         </div>
     </header>
     <nav class="container-fluid">
-        <div class="row">
-            <div class="col-5">
-                <button class="btn btn-success">Activar Turno</button>
+        <div class="row justify-content-center">
+            <div class="col-5 mt-5">
+                <button class="btn btn-success" onclick="enDesarrollo()">Activar Turno</button>
             </div>
         </div>
     </nav>
@@ -79,6 +79,15 @@
     <script src="../js/dataTables/simple-datatables.js"></script>
     <!-- Scripts Especificos -->
     <script type="module" src="../js/mediosPagos.js"></script>
+    <script>
+        function enDesarrollo(){
+            Toastify({
+                text: "Sorry.... Opción en desarrollo 😓",
+                duration: 3000,
+                backgroundColor: "#ec851f"
+            }).showToast();
+        }
+    </script>
 </body>
 
 </html>
