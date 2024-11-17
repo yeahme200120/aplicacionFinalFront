@@ -12,6 +12,7 @@ const $btnAgregarProducto = $('#btn-agregarProducto');
 const $loadSystem = $('.loadSystem');
 const $btnAddAlmacen = $('#addCatProducto');
 const $btnAddUnidad = $('#addUnidadProducto');
+const $selectFiltro =$("#selectFilterCat")
 
 //Select´s
 const $allSelect = $('.selectProductos');
@@ -102,6 +103,7 @@ $tabsProductos.on('click', 'li a', async (e) => {
         $seccionAgregar.addClass('d-none');
         $seccionConsultar.removeClass('d-none');
         await getProductos()
+        await getCategoriasFiltro()
     }
 })
 
@@ -194,7 +196,51 @@ $btnAddAlmacen.on('click', async function() {
 $btnAddUnidad.on('click', async function() {
     $("#agregarUnidadProducto").modal("show")   
 });
-
+$selectFiltro.on('change',async function(){
+    mostrarPreload()
+    const dataUser = getUserLocal();
+    const catalogos = getLocal('Catalogos');
+    let cat = $("#selectFilterCat").val()
+    
+    let infoProductos = [];
+    const urlGetProductos = 'https://abonos.sipecem.com.mx/api/getProductosCategoria';
+    const datos = {"usuario":dataUser,"categoria":parseInt(cat)};
+    const respProductos = await manejadorAPI('POST',urlGetProductos, datos);
+    console.log("Productos filtrados",respProductos, "categoria",cat);
+    
+    if (respProductos) {
+        for (const producto of respProductos) {
+            console.log("Producto", producto);
+            
+            let contenido = `
+                <div class="card bg-light mb-3">
+                    <div class="card-header fw-bold cardInsumo">${producto.nombre}</div>
+                    <div class="card-body">
+                        <ul>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Clave</label></div><div class="col-6"><h6>${producto.clave}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Precio 1</label></div><div class="col-6"><h6>${producto.precio_venta1}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Precio 2</label></div><div class="col-6"><h6>${producto.precio_venta2}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Precio Precio 3</label></div><div class="col-6"><h6>${producto.precio_venta3}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Categoria</label></div><div class="col-6"><h6>${producto.categoria}</h6></div></li>
+                            <li class="fw-bold"><div class="row"><div class="col-6"><label class="fw-bold">Unidad</label></div><div class="col-6"><h6>${producto.unidad}</h6></div></li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            infoProductos.push([contenido])
+        }
+    }
+    else {
+        
+    }
+    console.log(infoProductos);
+    
+    $tablaProductos.clear();
+    $tablaProductos.rows.add(infoProductos);
+    $tablaProductos.draw();
+    $(".cardProductos").addClass("bg-btn-primario");
+    ocultarPreload()
+});
 $btn_addCatProducto.on('click', async function() {
 });
 
@@ -327,6 +373,32 @@ async function getCategorias() {
 
         // Agregar opciones al select
         $selectCategorias.append(opciones);
+    } catch (error) {
+        console.error("Error al obtener las categorías:", error);
+    }
+}
+async function getCategoriasFiltro() {
+    try {
+        const dataUser = getUserLocal();
+        const datos = { "usuario": dataUser };
+        const $catFiltro = $("#selectFilterCat")
+        $catFiltro.empty(); // Limpia las opciones actuales del select
+
+        const urlCategoria = 'https://abonos.sipecem.com.mx/api/getCategoriaProductos';
+        const respCategoria = await manejadorAPI("POST", urlCategoria, datos);
+
+        if (!Array.isArray(respCategoria) || respCategoria.length === 0) {
+            console.warn("No se encontraron categorías.");
+            return; // Salir si no hay categorías
+        }
+
+        // Crear opciones en memoria
+        const opciones = respCategoria.map(item => 
+            $('<option></option>').val(item.id).text(item.categoria)
+        );
+
+        // Agregar opciones al select
+        $catFiltro.append(opciones);
     } catch (error) {
         console.error("Error al obtener las categorías:", error);
     }

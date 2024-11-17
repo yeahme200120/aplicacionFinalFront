@@ -9,16 +9,16 @@ const $loadSystem = $('.loadSystem');
 // const $modalSystem = $('#exampleModal');
 
 document.getElementById('btnLogin').addEventListener('click', async () => {
-        if ($("#email").hasClass('is-invalid') || $("#password").hasClass('is-invalid')) {
-            return
-        }
-        else if (!$email.value || !$password.value ) {
-            $email.classList.add('is-invalid');
-            $password.classList.add('is-invalid');
-            return
-        }
+    if ($("#email").hasClass('is-invalid') || $("#password").hasClass('is-invalid')) {
+        return
+    }
+    else if (!$email.value || !$password.value ) {
+        $email.classList.add('is-invalid');
+        $password.classList.add('is-invalid');
+        return
+    }
+    mostrarPreload()
         
-        mostrarPreload()
     
         try {
             const metodo = "POST";
@@ -30,22 +30,22 @@ document.getElementById('btnLogin').addEventListener('click', async () => {
            
     
             if (respLogin.msg == "Usuario no registrado" || respLogin.msg == "Credenciales incorrectas") {
-                ocultarPreload()
                 $email.classList.add('is-invalid');
-                $password.classList.add('is-invalid');
+                $password.classList.add('is-invalid');  
+                ocultarPreload()
             }
             else if(respLogin.msg == "Licencia inactiva") {
-                ocultarPreload()
                 // console.log("Licencia inactiva");
                 loadModal('modalDinamico', './components/modal.html', 'Lo sentimos 🥺, Tú licencia ha vencido...');
-                $(".modalDinamico").addClass("bg-btn-primario");
+                $(".modalDinamico").addClass("bg-btn-primario");    
+                ocultarPreload()
             }
             else if(respLogin.msg == "Estas fuera de tu horario") {
-                ocultarPreload()
                 // console.log("Estas fuera de tu horario");
                 loadModal('modalDinamico', './components/modal.html','Lo sentimos 🥺, Estás fuera del turno laboral.');
                 $(".modalDinamico").addClass("bg-btn-primario");
-    
+                
+                ocultarPreload()
             }else {
                 //Obtenemos los catalogos            
                 try {
@@ -65,8 +65,6 @@ document.getElementById('btnLogin').addEventListener('click', async () => {
                 localStorage.setItem("DataUser", dataUser)
                 respLogin.contra_update++
                 getEmpresa();
-                //console.log(respLogin);
-                //Validacion de rol de usuario
                 switch (respLogin.id_rol) {
                     case 0:
                         //Master
@@ -87,12 +85,6 @@ document.getElementById('btnLogin').addEventListener('click', async () => {
                     default:
                         break;
                 }
-
-                /* if (respLogin.contra_update == 0) {
-                    setTimeout(function () { $(window).attr('location', 'views/cambiarAcceso.html') }, 500);
-                } else {
-                    setTimeout(function () { $(window).attr('location', 'views/home.html') }, 500);
-                } */
             }
             
         } catch (error) {
