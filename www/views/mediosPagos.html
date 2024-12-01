@@ -57,7 +57,7 @@
     </header>
     <nav class="container-fluid">
         <section id="section-agregarTurnos" class="container-fluid pb-3 mt-5">
-            <div class="row">
+            <div class="row" id="opcionsPagos">
                 <div class="col-4">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
@@ -90,33 +90,6 @@
                         </label>
                     </div>
                 </div>
-            </div>
-            <div class="row pt-5">
-                <div class="col-12 p-2"><b>Clave</b></div>
-            </div>
-            <div class="row">
-                <div class="col-12 p-2"><b>Descripción</b></div>
-            </div>
-            <div class="row">
-                <div class="col-12 p-2"><b>Tipo de cambio</b></div>
-            </div>
-            <div class="row">
-                <div class="col-12 row">
-                    <div class="col-6 p-2">
-                        <b>Acepta Propina</b>
-                    </div>
-                    <div class="col-6">
-                        <select class="form-control" name="" id="">
-                            <option value="">Si</option>
-                            <option value="">No</option>
-                        </select>
-                    </div>
-                </div> 
-            </div>
-            <div class="row m-5 p-5"></div>
-            <div class="row m-3 p-3"></div>
-            <div class="row justify-content-center">
-                    <button class="btn estilo-header p-2 m-2" onclick="enDesarrollo()">Aceptar</button>
             </div>
         </section>
         <!-- Consultar -->
@@ -151,6 +124,42 @@
                 backgroundColor: "#ec851f"
             }).showToast();
         }
+        async function actualizaOpcion(id){
+    console.log("opcion: ", id);
+    const urlTipo = `http://127.0.0.1:8000/api/actualizaFP/${id}`;
+    await $.ajax(
+    {
+    url : `${urlTipo}`,
+    type: `GET`,
+    data : null,
+    })
+    .done(function(data) {        
+        if(data == 1){
+            Toastify({
+                text: "El Metodo de pago se actualizó con éxito",
+                duration: 3000,
+                backgroundColor: "#28b463"
+            }).showToast();
+        }else{
+            Toastify({
+                text: `Ocurrió un error! ${data}`,
+                duration: 3000,
+                backgroundColor: "#f7dc6f"
+            }).showToast();
+        }
+    })
+    .fail(function(error) {
+        console.log("ERROR AJAX", error);
+        
+        Toastify({
+            text: `Ocurrió un error! ${error}`,
+            duration: 3000,
+            backgroundColor: "#f7dc6f"
+        }).showToast();
+    })
+    console.log("respTipoPago: ", respTurno);
+    
+}
     </script>
 </body>
 

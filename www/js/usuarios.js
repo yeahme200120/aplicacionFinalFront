@@ -243,7 +243,7 @@ $btnAgregarUsuario.on('click', async function () {
     {
     url : `${url}`,
     type: `${metodo}`,
-    data : datosSetUsuario ? datosSetUsuario  : null,
+    data : datosSetUsuario,
     })
     .done(function(data) {
         console.log(data);

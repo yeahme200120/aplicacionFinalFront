@@ -78,7 +78,6 @@ $(document).ready(async function () {
     $cardTotal.empty()
     $cardIngreso.empty()
     $cardEgreso.empty()
-
     $.each(respMovimientos, function (index, item) {
         console.log("Index: ", index, " Item: ", item);
 
@@ -90,13 +89,19 @@ $(document).ready(async function () {
         if(item['tipo_movimiento'] == 2){
             sumaEgresos += item['cantidad']
         }
-
+        let extra = ''
+        let estiloIngreso = ''
+        if(item["tipo_movimiento"] == 1){
+            extra = "<i class='bi bi-cash'></i>";
+            estiloIngreso = 'text-success'
+        }
         $cuerpoTabla.empty()
         html += "<tr>"+
-        "<td>"+item['movimiento']+"</td>"+
-        "<td class='text-center'>"+item['cantidad']+"</td>"+
+        "<td>"+item['movimiento']+" </td>"+
+        "<td class='text-center "+estiloIngreso+"'>"+ item['cantidad'] + ` &nbsp; ${extra}` +"</td>"+
       "</tr>";
     });
+    total = (parseFloat(sumaIngresos ? sumaIngresos : 0) - parseFloat(sumaEgresos ? sumaEgresos : 0))
     $cardIngreso.text(sumaIngresos)
     $cardEgreso.text(sumaEgresos)
     $cardTotal.text(total)
@@ -195,4 +200,55 @@ async function limpiarModal() {
     $("#movimiento").val('')
     $("#descripcion").val('')
     $("#cantidad").val('')
+    actualizaMov()
+    $("#registrarMovimiento").modal("hide");
+}
+async function actualizaMov(){
+    try {
+        const userData = getUserLocal();
+        mostrarPreload()
+    const urlMovimientos = 'http://127.0.0.1:8000/api/getMovimientos';
+    const datosMovimientos = {"usuario":userData};
+
+    const respMovimientos = await manejadorAPI(metodo, urlMovimientos, datosMovimientos)
+    localStorage.setItem('Turnos', JSON.stringify(respMovimientos));
+    let sumaIngresos = 0
+    let sumaEgresos = 0
+    let total = 0
+    let html = ''
+    $cardTotal.empty()
+    $cardIngreso.empty()
+    $cardEgreso.empty()
+
+    $.each(respMovimientos, function (index, item) {
+        console.log("Index: ", index, " Item: ", item);
+
+        
+        if(item['tipo_movimiento'] == 1){
+            sumaIngresos += item['cantidad']
+        }
+        
+        if(item['tipo_movimiento'] == 2){
+            sumaEgresos += item['cantidad']
+        }
+
+        $cuerpoTabla.empty()
+        html += "<tr>"+
+        "<td>"+item['movimiento']+"</td>"+
+        "<td class='text-center'>"+item['cantidad']+"</td>"+
+      "</tr>";
+    });
+    total = (parseFloat(sumaIngresos ? sumaIngresos : 0) - parseFloat(sumaEgresos ? sumaEgresos : 0))
+    $cardIngreso.text(sumaIngresos)
+    $cardEgreso.text(sumaEgresos)
+    $cardTotal.text(total)
+
+    $cuerpoTabla.append(html);
+
+    ocultarPreload()
+    } catch (error) {
+        console.log("Error al momento de actuializar la info: ", error);
+        
+    }
+    
 }

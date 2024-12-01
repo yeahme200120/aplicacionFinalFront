@@ -18,6 +18,7 @@ const $loadSystem = $('.loadSystem');
 const $btn_userLogin = $('#btn-userLogin');
 const $btn_cerrarSesion = $('#btn-cerrarSesion');
 const $modal_cerrarSesion = $('#modal-cerrarSesion');
+const $opciones = $("#opcionsPagos");
 
 //Tables
 const tablaTurnos = $("#tablaTurnos").DataTable(configTable);
@@ -36,14 +37,37 @@ $(document).ready(async function () {
     $("#nombreUser").text(mayus);
 
 
-    //Categorias
-    const urlTurno = 'http://127.0.0.1:8000/api/getTurnoUsuario';
+    //Validamos si existe un turno abierto 
+    const urlTurno = 'http://127.0.0.1:8000/api/validaTurno';
     const datosTurno = userData;
+    console.log("Datos del usuario: ", datosTurno);
     
     const respTurno = await manejadorAPI(metodo,urlTurno, datosTurno)
-    removeLocal('Turnos');
-    localStorage.setItem('Turnos', JSON.stringify(respTurno));
-  
+    removeLocal('turnoActivo');
+    localStorage.setItem('turnoActivo', JSON.stringify(respTurno));
+    
+    $opciones.empty()
+    let op = ''
+    let activo = ""
+    $.each(respTurno, function (index, item) {
+
+        if(item.estatus == 1){
+            activo = "checked"
+        }else{
+            activo = ""
+        }
+        console.log(index, item, item.tipo_pago, item.estatus, activo);
+        
+        op += `<div class="col-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="${item.id}" ${activo} onchange="actualizaOpcion(${item.id})">
+                        <label class="form-check-label" for="defaultCheck1">
+                            ${item.tipo_pago}
+                        </label>
+                    </div>
+                </div>`;
+    });
+    $opciones.append(op);
     ocultarPreload();
 });
 
