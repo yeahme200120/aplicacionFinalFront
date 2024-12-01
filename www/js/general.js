@@ -55,7 +55,7 @@ export async function getEmpresa(){
     //Obtenemos el usuario logeado
     const usuario = localStorage.getItem("DataUser");
     
-    const urlEmpresa = 'https://abonos.sipecem.com.mx/api/getEmpresaName';
+    const urlEmpresa = 'http://127.0.0.1:8000/api/getEmpresaName';
     const datosEmpresa = usuario;
     
     const metodo = "POST";
@@ -331,7 +331,7 @@ export async function getCatalogosGlobal(id_usuario){
         let data = { usuario: id_usuario}
         console.log("Data user: ", data);
         
-        const urlCatalogos = 'https://abonos.sipecem.com.mx/api/getCatalogos';
+        const urlCatalogos = 'http://127.0.0.1:8000/api/getCatalogos';
         const respCatalogos = await manejadorAPI("POST",urlCatalogos,data)
         
         localStorage.removeItem("Catalogos")

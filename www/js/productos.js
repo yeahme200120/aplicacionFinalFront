@@ -51,14 +51,14 @@ $(document).ready(async function () {
     const metodo = 'POST';
     //Catalogos
     const datos = { usuario: userData.id };
-    const urlCatalogos = 'https://abonos.sipecem.com.mx/api/getCatalogos';
+    const urlCatalogos = 'http://127.0.0.1:8000/api/getCatalogos';
     
     //Areas
-    const urlAreas = 'https://abonos.sipecem.com.mx/api/getAreaAlmacenApi';
+    const urlAreas = 'http://127.0.0.1:8000/api/getAreaAlmacenApi';
     const datosAreas = userData;
 
     //EstatusProductos
-    const urlEstatusProductos = 'https://abonos.sipecem.com.mx/api/getEstatusProducto';
+    const urlEstatusProductos = 'http://127.0.0.1:8000/api/getEstatusProducto';
     const datosEstatusProductos = userData;
 
     const respCatalogos = await manejadorAPI(metodo,urlCatalogos,datos)
@@ -151,7 +151,7 @@ $btnAgregarProducto.on('click', async function () {
 
     //SET API
     const metodo = "POST";
-    const url = "https://abonos.sipecem.com.mx/api/setProducto";
+    const url = "http://127.0.0.1:8000/api/setProducto";
     const datosSetProducto = {
         "id_categoria_producto" : id_categoria_producto,
         "nombre" : nombre,
@@ -203,7 +203,7 @@ $selectFiltro.on('change',async function(){
     let cat = $("#selectFilterCat").val()
     
     let infoProductos = [];
-    const urlGetProductos = 'https://abonos.sipecem.com.mx/api/getProductosCategoria';
+    const urlGetProductos = 'http://127.0.0.1:8000/api/getProductosCategoria';
     const datos = {"usuario":dataUser,"categoria":parseInt(cat)};
     const respProductos = await manejadorAPI('POST',urlGetProductos, datos);
     console.log("Productos filtrados",respProductos, "categoria",cat);
@@ -250,7 +250,7 @@ $(document).on('click', '#btnSetCategoriaProducto', async function() {
     const $newCatProd = $('#nombreCategoriaProducto');
     const newCatProd = $newCatProd.val().trim().toUpperCase();
     const dataUser = getUserLocal()
-    const urlSetAlmacen = 'https://abonos.sipecem.com.mx/api/setCategoriaProducto';
+    const urlSetAlmacen = 'http://127.0.0.1:8000/api/setCategoriaProducto';
     const datosSetAlmacen = {
         usuario: dataUser,
         categoria: newCatProd
@@ -280,7 +280,7 @@ $(document).on('click', '#btnSetUnidadProducto', async function() {
     const $newUnidadProd = $('#unidad');
     const newUnidadProd = $newUnidadProd.val().trim().toUpperCase();
     const dataUser = getUserLocal()
-    const urlSetAlmacen = 'https://abonos.sipecem.com.mx/api/setUnidadProducto';
+    const urlSetAlmacen = 'http://127.0.0.1:8000/api/setUnidadProducto';
     const datosSetAlmacen = {
         usuario: dataUser,
         unidad: newUnidadProd
@@ -309,7 +309,7 @@ async function getProductos() {
     const catalogos = getLocal('Catalogos');
     
     let infoProductos = [];
-    const urlGetProductos = 'https://abonos.sipecem.com.mx/api/getProductos';
+    const urlGetProductos = 'http://127.0.0.1:8000/api/getProductos';
     const datos = {"usuario":dataUser};
     const respProductos = await manejadorAPI('POST',urlGetProductos, datos);
     let semaforo = ''
@@ -359,7 +359,7 @@ async function getCategorias() {
 
         $selectCategorias.empty(); // Limpia las opciones actuales del select
 
-        const urlCategoria = 'https://abonos.sipecem.com.mx/api/getCategoriaProductos';
+        const urlCategoria = 'http://127.0.0.1:8000/api/getCategoriaProductos';
         const respCategoria = await manejadorAPI("POST", urlCategoria, datos);
 
         if (!Array.isArray(respCategoria) || respCategoria.length === 0) {
@@ -385,7 +385,7 @@ async function getCategoriasFiltro() {
         const $catFiltro = $("#selectFilterCat")
         $catFiltro.empty(); // Limpia las opciones actuales del select
 
-        const urlCategoria = 'https://abonos.sipecem.com.mx/api/getCategoriaProductos';
+        const urlCategoria = 'http://127.0.0.1:8000/api/getCategoriaProductos';
         const respCategoria = await manejadorAPI("POST", urlCategoria, datos);
 
         if (!Array.isArray(respCategoria) || respCategoria.length === 0) {
@@ -411,7 +411,7 @@ async function getUnidades() {
 
         $selectUnidad.empty(); // Limpia las opciones actuales del select
 
-        const urlUnidad = 'https://abonos.sipecem.com.mx/api/getUnidadProductos';
+        const urlUnidad = 'http://127.0.0.1:8000/api/getUnidadProductos';
         const respUnidad = await manejadorAPI("POST", urlUnidad, datos);
         console.log(respUnidad);
         

@@ -22,7 +22,7 @@ document.getElementById('btnLogin').addEventListener('click', async () => {
     
         try {
             const metodo = "POST";
-            const url = "https://abonos.sipecem.com.mx/api/logIn";
+            const url = "http://127.0.0.1:8000/api/logIn";
             const datos = { email: $email.value, password: $password.value }
     
             const respLogin = await manejadorAPI(metodo, url, datos);
@@ -50,7 +50,7 @@ document.getElementById('btnLogin').addEventListener('click', async () => {
                 //Obtenemos los catalogos            
                 try {
                     let data = { usuario: respLogin.id }
-                    const urlCatalogos = 'https://abonos.sipecem.com.mx/api/getCatalogos';
+                    const urlCatalogos = 'http://127.0.0.1:8000/api/getCatalogos';
                     const respCatalogos = await manejadorAPI("POST",urlCatalogos,data)
                     
                     localStorage.removeItem("Catalogos")

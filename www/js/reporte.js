@@ -66,7 +66,7 @@ $(document).ready(async function () {
     const metodo = 'POST';
 
     //Categorias
-    const urlMovimientos = 'https://abonos.sipecem.com.mx/api/getMovimientos';
+    const urlMovimientos = 'http://127.0.0.1:8000/api/getMovimientos';
     const datosMovimientos = {"usuario":userData};
 
     const respMovimientos = await manejadorAPI(metodo, urlMovimientos, datosMovimientos)
@@ -146,7 +146,7 @@ btnConfirm.on('click', async function () {
     cantidad = parseFloat(cantidad)
     //Definimos la configuracion de la peticion
     const metodo = "POST";
-    const url = "https://abonos.sipecem.com.mx/api/setMovimiento";
+    const url = "http://127.0.0.1:8000/api/setMovimiento";
     const datosSetUsuario = {
         "usuario": dataUsuario,
         "movimiento": {

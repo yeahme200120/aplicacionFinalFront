@@ -204,7 +204,7 @@ $btnActualizarUsuario.on('click', async function () {
 
     //SET API
     const metodo = "POST";
-    const url = "https://abonos.sipecem.com.mx/api/updateUsuarios";
+    const url = "http://127.0.0.1:8000/api/updateUsuarios";
     const datosSetUsuario = {
         "usuario": dataUsuario,
         "datos" : {
@@ -228,7 +228,7 @@ $btnActualizarUsuario.on('click', async function () {
             //Actualizamos los datos el usuario logeado
             await $.ajax(
                 {
-                url : `https://abonos.sipecem.com.mx/api/getUsuarioLogeado`,
+                url : `http://127.0.0.1:8000/api/getUsuarioLogeado`,
                 type: `POST`,
                 data: dataUsuario
                 })
@@ -277,7 +277,7 @@ async function getUsuarios() {
     const catalogos = getLocal('Catalogos');
     
     let infoUsuarios = [];
-    const urlGetUsuarios = 'https://abonos.sipecem.com.mx/api/getUsuariosEmpresa';
+    const urlGetUsuarios = 'http://127.0.0.1:8000/api/getUsuariosEmpresa';
     const datos = dataUser;
     const respUsuarios = await manejadorAPI('POST',urlGetUsuarios, datos);
     

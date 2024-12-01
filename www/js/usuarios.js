@@ -43,7 +43,7 @@ $(document).ready(async function () {
 
 
     //Categorias
-    const urlTurno = 'https://abonos.sipecem.com.mx/api/getTurnoUsuario';
+    const urlTurno = 'http://127.0.0.1:8000/api/getTurnoUsuario';
     const datosTurno = userData;
     
     const respTurno = await manejadorAPI(metodo,urlTurno, datosTurno)
@@ -55,7 +55,7 @@ $(document).ready(async function () {
         );
     });
 
-    const urlAreas = 'https://abonos.sipecem.com.mx/api/getAreasApi';
+    const urlAreas = 'http://127.0.0.1:8000/api/getAreasApi';
     const datosAreas = userData;
     
     const respAreas = await manejadorAPI(metodo,urlAreas, datosAreas)
@@ -67,7 +67,7 @@ $(document).ready(async function () {
         );
     });
 
-    const urlEstados = 'https://abonos.sipecem.com.mx/api/getEstatusUsuarios';
+    const urlEstados = 'http://127.0.0.1:8000/api/getEstatusUsuarios';
     const datosEstados = userData;
     
     const respEstados = await manejadorAPI(metodo,urlEstados, datosEstados)
@@ -79,7 +79,7 @@ $(document).ready(async function () {
         );
     });
 
-    const urlRol = 'https://abonos.sipecem.com.mx/api/getRolUsuarios';
+    const urlRol = 'http://127.0.0.1:8000/api/getRolUsuarios';
     const datosRol = userData;
     
     const respRol = await manejadorAPI("GET",urlRol, datosRol)
@@ -223,7 +223,7 @@ $btnAgregarUsuario.on('click', async function () {
 
     //SET API
     const metodo = "POST";
-    const url = "https://abonos.sipecem.com.mx/api/registraUsuario";
+    const url = "http://127.0.0.1:8000/api/registraUsuario";
     const datosSetUsuario = {
         "usuario": dataUsuario,
         "datos" : {
@@ -277,7 +277,7 @@ async function getUsuarios() {
     const catalogos = getLocal('Catalogos');
     
     let infoUsuarios = [];
-    const urlGetUsuarios = 'https://abonos.sipecem.com.mx/api/getUsuariosEmpresa';
+    const urlGetUsuarios = 'http://127.0.0.1:8000/api/getUsuariosEmpresa';
     const datos = dataUser;
     const respUsuarios = await manejadorAPI('POST',urlGetUsuarios, datos);
     

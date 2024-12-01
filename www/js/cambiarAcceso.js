@@ -25,7 +25,7 @@ $('#cambiarAcceso').click(async () => {
         console.log("dataUser 2 -> ", JSON.stringify(dataUser));
         
         const metodo = 'POST';
-        const url = 'https://abonos.sipecem.com.mx/api/changePasswordApi';
+        const url = 'http://127.0.0.1:8000/api/changePasswordApi';
         const datos = {
             usuario: JSON.stringify(dataUser),
             new_password: newPass

@@ -37,7 +37,7 @@ $(document).ready(async function () {
 
 
     //Categorias
-    const urlTurno = 'https://abonos.sipecem.com.mx/api/getTurnoUsuario';
+    const urlTurno = 'http://127.0.0.1:8000/api/getTurnoUsuario';
     const datosTurno = userData;
     
     const respTurno = await manejadorAPI(metodo,urlTurno, datosTurno)
@@ -112,7 +112,7 @@ $btnAgregarTurno.on('click', async function () {
 
     //SET API
     const metodo = "POST";
-    const url = "https://abonos.sipecem.com.mx/api/setTurnos";
+    const url = "http://127.0.0.1:8000/api/setTurnos";
     const datosSetTurno = {
         "usuario": dataUsuario,
         "turno" : {
@@ -164,7 +164,7 @@ async function getTurnos() {
     mostrarPreload()
     const dataUser = getUserLocal();
     let infoTurnos = [];
-    const urlGetTurnos = 'https://abonos.sipecem.com.mx/api/getTurnoUsuario';
+    const urlGetTurnos = 'http://127.0.0.1:8000/api/getTurnoUsuario';
     const datos = dataUser;
     const respTurnos = await manejadorAPI('POST',urlGetTurnos, datos);
     

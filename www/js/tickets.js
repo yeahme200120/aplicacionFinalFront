@@ -37,7 +37,7 @@ $(document).ready(async function () {
 
 
     //Categorias
-    const urlTurno = 'https://abonos.sipecem.com.mx/api/getTurnoUsuario';
+    const urlTurno = 'http://127.0.0.1:8000/api/getTurnoUsuario';
     const datosTurno = userData;
     
     const respTurno = await manejadorAPI(metodo,urlTurno, datosTurno)

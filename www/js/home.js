@@ -37,7 +37,7 @@ $(document).ready(async function(){
         }
         await $.ajax(
             {
-            url : `https://abonos.sipecem.com.mx/api/getRolUsuarios`,
+            url : `http://127.0.0.1:8000/api/getRolUsuarios`,
             type: `GET`,
             })
             .done(async function(data) {
@@ -51,7 +51,7 @@ $(document).ready(async function(){
                 }).showToast();
             })
     
-        let url = 'https://abonos.sipecem.com.mx/api/getTurnoUsuario'
+        let url = 'http://127.0.0.1:8000/api/getTurnoUsuario'
         let datos = localStorage.getItem("DataUser") ? localStorage.getItem("DataUser") : 0;
         await $.ajax(
             {
@@ -71,7 +71,7 @@ $(document).ready(async function(){
                 }).showToast();
             })
     
-            let url2 = 'https://abonos.sipecem.com.mx/api/getEstatusUsuarios'
+            let url2 = 'http://127.0.0.1:8000/api/getEstatusUsuarios'
             await $.ajax(
                 {
                 url : `${url2}`,

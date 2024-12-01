@@ -41,7 +41,7 @@ $(document).ready(async function () {
     const metodo = 'POST';
     
     //Categorias
-    const urlCategorias = 'https://abonos.sipecem.com.mx/api/getCategoriasApi';
+    const urlCategorias = 'http://127.0.0.1:8000/api/getCategoriasApi';
     const datosCategorias = userData;
     
     const respCategorias = await manejadorAPI(metodo,urlCategorias, datosCategorias)
@@ -166,7 +166,7 @@ $btnAgregarProvedor.on('click', async function () {
 
     //SET API
     const metodo = "POST";
-    const url = "https://abonos.sipecem.com.mx/api/setProvedor";
+    const url = "http://127.0.0.1:8000/api/setProvedor";
     const datosSetProvedor = {
         "usuario" : dataUsuario,
         "provedor" : {
@@ -215,7 +215,7 @@ async function getProvedores() {
     const unidades = catalogos.Unidades;
     
     let infoProvedores = [];
-    const urlGetProvedores = 'https://abonos.sipecem.com.mx/api/getProvedoresApi';
+    const urlGetProvedores = 'http://127.0.0.1:8000/api/getProvedoresApi';
     const datos = dataUser;
     const respProvedores = await manejadorAPI('POST',urlGetProvedores, datos);
     console.log("respProvedores", respProvedores);
@@ -256,7 +256,7 @@ async function getProvedores() {
 async function getAreaAlmacen(){
     let almacen = $('#almacen');
     const $allSelect = $('.selectInsumos');
-    const urlAreas = 'https://abonos.sipecem.com.mx/api/getAreaAlmacenApi';
+    const urlAreas = 'http://127.0.0.1:8000/api/getAreaAlmacenApi';
     const respAreas = await manejadorAPI(metodo,urlAreas, datosAreas)
     console.log("Respuesta de las areas", respAreas);
     
